@@ -1,0 +1,26 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="FullHeightDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColor">@color/textHeading</item>
+        <item name="android:textColorPrimary">@color/textDescription</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <color name="white">#ffffff</color>
+    <color name="textHeading">#404040</color>
+    <color name="textDescription">#909090</color>
+</resources>
