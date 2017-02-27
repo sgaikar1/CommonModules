@@ -20,7 +20,22 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
-    <color name="white">#ffffff</color>
-    <color name="textHeading">#404040</color>
-    <color name="textDescription">#909090</color>
+    <style name="TextInputLayoutStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/textDescription</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/textsize12</item>
+        <!--<item name="android:textSize">@dimen/textsize10</item>-->
+    </style>
+
+    <style name="EditTextStyle" parent="AppTheme">
+        <item name="android:gravity">left</item>
+        <item name="android:paddingLeft">@dimen/margin10</item>
+        <item name="android:textSize">@dimen/textsize14</item>
+        <item name="android:textColorHint">@color/textDescription</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>

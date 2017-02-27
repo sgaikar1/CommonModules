@@ -6,10 +6,11 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.api.NetworkModule;
 import com.example.smartrealitymodules.deps.DaggerDeps;
 import com.example.smartrealitymodules.deps.Deps;
-import com.example.smartrealitymodules.api.NetworkModule;
 import com.example.smartrealitymodules.mvp.view.BaseView;
+import com.example.smartrealitymodules.utils.ConnectionDetector;
 import com.example.smartrealitymodules.utils.Utils;
 
 import java.io.File;
@@ -19,9 +20,10 @@ import java.io.File;
  */
 public class BaseActivity extends AppCompatActivity implements BaseView{
     private static final String TAG = BaseActivity.class.getSimpleName();
+    public ProgressBar progressBar;
+    public Utils mUtils;
+    public ConnectionDetector cd;
     Deps deps;
-    private ProgressBar progressBar;
-    Utils mUtils;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView{
         File cacheFile = new File(getCacheDir(), "responses");
         deps = DaggerDeps.builder().networkModule(new NetworkModule(cacheFile)).build();
         mUtils = new Utils();
+        cd = new ConnectionDetector(this);
     }
 
     public Deps getDeps() {
@@ -51,12 +54,12 @@ public class BaseActivity extends AppCompatActivity implements BaseView{
 
     @Override
     public void onFailure(String appErrorMessage) {
-        mUtils.logMe(TAG+" onFailure",appErrorMessage);
+        mUtils.logMe(TAG + " onFailure", appErrorMessage);
     }
 
     @Override
     public void showToast(String Message) {
-        mUtils.toastMe(BaseActivity.this,Message);
+        mUtils.toastMe(BaseActivity.this, Message);
     }
 
 }

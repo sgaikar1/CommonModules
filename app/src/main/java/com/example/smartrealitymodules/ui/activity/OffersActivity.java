@@ -13,16 +13,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.models.request.CommonReq;
 import com.example.smartrealitymodules.models.response.GetOffersRes;
 import com.example.smartrealitymodules.mvp.model.MainModel;
-import com.example.smartrealitymodules.ui.adapter.OffersAdapter;
 import com.example.smartrealitymodules.mvp.presenter.OffersPresenter;
 import com.example.smartrealitymodules.mvp.view.OffersView;
+import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.adapter.OffersAdapter;
 import com.example.smartrealitymodules.utils.Constants;
 
 import javax.inject.Inject;
@@ -32,12 +31,12 @@ import javax.inject.Inject;
  */
 
 
-public class OffersActivity extends BaseActivity implements OffersView,OffersAdapter.OnItemClickListener{
+public class OffersActivity extends BaseActivity implements OffersView, OffersAdapter.OnItemClickListener {
 
-    private RecyclerView list;
     @Inject
     public MainModel mainModel;
     ProgressBar progressBar;
+    private RecyclerView list;
     private Dialog alert;
 
     @Override
@@ -70,8 +69,7 @@ public class OffersActivity extends BaseActivity implements OffersView,OffersAda
                 new OffersAdapter.OnItemClickListener() {
                     @Override
                     public void onClick(GetOffersRes.Result Item) {
-                        Toast.makeText(getApplicationContext(), Item.getTitle(),
-                                Toast.LENGTH_LONG).show();
+
                     }
                 });
 
@@ -122,6 +120,6 @@ public class OffersActivity extends BaseActivity implements OffersView,OffersAda
 
     @Override
     public void onClick(GetOffersRes.Result Item) {
-        showDialog(Item.getTitle(),Item.getDescription());
+        showDialog(Item.getTitle(), Item.getDescription());
     }
 }

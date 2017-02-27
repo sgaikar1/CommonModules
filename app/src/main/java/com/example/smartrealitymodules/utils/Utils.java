@@ -17,6 +17,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -50,7 +51,6 @@ public class Utils {
 
     public static final int CACHETIME = 432000;
 
-    public static final String sProjectCode = "SPR";
     public static final String Device = "android";
     public static final String Devicedownload = "androiddownload";
 
@@ -71,6 +71,90 @@ public class Utils {
     public Utils() {
     }
 
+    public static void openShareIntent(Activity activity, String message) {
+        try {
+            ShareCompat.IntentBuilder.from(activity)
+                    .setType("text/plain")
+//                  .addEmailTo(getString(R.string.support_email_id))
+//                  .setSubject("")
+                    .setText(message)
+//                  .setHtmlText(body) //If you are using HTML in your body text
+                    .setChooserTitle("Share")
+                    .startChooser();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String convertBudgetToCrore(String budget) {
+        String s = "";
+
+        try {
+            if (!budget.equalsIgnoreCase("")) {
+                double num = Integer.parseInt(budget);
+                double float_num = 0;
+                if (budget.length() >= 8) {
+                    float_num = num / 10000000;
+                    s = String.format("%.2f", float_num);
+                    String dec = s.substring(0, s.indexOf(".") + 2);
+                    s = "₹ " + dec + " Cr";
+//                    if (dec.equals("00")) {
+//                        int newnum = (int) Float.parseFloat(s);
+//                        s = Integer.toString(newnum) +" Cr";
+//                    }
+                } else if (budget.length() >= 6) {
+                    float_num = num / 100000;
+                    s = String.format("%.2f", float_num);
+                    String dec = s.substring(0, s.indexOf(".") + 2);
+                    s = "₹ " + dec + " Lac";
+//                    if (dec.equals("00")) {
+//                        int newnum = (int) Float.parseFloat(s);
+//                        s = Integer.toString(newnum) +" Lac" ;
+//                    }
+                } else if (budget.length() >= 4) {
+                    float_num = num / 1000;
+                    s = String.format("%.2f", float_num);
+                    String dec = s.substring(0, s.indexOf(".") + 2);
+                    s = "₹ " + dec + " K";
+//                    if (dec.equals("00")) {
+//                        int newnum = (int) Float.parseFloat(s);
+//                        s = Integer.toString(newnum) +" K";
+//                    }
+                }
+
+            } else {
+                s = "";
+            }
+        } catch (Exception e) {
+            Log.e("Covert exp", e + "");
+        }
+        return s;
+
+    }
+
+    public static String convertBudgetToCrore1(String budget) {
+        String s = "";
+
+        try {
+            if (!budget.equalsIgnoreCase("")) {
+                int num = Integer.parseInt(budget);
+                float float_num = num / 10000000;
+                s = String.format("%.2f", float_num);
+                String dec = s.substring(s.indexOf(".") + 1);
+                if (dec.equals("00")) {
+                    int newnum = (int) Float.parseFloat(s);
+                    s = Integer.toString(newnum);
+                }
+            } else {
+                s = "";
+            }
+        } catch (Exception e) {
+            Log.e("Covert exp", e + "");
+        }
+        return s;
+
+    }
+
     /**
      * Method for logging the message
      *
@@ -87,6 +171,24 @@ public class Utils {
     }
 
     /**
+     * Method to check whether internet is connection or connected
+     *
+     * @param mContext - context of activity
+     * @return status of internet connection
+     */
+//    public boolean isInternetPresent(Context mContext) {
+//        ConnectivityManager connectivity = (ConnectivityManager) mContext.
+//                getSystemService(Context.CONNECTIVITY_SERVICE);
+//        if (connectivity != null) {
+//            NetworkInfo info = connectivity.getActiveNetworkInfo();
+//            if (info != null && info.isConnected()) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    /**
      * Method for toast the message
      *
      * @param mContext - context of activity
@@ -94,6 +196,29 @@ public class Utils {
      */
     public void toastMe(Context mContext, String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
+    }
+
+    public static void showAlertDialog(Context context, String title,
+                                       String message) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setPositiveButton("OK", null);
+        alertDialog.show();
+    }
+
+    public static void hideKeyboard(Activity mAcivity) {
+
+        try {
+            InputMethodManager inputManager = (InputMethodManager)
+                    mAcivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            inputManager.hideSoftInputFromWindow(mAcivity.getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch (Exception e) {
+//            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -158,24 +283,6 @@ public class Utils {
     }
 
     /**
-     * Method to check whether internet is connection or connected
-     *
-     * @param mContext - context of activity
-     * @return status of internet connection
-     */
-//    public boolean isInternetPresent(Context mContext) {
-//        ConnectivityManager connectivity = (ConnectivityManager) mContext.
-//                getSystemService(Context.CONNECTIVITY_SERVICE);
-//        if (connectivity != null) {
-//            NetworkInfo info = connectivity.getActiveNetworkInfo();
-//            if (info != null && info.isConnected()) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-    /**
      * Method to get configures account's email address from device
      *
      * @param mContext - context of Activity
@@ -229,7 +336,6 @@ public class Utils {
         return matcher.matches();
     }
 
-
     /**
      * Mehtod to get device's unique device id
      *
@@ -281,33 +387,6 @@ public class Utils {
         return mAlertDialog;
     }
 
-    /**
-     * Convert URL to Bitmap using AsyncTask
-     */
-    public class GetBitmapFromUrl extends AsyncTask<String, Void, Bitmap> {
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            try {
-                URL url = new URL(params[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-                return myBitmap;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-        }
-    }
-
     public void toastAlert(Activity mContext, String message) {
 
 //        Configuration croutonConfiguration = new Configuration.Builder().setDuration(2500).build();
@@ -343,21 +422,6 @@ public class Utils {
         context.startActivity(callIntent);
     }
 
-    public static void openShareIntent(Activity activity, String message) {
-        try {
-            ShareCompat.IntentBuilder.from(activity)
-                    .setType("text/plain")
-//                  .addEmailTo(getString(R.string.support_email_id))
-//                  .setSubject("")
-                    .setText(message)
-//                  .setHtmlText(body) //If you are using HTML in your body text
-                    .setChooserTitle("Share")
-                    .startChooser();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void openShareMailIntent(Activity activity, String Recipient) {
         try {
             ShareCompat.IntentBuilder.from(activity)
@@ -370,76 +434,6 @@ public class Utils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
-    public static String convertBudgetToCrore(String budget) {
-        String s = "";
-
-        try {
-            if (!budget.equalsIgnoreCase("")) {
-                double num = Integer.parseInt(budget);
-                double float_num = 0;
-                if(budget.length()>=8) {
-                    float_num = num / 10000000;
-                    s = String.format("%.2f", float_num);
-                    String dec = s.substring(0, s.indexOf(".") + 2);
-                    s = "₹ "+dec+" Cr";
-//                    if (dec.equals("00")) {
-//                        int newnum = (int) Float.parseFloat(s);
-//                        s = Integer.toString(newnum) +" Cr";
-//                    }
-                }else if(budget.length()>=6){
-                    float_num = num / 100000;
-                    s = String.format("%.2f", float_num);
-                    String dec = s.substring(0, s.indexOf(".") + 2);
-                    s = "₹ "+dec +" Lac" ;
-//                    if (dec.equals("00")) {
-//                        int newnum = (int) Float.parseFloat(s);
-//                        s = Integer.toString(newnum) +" Lac" ;
-//                    }
-                }else if(budget.length()>=4){
-                    float_num = num / 1000;
-                    s = String.format("%.2f", float_num);
-                    String dec = s.substring(0, s.indexOf(".") + 2);
-                    s = "₹ "+dec +" K";
-//                    if (dec.equals("00")) {
-//                        int newnum = (int) Float.parseFloat(s);
-//                        s = Integer.toString(newnum) +" K";
-//                    }
-                }
-
-            } else {
-                s = "";
-            }
-        } catch (Exception e) {
-            Log.e("Covert exp", e + "");
-        }
-        return s;
-
-    }
-
-    public static String convertBudgetToCrore1(String budget) {
-        String s = "";
-
-        try {
-            if (!budget.equalsIgnoreCase("")) {
-                int num = Integer.parseInt(budget);
-                float float_num = num / 10000000;
-                s = String.format("%.2f", float_num);
-                String dec = s.substring(s.indexOf(".") + 1);
-                if (dec.equals("00")) {
-                    int newnum = (int) Float.parseFloat(s);
-                    s = Integer.toString(newnum);
-                }
-            } else {
-                s = "";
-            }
-        } catch (Exception e) {
-            Log.e("Covert exp", e + "");
-        }
-        return s;
-
     }
 
     public void copyStream(InputStream input, OutputStream output)
@@ -462,6 +456,33 @@ public class Utils {
             formattedDate = "";
         }
         return formattedDate;
+    }
+
+    /**
+     * Convert URL to Bitmap using AsyncTask
+     */
+    public class GetBitmapFromUrl extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            try {
+                URL url = new URL(params[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                return myBitmap;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+        }
     }
 
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <AutoCompleteTextView
+            android:id="@+id/autocomplete_search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="17dp"
+            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:drawablePadding="5dp"
+            android:ems="15"
+            android:hint="Search by name or number"
+            android:imeOptions="actionDone"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textSize="@dimen/textsize16" />
+
+        <ListView
+            android:id="@+id/listContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnSend"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/autocomplete_search"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:textColor="#fff"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorAccent"
+            android:text="Send"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+</RelativeLayout>

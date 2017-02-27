@@ -9,8 +9,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.ui.activity.AboutUsActivity;
+import com.example.smartrealitymodules.ui.activity.ContactUsActivity;
+import com.example.smartrealitymodules.ui.activity.NotificationActivity;
 import com.example.smartrealitymodules.ui.activity.OffersActivity;
-import com.example.smartrealitymodules.ui.activity.HomeActivity;
+import com.example.smartrealitymodules.ui.activity.ReferFriendActivity;
+import com.example.smartrealitymodules.ui.activity.ShareActivity;
 
 import java.util.List;
 
@@ -44,12 +48,28 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
             public void onClick(View v) {
                 switch (position){
                     case 0:
-                        Intent intent = new Intent(mContext, HomeActivity.class);
+                        Intent intent = new Intent(mContext, ReferFriendActivity.class);
                         mContext.startActivity(intent);
                         break;
                     case 1:
                         Intent intent2 = new Intent(mContext, OffersActivity.class);
                         mContext.startActivity(intent2);
+                        break;
+                    case 2:
+                        Intent intent3 = new Intent(mContext, NotificationActivity.class);
+                        mContext.startActivity(intent3);
+                        break;
+                    case 3:
+                        Intent intent4 = new Intent(mContext, ContactUsActivity.class);
+                        mContext.startActivity(intent4);
+                        break;
+                    case 4:
+                        Intent intent5 = new Intent(mContext, AboutUsActivity.class);
+                        mContext.startActivity(intent5);
+                        break;
+                    case 5:
+                        Intent intent6 = new Intent(mContext, ShareActivity.class);
+                        mContext.startActivity(intent6);
                         break;
                 }
 

@@ -1,8 +1,8 @@
 package com.example.smartrealitymodules.mvp.presenter;
 
+import com.example.smartrealitymodules.api.NetworkError;
 import com.example.smartrealitymodules.models.request.CommonReq;
 import com.example.smartrealitymodules.models.response.GetOffersRes;
-import com.example.smartrealitymodules.api.NetworkError;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.view.OffersView;
 

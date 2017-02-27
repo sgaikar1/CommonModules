@@ -26,8 +26,12 @@ public class MainActivity extends AppCompatActivity {
         mContext = this;
 
         ArrayList<String> mainList = new ArrayList<>();
-        mainList.add("Home aka demo");
+        mainList.add("Refer a friend");
         mainList.add("Offers");
+        mainList.add("Notification");
+        mainList.add("Contact Us");
+        mainList.add("About Us");
+        mainList.add("Share");
         setContentView(R.layout.activity_main);
         RecyclerView rvmain = (RecyclerView) findViewById(R.id.rv_main);
         rvmain.setHasFixedSize(true);

@@ -6,4 +6,7 @@ package com.example.smartrealitymodules.api;
 
 public class ApiNames {
     public static final String GetOffers = "GetOffers";
+    public static final String GetAllJumbleNotifications = "GetAllJumbleNotifications";
+    public static final String SaveReferForRewardsPost = "SaveReferForRewardsPost";
+    public static final String GetCheckForShare= "CheckForShare";
 }

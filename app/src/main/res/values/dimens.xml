@@ -10,4 +10,10 @@
     <dimen name="margin30">30dp</dimen>
     <dimen name="buttonwidth">80dp</dimen>
     <dimen name="buttonheight">40dp</dimen>
+    <dimen name="textsize18">18sp</dimen>
+    <dimen name="textsize14">14sp</dimen>
+    <dimen name="margin20">20dp</dimen>
+    <dimen name="margin1">1dp</dimen>
+    <dimen name="margin15">15dp</dimen>
+    <dimen name="textsize17">17sp</dimen>
 </resources>

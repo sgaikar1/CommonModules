@@ -1,18 +1,12 @@
 package com.example.smartrealitymodules.models.response;
 
-import android.databinding.BaseObservable;
-import android.databinding.BindingAdapter;
-import android.widget.ImageView;
-
-import com.example.smartrealitymodules.utils.Utils;
-
 import java.util.ArrayList;
 
 /**
  * Created by vijay on 28/11/16.
  */
 
-public class GetOffersRes extends BaseObservable {
+public class GetOffersRes {
 
     public String status;
     public String message;
@@ -105,9 +99,4 @@ public class GetOffersRes extends BaseObservable {
         }
 
     }
-//    @BindingAdapter({"Bind:offerImageUrl"})
-//    public static void loadImage(ImageView view, String offerImageUrl) {
-//        Utils mUtils = new Utils();
-//        mUtils.loadImageInImageview(view.getContext(),offerImageUrl,view);
-//    }
 }
