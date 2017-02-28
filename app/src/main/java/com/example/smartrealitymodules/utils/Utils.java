@@ -155,49 +155,6 @@ public class Utils {
 
     }
 
-    /**
-     * Method for logging the message
-     *
-     * @param tag     - tag for log
-     * @param message - message for log
-     **/
-    public void logMe(String tag, String message) {
-        Log.e(tag, message);
-    }
-
-    public void getWebserviceLog(String tag, Object obj) {
-        Gson gson = new Gson();
-        logMe(tag, gson.toJson(obj));
-    }
-
-    /**
-     * Method to check whether internet is connection or connected
-     *
-     * @param mContext - context of activity
-     * @return status of internet connection
-     */
-//    public boolean isInternetPresent(Context mContext) {
-//        ConnectivityManager connectivity = (ConnectivityManager) mContext.
-//                getSystemService(Context.CONNECTIVITY_SERVICE);
-//        if (connectivity != null) {
-//            NetworkInfo info = connectivity.getActiveNetworkInfo();
-//            if (info != null && info.isConnected()) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-    /**
-     * Method for toast the message
-     *
-     * @param mContext - context of activity
-     * @param message  - message to toast
-     */
-    public void toastMe(Context mContext, String message) {
-        Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
-    }
-
     public static void showAlertDialog(Context context, String title,
                                        String message) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
@@ -219,6 +176,49 @@ public class Utils {
 //            e.printStackTrace();
         }
 
+    }
+
+    /**
+     * Method to check whether internet is connection or connected
+     *
+     * @param mContext - context of activity
+     * @return status of internet connection
+     */
+//    public boolean isInternetPresent(Context mContext) {
+//        ConnectivityManager connectivity = (ConnectivityManager) mContext.
+//                getSystemService(Context.CONNECTIVITY_SERVICE);
+//        if (connectivity != null) {
+//            NetworkInfo info = connectivity.getActiveNetworkInfo();
+//            if (info != null && info.isConnected()) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    /**
+     * Method for logging the message
+     *
+     * @param tag     - tag for log
+     * @param message - message for log
+     **/
+    public void logMe(String tag, String message) {
+        Log.e(tag, message);
+    }
+
+    public void getWebserviceLog(String tag, Object obj) {
+        Gson gson = new Gson();
+        logMe(tag, gson.toJson(obj));
+    }
+
+    /**
+     * Method for toast the message
+     *
+     * @param mContext - context of activity
+     * @param message  - message to toast
+     */
+    public void toastMe(Context mContext, String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -353,7 +353,7 @@ public class Utils {
 
 
         try {
-            serial = android.os.Build.class.getField("SERIAL").get(null)
+            serial = Build.class.getField("SERIAL").get(null)
                     .toString();
             logMe("unique-1", serial);
             logMe("unique-2", m_szDevIDShort);

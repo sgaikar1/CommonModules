@@ -143,5 +143,17 @@
     <string name="share_msg">Hi, just thought of sharing SPR App. Click on this link http://bit.ly/2jDOixX to get the app.</string>
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
+    <string name="no_project_found">No Project Found</string>
+    <string name="start_from">Starts From</string>
+    <string name="about_project">About Project</string>
+    <string name="amenities">Amenities</string>
+    <string name="schedule_site_visit">Schedule Site Visit</string>
+    <string name="online_blocking">Online Booking</string>
+    <string name="project_images">PROJECT IMAGES</string>
+    <string name="gallery">GALLERY</string>
+    <string name="layout">LAYOUT</string>
+    <string name="no_video_available">Video Not Available</string>
+    <string name="no_360_video_available">360 View Is Not Available</string>
+    <string name="server_unavailable">Server Unavailable</string>
 
 </resources>

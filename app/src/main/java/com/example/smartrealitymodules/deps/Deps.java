@@ -8,6 +8,8 @@ import com.example.smartrealitymodules.ui.activity.ContactUsActivity;
 import com.example.smartrealitymodules.ui.activity.ListContact;
 import com.example.smartrealitymodules.ui.activity.NotificationActivity;
 import com.example.smartrealitymodules.ui.activity.OffersActivity;
+import com.example.smartrealitymodules.ui.activity.ProjectDetailsActivity;
+import com.example.smartrealitymodules.ui.activity.ProjectListingActivity;
 import com.example.smartrealitymodules.ui.activity.ReferFriendActivity;
 import com.example.smartrealitymodules.ui.activity.ShareActivity;
 
@@ -29,4 +31,8 @@ public interface Deps {
     void inject(AboutDetailsActivity aboutDetailsActivity);
     void inject(ShareActivity shareActivity);
     void inject(ListContact listContact);
+
+    void inject(ProjectListingActivity projectListingActivity);
+
+    void inject(ProjectDetailsActivity projectDetailsActivity);
 }

@@ -1,6 +1,5 @@
 package com.example.smartrealitymodules.ui.activity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -15,7 +14,6 @@ import android.provider.ContactsContract;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,9 +43,7 @@ import com.example.smartrealitymodules.mvp.view.ShareView;
 import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
 import com.example.smartrealitymodules.ui.adapter.ContactListRowAdapter;
 import com.example.smartrealitymodules.utils.Constants;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.example.smartrealitymodules.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,17 +54,19 @@ import java.util.Map;
 import javax.inject.Inject;
 
 public class ListContact extends BaseActivity implements ShareView {
+    @Inject
+    public MainModel mainModel;
     // protected ArrayList<M_Share> list_summary;
     protected boolean isInternetPresent = false;
     protected String METHOD_NAME;
-    String strNumbers = "";
     protected String struserID = "";
-    String sAppUserName = "", sAppPassword = "", sProjectCode = "", sUserID = "", sUserType = "";
-    // protected String strProjectID="";
-    Dialog alert;
     protected String struserType = "";
     protected String strPopMessageSend = "";
     protected String strPopMessageNotSend = "";
+    String strNumbers = "";
+    String sAppUserName = "", sAppPassword = "", sProjectCode = "", sUserID = "", sUserType = "";
+    // protected String strProjectID="";
+    Dialog alert;
     int count_send = 0;
     int count_notsend = 0;
     ArrayList<MobileandRemark> arraylist_mobile_remark;
@@ -88,12 +86,10 @@ public class ListContact extends BaseActivity implements ShareView {
     boolean flag = false;
     ReferralEntity ref;
     Toolbar toolbar;
+    TextView toolbar_title;
     private ArrayList<Map<String, String>> mPeopleList;
     private SimpleAdapter mAdapter;
     private Dialog dilaog;
-    TextView toolbar_title;
-    @Inject
-    public MainModel mainModel;
     private ContactListRowAdapter adapter;
 
     @Override
@@ -135,7 +131,7 @@ public class ListContact extends BaseActivity implements ShareView {
                 TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
                 final String id = telephonyManager.getDeviceId();
 
-                if (telephonyManager.getSimState() != telephonyManager.SIM_STATE_ABSENT) {
+                if (telephonyManager.getSimState() != TelephonyManager.SIM_STATE_ABSENT) {
                     arrReferral = new ArrayList<ReferralEntity>();
                     mobileNumber = "";
                     flag = false;
@@ -392,8 +388,8 @@ public class ListContact extends BaseActivity implements ShareView {
                 Iterator<String> myVeryOwnIterator = map.keySet().iterator();
                 while (myVeryOwnIterator.hasNext()) {
 
-                    String key = (String) myVeryOwnIterator.next();
-                    String value = (String) map.get(key);
+                    String key = myVeryOwnIterator.next();
+                    String value = map.get(key);
                     if (key.equalsIgnoreCase("Name")) {
                         autocomplete_search.setText(value);
                     }
@@ -485,7 +481,7 @@ public class ListContact extends BaseActivity implements ShareView {
                     ShareWithMultipleNumbers(strjson);
 
                 } else {
-                    mUtils.showAlertDialog(ListContact.this, "No Internet Connection",
+                    Utils.showAlertDialog(ListContact.this, "No Internet Connection",
                             "You don't have internet connection.");
 
                 }
@@ -596,6 +592,23 @@ public class ListContact extends BaseActivity implements ShareView {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private class LoadingContact extends AsyncTask<String, Void, String> {
         ProgressDialog pDialog;
 
@@ -681,24 +694,6 @@ public class ListContact extends BaseActivity implements ShareView {
             getContactNames();
         }
 
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                // app icon in action bar clicked; goto parent activity.
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
 }

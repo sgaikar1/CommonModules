@@ -16,4 +16,7 @@
     <dimen name="margin1">1dp</dimen>
     <dimen name="margin15">15dp</dimen>
     <dimen name="textsize17">17sp</dimen>
+    <dimen name="textsize15">15sp</dimen>
+    <dimen name="textsize10">10sp</dimen>
+    <dimen name="margin2">2dp</dimen>
 </resources>

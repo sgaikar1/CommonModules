@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         mainList.add("Contact Us");
         mainList.add("About Us");
         mainList.add("Share");
+        mainList.add("Projects");
         setContentView(R.layout.activity_main);
         RecyclerView rvmain = (RecyclerView) findViewById(R.id.rv_main);
         rvmain.setHasFixedSize(true);

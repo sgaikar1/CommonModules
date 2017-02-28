@@ -9,11 +9,11 @@
         android:id="@+id/txtContactName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/textsize16"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="3dp"
-        android:ems="10" />
+        android:ems="10"
+        android:textSize="@dimen/textsize16" />
 
     <CheckBox
         android:id="@+id/checkContactCheckBox"
@@ -28,10 +28,10 @@
     <TextView
         android:id="@+id/tv_number"
         android:layout_width="wrap_content"
-        android:textSize="@dimen/textsize16"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtContactName"
         android:layout_below="@+id/txtContactName"
-        android:layout_marginTop="@dimen/margin5" />
+        android:layout_marginTop="@dimen/margin5"
+        android:textSize="@dimen/textsize16" />
 
 </RelativeLayout>

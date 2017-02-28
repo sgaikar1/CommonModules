@@ -25,15 +25,15 @@
 
         <Button
             android:id="@+id/buttonShare"
-            android:background="@color/colorAccent"
-            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/editText2"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:text="OK" />
+            android:background="@color/colorAccent"
+            android:text="OK"
+            android:textColor="@color/white" />
     </RelativeLayout>
 
 </RelativeLayout>

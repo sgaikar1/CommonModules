@@ -60,6 +60,18 @@ public class ShareActivity extends BaseActivity implements ShareView {
     private EditText edtNumber;
     private EditText edtName;
 
+    public static boolean filterByPackageName(Context context, Intent intent, String prefix) {
+        List<ResolveInfo> matches = context.getPackageManager().queryIntentActivities(intent, 0);
+        for (ResolveInfo info : matches) {
+            if (info.activityInfo.packageName.toLowerCase().startsWith(prefix)) {
+                intent.setPackage(info.activityInfo.packageName);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +91,6 @@ public class ShareActivity extends BaseActivity implements ShareView {
         rlShareContacts = (RelativeLayout) findViewById(R.id.rlShareContacts);
 
     }
-
 
     private void initClicks() {
         rlShareNewNumber.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +170,7 @@ public class ShareActivity extends BaseActivity implements ShareView {
 
                     }
                 } else {
-                    mUtils.showAlertDialog(ShareActivity.this,
+                    Utils.showAlertDialog(ShareActivity.this,
                             "No Internet Connection",
                             "You don't have internet connection.");
                 }
@@ -177,7 +188,6 @@ public class ShareActivity extends BaseActivity implements ShareView {
             }
         });
     }
-
 
     private void showDialog() {
 
@@ -279,7 +289,7 @@ public class ShareActivity extends BaseActivity implements ShareView {
                     TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
                     final String id = telephonyManager.getDeviceId();
 
-                    if (telephonyManager.getSimState() != telephonyManager.SIM_STATE_ABSENT) {
+                    if (telephonyManager.getSimState() != TelephonyManager.SIM_STATE_ABSENT) {
 
                         ShareNumber(edtNumber.getText().toString(), strjson);
                     } else {
@@ -319,18 +329,6 @@ public class ShareActivity extends BaseActivity implements ShareView {
         } else {
             Utils.showAlertDialog(ShareActivity.this, "No Internet Connection", "You don't have internet connection.");
         }
-    }
-
-    public static boolean filterByPackageName(Context context, Intent intent, String prefix) {
-        List<ResolveInfo> matches = context.getPackageManager().queryIntentActivities(intent, 0);
-        for (ResolveInfo info : matches) {
-            if (info.activityInfo.packageName.toLowerCase().startsWith(prefix)) {
-                intent.setPackage(info.activityInfo.packageName);
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public void showAlert(final String strMobileNumber) {

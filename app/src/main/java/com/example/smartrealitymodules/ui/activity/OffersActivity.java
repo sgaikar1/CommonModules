@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.api.ApiNames;
 import com.example.smartrealitymodules.models.request.CommonReq;
 import com.example.smartrealitymodules.models.response.GetOffersRes;
 import com.example.smartrealitymodules.mvp.model.MainModel;
@@ -47,9 +48,10 @@ public class OffersActivity extends BaseActivity implements OffersView, OffersAd
         renderView();
         init();
 
+        // TODO: 27/2/17 check internet connection.. do needed check in other activities too
         CommonReq obj = new CommonReq(Constants.PROJECTCODE, Constants.USERTYPE,Constants.USERID);
         OffersPresenter presenter = new OffersPresenter(mainModel, this);
-        presenter.getOffersList(obj);
+        presenter.getOffersList(obj, ApiNames.GetOffers);
     }
 
     public  void renderView(){

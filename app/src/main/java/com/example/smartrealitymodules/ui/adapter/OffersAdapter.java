@@ -38,7 +38,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
 
 
     @Override
-    public OffersAdapter.OffersViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public OffersViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.offers_row, null);
         view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
         return new OffersViewHolder(view);
@@ -46,7 +46,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
 
 
     @Override
-    public void onBindViewHolder(final OffersAdapter.OffersViewHolder holder, final int position) {
+    public void onBindViewHolder(final OffersViewHolder holder, final int position) {
         holder.textitemrecyclerofferdate.setText(mDateUtils.changeDateFormat(
                 data.get(position).getEndDate(), mDateUtils.dd_MM_yyyy, mDateUtils.dd_MMM_yy));
         holder.textitemrecycleroffertitle.setText(data.get(position).getTitle());

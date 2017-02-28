@@ -14,6 +14,9 @@ public class Constants {
     public static final int MOBILENO_ALTERNATE_EMPTY_STATUS = 3;
     public static final int EMAIL_EMPTY_STATUS = 4;
     public static final int PINCODE_EMPTY_STATUS = 5;
+    public static final String PROJECTNAME_KEY = "projectname";
+    public static final String PROJECTID_KEY = "projectid";
+    public static final String PROJECTIMAGE_KEY = "projectImage";
 
     /**
      * This is Webservice's Base URL's USERNAME to access webservice

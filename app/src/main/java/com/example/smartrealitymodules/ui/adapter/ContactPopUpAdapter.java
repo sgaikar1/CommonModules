@@ -17,7 +17,6 @@ import com.example.smartrealitymodules.models.share.PhoneNumber;
 import java.util.ArrayList;
 
 
-
 public class ContactPopUpAdapter extends BaseAdapter {
 
     Context con;

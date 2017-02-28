@@ -20,7 +20,6 @@ import com.example.smartrealitymodules.models.share.ContactEntity;
 import java.util.ArrayList;
 
 
-
 public class ContactListRowAdapter extends BaseAdapter {
 
     public static ArrayList<ContactEntity> arrContact;
@@ -33,10 +32,10 @@ public class ContactListRowAdapter extends BaseAdapter {
     Integer arrImage[];
 
     public ContactListRowAdapter(Context applicationContext,
-                          ArrayList<ContactEntity> arrConatct) {
+                                 ArrayList<ContactEntity> arrConatct) {
         // TODO Auto-generated constructor stub
         con = applicationContext;
-        this.arrContact = arrConatct;
+        arrContact = arrConatct;
         // countSend=0;
     }
 
@@ -326,7 +325,7 @@ public class ContactListRowAdapter extends BaseAdapter {
 //		final View pView = mInflater.inflate(R.layout.poplist, null, false);
 
 
-        final Dialog alert = new Dialog(context ,R.style.FullHeightDialog);
+        final Dialog alert = new Dialog(context, R.style.FullHeightDialog);
         alert.setContentView(R.layout.poplist);
         alert.setCanceledOnTouchOutside(true);
         alert.setCancelable(true);

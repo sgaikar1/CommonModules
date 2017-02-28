@@ -13,6 +13,7 @@ import com.example.smartrealitymodules.ui.activity.AboutUsActivity;
 import com.example.smartrealitymodules.ui.activity.ContactUsActivity;
 import com.example.smartrealitymodules.ui.activity.NotificationActivity;
 import com.example.smartrealitymodules.ui.activity.OffersActivity;
+import com.example.smartrealitymodules.ui.activity.ProjectListingActivity;
 import com.example.smartrealitymodules.ui.activity.ReferFriendActivity;
 import com.example.smartrealitymodules.ui.activity.ShareActivity;
 
@@ -70,6 +71,10 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
                     case 5:
                         Intent intent6 = new Intent(mContext, ShareActivity.class);
                         mContext.startActivity(intent6);
+                        break;
+                    case 6:
+                        Intent intent7 = new Intent(mContext, ProjectListingActivity.class);
+                        mContext.startActivity(intent7);
                         break;
                 }
 

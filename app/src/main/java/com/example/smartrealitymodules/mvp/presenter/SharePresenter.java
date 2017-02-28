@@ -43,10 +43,10 @@ public class SharePresenter {
 
             @Override
             public void onFailure(CheckForShareRes checkForShareRes) {
-               view.GetCheckForShareSuccess(checkForShareRes);
+                view.GetCheckForShareSuccess(checkForShareRes);
             }
         });
-            subscriptions.add(subscription);
+        subscriptions.add(subscription);
     }
 
 }

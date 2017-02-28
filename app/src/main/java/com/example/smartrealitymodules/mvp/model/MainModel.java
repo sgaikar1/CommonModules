@@ -4,10 +4,14 @@ package com.example.smartrealitymodules.mvp.model;
 import com.example.smartrealitymodules.api.NetworkError;
 import com.example.smartrealitymodules.api.NetworkService;
 import com.example.smartrealitymodules.models.request.CommonReq;
+import com.example.smartrealitymodules.models.request.ProjectDetailsReq;
+import com.example.smartrealitymodules.models.request.ProjectInterestedInReq;
 import com.example.smartrealitymodules.models.request.SaveReferForRewardsPostReq;
 import com.example.smartrealitymodules.models.response.CommonRes;
 import com.example.smartrealitymodules.models.response.GetAllJumbleNotificationsRes;
 import com.example.smartrealitymodules.models.response.GetOffersRes;
+import com.example.smartrealitymodules.models.response.ProjectDetailsRes;
+import com.example.smartrealitymodules.models.response.ProjectListingRes;
 import com.example.smartrealitymodules.models.share.CheckForShareReq;
 import com.example.smartrealitymodules.models.share.CheckForShareRes;
 import com.example.smartrealitymodules.utils.Constants;
@@ -33,10 +37,13 @@ public class MainModel {
 
     public MainModel(NetworkService networkService) {
         this.networkService = networkService;
+        gson = new Gson();
+        mUtils = new Utils();
     }
 
-    public Subscription getOffersList(CommonReq obj, final GetOffersListCallback callback) {
+    public Subscription getOffersList(CommonReq obj, final String apiname, final GetOffersListCallback callback) {
 
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
         return networkService.getOffersList(obj)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -60,16 +67,95 @@ public class MainModel {
 
                     @Override
                     public void onNext(GetOffersRes getOffersRes) {
+                        mUtils.getWebserviceLog(apiname + "_response", getOffersRes);
                         callback.onSuccess(getOffersRes);
 
                     }
                 });
     }
 
+    public Subscription getProjectList(CommonReq obj, final String apiname, final GetProjectListCallback callback) {
+
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.getProjectList(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends ProjectListingRes>>() {
+                    @Override
+                    public Observable<? extends ProjectListingRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<ProjectListingRes>() {
+                               @Override
+                               public void onCompleted() {
+
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+                                   callback.onError(new NetworkError(e));
+
+                               }
+
+                               @Override
+                               public void onNext(ProjectListingRes projectListingRes) {
+                                   mUtils.getWebserviceLog(apiname + "_response", projectListingRes);
+                                   if (projectListingRes.getStatus().equalsIgnoreCase("true")) {
+                                       callback.onSuccess(projectListingRes);
+                                   } else {
+                                       callback.onFailure(projectListingRes);
+                                   }
+
+                               }
+
+                           }
+                );
+    }
+
+
+    public Subscription getProjectDetails(ProjectDetailsReq obj, final String apiname, final GetProjectDetailsCallback callback) {
+
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.getProjectDetails(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends ProjectDetailsRes>>() {
+                    @Override
+                    public Observable<? extends ProjectDetailsRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<ProjectDetailsRes>() {
+                               @Override
+                               public void onCompleted() {
+
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+                                   callback.onError(new NetworkError(e));
+
+                               }
+
+                               @Override
+                               public void onNext(ProjectDetailsRes projectDetailsRes) {
+                                   mUtils.getWebserviceLog(apiname + "_response", projectDetailsRes);
+                                   if (projectDetailsRes.getStatus().equalsIgnoreCase("true")) {
+                                       callback.onSuccess(projectDetailsRes);
+                                   } else {
+                                       callback.onFailure(projectDetailsRes);
+                                   }
+
+                               }
+
+                           }
+                );
+    }
+
+
     public Subscription getNotificationList(CommonReq obj, final String apiname, final GetNotificationListCallback callback) {
 
-        gson = new Gson();
-        mUtils = new Utils();
 
         mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
         return networkService.getNotificationList(obj)
@@ -107,10 +193,8 @@ public class MainModel {
 
     public Subscription GetCheckForShare(ArrayList<CheckForShareReq> mySoapArr, final String apiname, final GetCheckForShareCallback callback) {
 
-        gson = new Gson();
-        mUtils = new Utils();
 
-        mUtils.logMe(apiname + "_request",mySoapArr.get(0).getValue()+"," +mySoapArr.get(1).getValue()+"," +mySoapArr.get(2).getValue()+"," + mySoapArr.get(3).getValue()+"," + mySoapArr.get(4).getValue()+"," +mySoapArr.get(5).getValue());
+        mUtils.logMe(apiname + "_request", mySoapArr.get(0).getValue() + "," + mySoapArr.get(1).getValue() + "," + mySoapArr.get(2).getValue() + "," + mySoapArr.get(3).getValue() + "," + mySoapArr.get(4).getValue() + "," + mySoapArr.get(5).getValue());
         return networkService.getCheckForShare(mySoapArr.get(0).getValue(), mySoapArr.get(1).getValue(), mySoapArr.get(2).getValue(), mySoapArr.get(3).getValue(), mySoapArr.get(4).getValue(), mySoapArr.get(5).getValue())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -171,9 +255,6 @@ public class MainModel {
     }
 
     public Subscription apiSaveReferForRewardsPost(SaveReferForRewardsPostReq obj, final String apiname, final SaveReferForRewardsPostCallback callback) {
-        gson = new Gson();
-        mUtils = new Utils();
-
         mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
         return networkService.apiSaveReferForRewardsPost(obj)
                 .subscribeOn(Schedulers.io())
@@ -214,12 +295,68 @@ public class MainModel {
                 });
     }
 
+    public Subscription getProjectInterestedIn(ProjectInterestedInReq obj, final String apiname, final GetProjectInterestedInCallback callback) {
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.apiProjectInterestedIn(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CommonRes>>() {
+                    @Override
+                    public Observable<? extends CommonRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<CommonRes>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+
+                    }
+
+                    @Override
+                    public void onNext(CommonRes commonRes) {
+                        mUtils.getWebserviceLog(apiname + "_response", commonRes);
+                        if (commonRes.getStatus().equalsIgnoreCase("true")) {
+                            if (commonRes.getMessage() != null) {
+                                callback.onSuccess(commonRes);
+                            }
+                        } else {
+                            if (commonRes.getMessage() != null) {
+                                callback.onFailure(commonRes, true);
+                            } else {
+                                callback.onFailure(commonRes, false);
+                            }
+                        }
+                    }
+                });
+    }
 
 
     public interface GetOffersListCallback {
         void onSuccess(GetOffersRes getOffersRes);
 
         void onError(NetworkError networkError);
+    }
+
+    public interface GetProjectListCallback {
+        void onSuccess(ProjectListingRes projectListingRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(ProjectListingRes projectListingRes);
+    }
+
+    public interface GetProjectDetailsCallback {
+        void onSuccess(ProjectDetailsRes projectDetailsRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(ProjectDetailsRes projectDetailsRes);
     }
 
     public interface GetNotificationListCallback {
@@ -250,5 +387,14 @@ public class MainModel {
         void onError(NetworkError networkError);
 
         void onFailure(CheckForShareRes checkForShareRes);
+    }
+
+
+    public interface GetProjectInterestedInCallback {
+        void onSuccess(CommonRes commonRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(CommonRes commonRes, boolean flag);
     }
 }

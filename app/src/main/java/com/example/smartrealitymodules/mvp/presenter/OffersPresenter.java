@@ -24,10 +24,10 @@ public class OffersPresenter {
         this.subscriptions = new CompositeSubscription();
     }
 
-    public void getOffersList(CommonReq obj) {
+    public void getOffersList(CommonReq obj, String apiname) {
         view.showWait();
 
-        Subscription subscription = mainModel.getOffersList(obj,new MainModel.GetOffersListCallback() {
+        Subscription subscription = mainModel.getOffersList(obj, apiname, new MainModel.GetOffersListCallback() {
             @Override
             public void onSuccess(GetOffersRes getOffersRes) {
                 view.removeWait();
