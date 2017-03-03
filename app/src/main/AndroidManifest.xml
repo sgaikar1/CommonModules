@@ -20,16 +20,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.ReferFriendActivity" />
-        <activity android:name=".ui.activity.OffersActivity"/>
-        <activity android:name=".ui.activity.NotificationActivity" />
-        <activity android:name=".ui.activity.ContactUsActivity" />
-        <activity android:name=".ui.activity.AboutUsActivity" />
-        <activity android:name=".ui.activity.AboutDetailsActivity" />
-        <activity android:name=".ui.activity.ShareActivity" />
-        <activity android:name=".ui.activity.ListContact" />
-        <activity android:name=".ui.activity.ProjectListingActivity" />
-        <activity android:name=".ui.activity.ProjectDetailsActivity" />
+        <activity android:name=".ui.activity.ReferFriendActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.OffersActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.NotificationActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.ContactUsActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.AboutUsActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.AboutDetailsActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.ShareActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.ListContact"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.ProjectListingActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.ProjectDetailsActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.GalleryActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.ImagePagerActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.AboutProjectActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.ScheduleSiteVisitActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.CalenderActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.LayoutActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.ProjectAmenitiesActivity"
+                  android:screenOrientation="portrait" />
     </application>
 
 

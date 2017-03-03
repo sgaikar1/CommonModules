@@ -238,13 +238,11 @@ public class Utils {
 
                         @Override
                         public void onSuccess() {
-                            // TODO Auto-generated method stub
-                            view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                           view.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         }
 
                         @Override
                         public void onError() {
-                            // TODO Auto-generated method stub
                             try {
                                 view.setImageResource(R.mipmap.ic_launcher);
                             } catch (Exception | OutOfMemoryError e) {
@@ -313,7 +311,6 @@ public class Utils {
                 }
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

@@ -54,6 +54,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 public class ListContact extends BaseActivity implements ShareView {
+    private static final String TAG = ListContact.class.getSimpleName();
     @Inject
     public MainModel mainModel;
     // protected ArrayList<M_Share> list_summary;
@@ -125,7 +126,7 @@ public class ListContact extends BaseActivity implements ShareView {
                                     .getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
                 } catch (Exception e) {
-                    // TODO: handle exception
+                    mUtils.logMe(TAG+" ERROR",e.getMessage());
                 }
 
                 TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -492,7 +493,6 @@ public class ListContact extends BaseActivity implements ShareView {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 alert.dismiss();
             }
         });

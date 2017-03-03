@@ -26,7 +26,6 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
     public GetOffersRes.Result result;
     private List<GetOffersRes.Result> data;
     private Dialog alert;
-    private OnItemClickListener itemClickListener;
 
     public OffersAdapter(Activity activity, List<GetOffersRes.Result> data, OnItemClickListener listener) {
         this.data = data;
@@ -56,7 +55,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClickListener.onClick(data.get(position));
+                listener.onClick(data.get(position),v);
             }
         });
     }
@@ -67,16 +66,9 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
         return data.size();
     }
 
-    public void showOnItemClick(View view, GetOffersRes.Result result) {
-        itemClickListener.onClick(result);
-    }
-
-    public void registerItemClickListener(OnItemClickListener itemClickListsener) {
-        this.itemClickListener = itemClickListsener;
-    }
 
     public interface OnItemClickListener {
-        void onClick(GetOffersRes.Result Item);
+        void onClick(GetOffersRes.Result Item, View v);
     }
 
     public class OffersViewHolder extends RecyclerView.ViewHolder {

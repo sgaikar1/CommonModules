@@ -82,7 +82,7 @@ public class NotificationActivity extends BaseActivity implements NotificationVi
         NotificationAdapter adapter = new NotificationAdapter(NotificationActivity.this, response.getResult(),
                 new NotificationAdapter.OnItemClickListener() {
                     @Override
-                    public void onClick(GetAllJumbleNotificationsRes.Result Item) {
+                    public void onClick(GetAllJumbleNotificationsRes.Result Item, View v) {
                         mUtils.toastMe(mContext, Item.getTitle());
                     }
                 });

@@ -70,6 +70,20 @@ public class ProjectListingAdapter extends RecyclerView.Adapter<ProjectListingAd
                 listener.onClick(data.get(position), v, position);
             }
         });
+
+        holder.imageitemrecyclerprojectlocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(data.get(position), v, position);
+            }
+        });
+
+        holder.imageitemrecyclerprojectcall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(data.get(position), v, position);
+            }
+        });
     }
 
 

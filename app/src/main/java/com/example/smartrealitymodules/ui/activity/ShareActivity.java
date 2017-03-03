@@ -165,8 +165,7 @@ public class ShareActivity extends BaseActivity implements ShareView {
                                 "Share with"));
                     } else {
 
-                        mUtils.toastMe(ShareActivity.this,
-                                "WhatsApp is not Installed");
+                        showToast("WhatsApp is not Installed");
 
                     }
                 } else {

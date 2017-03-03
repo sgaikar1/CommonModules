@@ -8,4 +8,7 @@
     <color name="textDescription">#909090</color>
     <color name="black">#000000</color>
     <color name="project_flat">#D28F08</color>
+    <color name="dividerLine">#e5e5e5</color>
+    <color name="black_tint">#99000000</color>
+    <color name="dark_blue">#030729</color>
 </resources>

@@ -7,8 +7,8 @@ import android.widget.ProgressBar;
 
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.api.NetworkModule;
-import com.example.smartrealitymodules.deps.DaggerDeps;
-import com.example.smartrealitymodules.deps.Deps;
+import com.example.smartrealitymodules.dependancy.DaggerDependancyInjection;
+import com.example.smartrealitymodules.dependancy.DependancyInjection;
 import com.example.smartrealitymodules.mvp.view.BaseView;
 import com.example.smartrealitymodules.utils.ConnectionDetector;
 import com.example.smartrealitymodules.utils.Utils;
@@ -23,18 +23,18 @@ public class BaseActivity extends AppCompatActivity implements BaseView{
     public ProgressBar progressBar;
     public Utils mUtils;
     public ConnectionDetector cd;
-    Deps deps;
+    DependancyInjection deps;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         File cacheFile = new File(getCacheDir(), "responses");
-        deps = DaggerDeps.builder().networkModule(new NetworkModule(cacheFile)).build();
+        deps = DaggerDependancyInjection.builder().networkModule(new NetworkModule(cacheFile)).build();
         mUtils = new Utils();
         cd = new ConnectionDetector(this);
     }
 
-    public Deps getDeps() {
+    public DependancyInjection getDeps() {
         return deps;
     }
 
@@ -62,4 +62,9 @@ public class BaseActivity extends AppCompatActivity implements BaseView{
         mUtils.toastMe(BaseActivity.this, Message);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
+    }
 }

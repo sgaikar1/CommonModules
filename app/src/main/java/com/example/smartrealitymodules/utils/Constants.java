@@ -17,6 +17,14 @@ public class Constants {
     public static final String PROJECTNAME_KEY = "projectname";
     public static final String PROJECTID_KEY = "projectid";
     public static final String PROJECTIMAGE_KEY = "projectImage";
+    public static final String POSITION_KEY = "POSITION";
+    public static final String WALKTHROUGH_URL_KEY = "WalkThroughURL";
+    public static final String ARCHITECTURE_KEY = "Architecture";
+    public static final String CUNSTRUCTION_KEY = "Construction";
+    public static final String TYPE_KEY = "type";
+    public static final String PROJECT_DESC_KEY = "projectDesc";
+    public static final String PROJECT_CITY_KEY = "projectCity";
+    public static final String DATE_KEY = "Date";
 
     /**
      * This is Webservice's Base URL's USERNAME to access webservice

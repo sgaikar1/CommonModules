@@ -45,7 +45,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(final NotificationViewHolder holder, final int position) {
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(data.get(position),v);
+            }
+        });
     }
 
 
@@ -54,16 +59,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         return data.size();
     }
 
-    public void showOnItemClick(View view, GetAllJumbleNotificationsRes.Result result) {
-        itemClickListener.onClick(result);
-    }
-
-    public void registerItemClickListener(OnItemClickListener itemClickListsener) {
-        this.itemClickListener = itemClickListsener;
-    }
-
     public interface OnItemClickListener {
-        void onClick(GetAllJumbleNotificationsRes.Result Item);
+        void onClick(GetAllJumbleNotificationsRes.Result Item, View v);
     }
 
     public class NotificationViewHolder extends RecyclerView.ViewHolder {

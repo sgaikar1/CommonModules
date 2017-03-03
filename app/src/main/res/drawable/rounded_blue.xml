@@ -4,7 +4,7 @@
 
     <solid
         android:width="@dimen/margin1"
-        android:color="@color/white" />
+        android:color="@color/dark_blue" />
     <corners
         android:bottomLeftRadius="15dp"
         android:bottomRightRadius="15dp"

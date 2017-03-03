@@ -9,7 +9,6 @@ public class SmsDeliveredReceiver_Login extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent arg1) {
-        // TODO Auto-generated method stub
         String str = new String(arg1.getStringExtra("PhoneNumber"));
 
         switch (getResultCode()) {

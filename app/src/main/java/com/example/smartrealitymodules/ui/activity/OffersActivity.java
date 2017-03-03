@@ -32,7 +32,7 @@ import javax.inject.Inject;
  */
 
 
-public class OffersActivity extends BaseActivity implements OffersView, OffersAdapter.OnItemClickListener {
+public class OffersActivity extends BaseActivity implements OffersView{
 
     @Inject
     public MainModel mainModel;
@@ -49,9 +49,15 @@ public class OffersActivity extends BaseActivity implements OffersView, OffersAd
         init();
 
         // TODO: 27/2/17 check internet connection.. do needed check in other activities too
-        CommonReq obj = new CommonReq(Constants.PROJECTCODE, Constants.USERTYPE,Constants.USERID);
-        OffersPresenter presenter = new OffersPresenter(mainModel, this);
-        presenter.getOffersList(obj, ApiNames.GetOffers);
+        if (cd.isConnectingToInternet()) {
+            CommonReq obj = new CommonReq(Constants.PROJECTCODE, Constants.USERTYPE, Constants.USERID);
+            OffersPresenter presenter = new OffersPresenter(mainModel, this);
+            presenter.getOffersList(obj, ApiNames.GetOffers);
+        }else{
+            mUtils.toastAlert(this, getString(R.string.no_internet));
+            // TODO: 20/2/17 If internet not available display data from local database
+//            setOfflineData(dBhelper.getValuesFromModule(dBhelper.OFFERS));
+        }
     }
 
     public  void renderView(){
@@ -70,12 +76,11 @@ public class OffersActivity extends BaseActivity implements OffersView, OffersAd
         OffersAdapter adapter = new OffersAdapter(OffersActivity.this, getOffersRes.getResult(),
                 new OffersAdapter.OnItemClickListener() {
                     @Override
-                    public void onClick(GetOffersRes.Result Item) {
-
+                    public void onClick(GetOffersRes.Result Item, View v) {
+                        showDialog(Item.getTitle(), Item.getDescription());
                     }
                 });
 
-        adapter.registerItemClickListener(OffersActivity.this);
         list.setAdapter(adapter);
     }
 
@@ -120,8 +125,4 @@ public class OffersActivity extends BaseActivity implements OffersView, OffersAd
 
     }
 
-    @Override
-    public void onClick(GetOffersRes.Result Item) {
-        showDialog(Item.getTitle(), Item.getDescription());
-    }
 }

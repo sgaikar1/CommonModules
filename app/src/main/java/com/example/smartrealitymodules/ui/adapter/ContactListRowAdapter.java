@@ -33,7 +33,6 @@ public class ContactListRowAdapter extends BaseAdapter {
 
     public ContactListRowAdapter(Context applicationContext,
                                  ArrayList<ContactEntity> arrConatct) {
-        // TODO Auto-generated constructor stub
         con = applicationContext;
         arrContact = arrConatct;
         // countSend=0;

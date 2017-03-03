@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/frame_layout"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="@dimen/margin5"
+             android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/image_item_recycler_layout_images"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop" />
+
+    <!--<ImageView-->
+    <!--android:id="@+id/image_item_recycler_layout_image_view"-->
+    <!--android:layout_width="@dimen/margin50"-->
+    <!--android:layout_height="@dimen/margin50"-->
+    <!--android:layout_gravity="right"-->
+    <!--android:padding="@dimen/margin10"-->
+    <!--android:src="@drawable/ic_eye_view"/>-->
+
+    <RelativeLayout
+        android:id="@+id/relative_item_recycler_layout_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.5"
+        android:background="@drawable/rounded_blue"
+        android:layout_marginTop="@dimen/margin20"
+        android:layout_marginRight="@dimen/margin10"
+        android:padding="@dimen/margin8"
+        android:layout_gravity="right">
+
+        <ImageView
+            android:id="@+id/image_item_recycler_block_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_search"
+            android:tint="@color/white"/>
+
+        <TextView
+            android:layout_below="@+id/image_item_recycler_block_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin3"
+            android:text="View Image"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize10" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_item_recycler_layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:paddingTop="@dimen/margin5"
+        android:paddingBottom="@dimen/margin10"
+        android:paddingLeft="@dimen/margin10"
+        android:textAllCaps="true"
+        android:background="@color/black_tint"
+        android:alpha="0.8"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/textsize16" />
+
+</FrameLayout>

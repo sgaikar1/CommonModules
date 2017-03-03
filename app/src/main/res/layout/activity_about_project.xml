@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_about_project"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.smartrealitymodules.ui.activity.AboutProjectActivity">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="55dp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <com.example.smartrealitymodules.utils.AutoScrollViewPager
+                    android:id="@+id/about_project_autoscroll_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin10">
+
+                    <TextView
+                        android:id="@+id/txt_aboutus_project"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="OSIAN"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize18" />
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/circleindicator_project_about"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin30"
+                        android:layout_gravity="bottom"/>
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin10"
+                android:layout_marginLeft="@dimen/margin10"
+                android:layout_marginRight="@dimen/margin10"
+                android:layout_marginStart="@dimen/margin10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_aboutus_project_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:layout_marginBottom="@dimen/margin10"
+                    android:gravity="center_vertical"
+                    android:text="Desc"
+                    android:textColor="@color/textDescription"
+                    android:textSize="@dimen/textsize15" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

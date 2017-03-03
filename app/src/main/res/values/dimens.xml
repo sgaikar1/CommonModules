@@ -19,4 +19,5 @@
     <dimen name="textsize15">15sp</dimen>
     <dimen name="textsize10">10sp</dimen>
     <dimen name="margin2">2dp</dimen>
+    <dimen name="margin3">3dp</dimen>
 </resources>

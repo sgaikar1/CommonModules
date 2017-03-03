@@ -155,5 +155,21 @@
     <string name="no_video_available">Video Not Available</string>
     <string name="no_360_video_available">360 View Is Not Available</string>
     <string name="server_unavailable">Server Unavailable</string>
+    <string name="no_gallery_image_available">Gallery Images Not Available</string>
+    <string name="site_visit_select_project">Select Project Name</string>
+    <string name="site_visit_schedule_date">*Schedule Date</string>
+    <string name="site_visit_schedule_time">*Schedule Time</string>
+    <string name="site_visit_pickup_home">Pick up from home</string>
+    <string name="site_visit_set_time">*Set Time</string>
+    <string name="site_visit_enter_address">*Enter Address</string>
+    <string name="site_visit_city">City</string>
+    <string name="date_should_greater">You cannot select previous Date</string>
+    <string name="schedule_time_should_greater">You can not select past time</string>
+    <string name="select_site_visit_schedule_date">Select schedule date</string>
+    <string name="pickup_time_less_than_schedule_time">Pickup time should be less than Visit time</string>
+    <string name="select_site_visit_schedule_time">Select Schedule Time</string>
+    <string name="select_site_visit_set_time">Select Pick up Time</string>
+    <string name="enter_address">Enter Address</string>
+    <string name="no_layout_image_available">Layout images not available.</string>
 
 </resources>

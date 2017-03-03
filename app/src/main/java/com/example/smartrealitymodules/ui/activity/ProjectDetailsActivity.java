@@ -59,7 +59,6 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
 
         getIntentValues();
 
-
         renderView();
         apiProjectDetails();
     }
@@ -132,18 +131,18 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
 
         int id = v.getId();
         switch (id) {
-           /* case R.id.frame_project_detail_gallery:
+            case R.id.frame_project_detail_gallery:
                 Intent gallery = new Intent(ProjectDetailsActivity.this, GalleryActivity.class);
-                gallery.putExtra("POSITION", 0);
-                gallery.putExtra("WalkThroughURL", data.getResult().getWalkThroughURL());
-                gallery.putParcelableArrayListExtra("Architecture", data.getResult().getGallery().get(0).getArchitecture());
-                gallery.putParcelableArrayListExtra("Construction", data.getResult().getGallery().get(0).getConstruction());
+                gallery.putExtra(Constants.POSITION_KEY, 0);
+                gallery.putExtra(Constants.WALKTHROUGH_URL_KEY, data.getResult().getWalkThroughURL());
+                gallery.putParcelableArrayListExtra(Constants.ARCHITECTURE_KEY, data.getResult().getGallery().get(0).getArchitecture());
+                gallery.putParcelableArrayListExtra(Constants.CUNSTRUCTION_KEY, data.getResult().getGallery().get(0).getConstruction());
                 startActivity(gallery);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left);
                 break;
             case R.id.frame_project_detail_layout:
                 Intent layout = new Intent(ProjectDetailsActivity.this, LayoutActivity.class);
-                layout.putExtra("projectId", projectId);
+                layout.putExtra(Constants.PROJECTID_KEY, projectId);
                 startActivity(layout);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left);
                 break;
@@ -156,17 +155,17 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.linear_project_detail_schedule_site_visit:
                 Intent schedule_visit = new Intent(ProjectDetailsActivity.this, ScheduleSiteVisitActivity.class);
-                schedule_visit.putExtra("projectId", projectId);
-                schedule_visit.putExtra("projectName", data.getResult().getProjectName());
-                schedule_visit.putExtra("projectCity", data.getResult().getCityName());
+                schedule_visit.putExtra(Constants.PROJECTID_KEY, projectId);
+                schedule_visit.putExtra(Constants.PROJECTNAME_KEY, data.getResult().getProjectName());
+                schedule_visit.putExtra(Constants.PROJECT_CITY_KEY, data.getResult().getCityName());
                 startActivity(schedule_visit);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left);
                 break;
             case R.id.linear_project_detail_about_project:
                 Intent aboutProject = new Intent(ProjectDetailsActivity.this, AboutProjectActivity.class);
-                aboutProject.putExtra("projectName", data.getResult().getProjectName());
-                aboutProject.putExtra("projectDesc", data.getResult().getAboutProject());
-                aboutProject.putExtra("projectImages", data.getResult().getProjectImages());
+                aboutProject.putExtra(Constants.PROJECTNAME_KEY, data.getResult().getProjectName());
+                aboutProject.putExtra(Constants.PROJECT_DESC_KEY, data.getResult().getAboutProject());
+                aboutProject.putExtra(Constants.PROJECTIMAGE_KEY, data.getResult().getProjectImages());
                 startActivity(aboutProject);
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left);
                 break;
@@ -188,13 +187,11 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
                 mUtils.openCallScreen(this, data.getResult().getContactNo());
                 break;
             case R.id.image_project_detail_location:
-                Intent location = new Intent(ProjectDetailsActivity.this, ProjectLocationActivity.class);
-                location.putExtra("Lattitude", data.getResult().getLat());
-                location.putExtra("Longitude", data.getResult().getLong());
-                location.putExtra("ProjectName", data.getResult().getProjectName());
-                startActivity(location);
-                overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left);
-                break;*/
+
+                String uri = "http://maps.google.com/maps?q=loc:" + data.getResult().getLat() + "," + data.getResult().getLong() + " (Current Project)";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(intent);
+                break;
             case R.id.image_project_detail_360_view:
 
                 if (cd.isConnectingToInternet()) {

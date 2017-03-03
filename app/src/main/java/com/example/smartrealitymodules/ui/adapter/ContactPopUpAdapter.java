@@ -25,7 +25,6 @@ public class ContactPopUpAdapter extends BaseAdapter {
     ViewHolder holder = null;
 
     public ContactPopUpAdapter(Context applicationContext, ArrayList<PhoneNumber> arrPhone, int parentPositon) {
-        // TODO Auto-generated constructor stub
         con = applicationContext;
         this.arrPhone = arrPhone;
         this.parentPositon = parentPositon;

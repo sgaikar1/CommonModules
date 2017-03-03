@@ -2,6 +2,7 @@ package com.example.smartrealitymodules.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -122,7 +123,7 @@ public class ProjectListingActivity extends BaseActivity implements ProjectListi
     }
 
     @Override
-    public void getProjectListSuccess(ProjectListingRes projectListingRes) {
+    public void getProjectListSuccess(final ProjectListingRes projectListingRes) {
         txtprojectslisting.setVisibility(View.GONE);
         recyclerprojectslisting.setVisibility(View.VISIBLE);
         listAll = projectListingRes.getResult();
@@ -152,6 +153,16 @@ public class ProjectListingActivity extends BaseActivity implements ProjectListi
                                 } else {
                                     mUtils.toastAlert(ProjectListingActivity.this, mContext.getString(R.string.no_internet));
                                 }
+                                break;
+
+                            case R.id.image_item_recycler_project_call:
+                                mUtils.openCallScreen(mContext, projectListingRes.getResult().get(position).getContactNo());
+                                break;
+
+                            case R.id.image_item_recycler_project_location:
+                                String uri = "http://maps.google.com/maps?q=loc:" + projectListingRes.getResult().get(position).getLat() + "," + projectListingRes.getResult().get(position).getLong() + " (Current Project)";
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                                startActivity(intent);
                                 break;
                             default:
                                 Intent in = new Intent(mContext, ProjectDetailsActivity.class);

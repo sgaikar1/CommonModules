@@ -2,11 +2,14 @@ package com.example.smartrealitymodules.api;
 
 
 import com.example.smartrealitymodules.models.request.CommonReq;
+import com.example.smartrealitymodules.models.request.GetLayoutDetailsReq;
 import com.example.smartrealitymodules.models.request.ProjectDetailsReq;
 import com.example.smartrealitymodules.models.request.ProjectInterestedInReq;
 import com.example.smartrealitymodules.models.request.SaveReferForRewardsPostReq;
+import com.example.smartrealitymodules.models.request.ScheduleSiteVisitReq;
 import com.example.smartrealitymodules.models.response.CommonRes;
 import com.example.smartrealitymodules.models.response.GetAllJumbleNotificationsRes;
+import com.example.smartrealitymodules.models.response.GetLayoutDetailsRes;
 import com.example.smartrealitymodules.models.response.GetOffersRes;
 import com.example.smartrealitymodules.models.response.ProjectDetailsRes;
 import com.example.smartrealitymodules.models.response.ProjectListingRes;
@@ -52,4 +55,12 @@ public interface NetworkService {
     @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
     @POST(ApiNames.ProjectInterestedIn)
     Observable<CommonRes> apiProjectInterestedIn(@Body ProjectInterestedInReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.ScheduleSiteVisit)
+    Observable<CommonRes> apiGetScheduleSiteVisit(@Body ScheduleSiteVisitReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.GetLayoutDetails)
+    Observable<GetLayoutDetailsRes> getLayoutDetails(@Body GetLayoutDetailsReq obj);
 }

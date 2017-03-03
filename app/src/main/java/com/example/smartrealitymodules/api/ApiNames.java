@@ -12,4 +12,6 @@ public class ApiNames {
     public static final String ProjectListing = "ProjectListing";
     public static final String ProjectDetails = "ProjectDetails";
     public static final String ProjectInterestedIn = "ProjectInterestedIn";
+    public static final String ScheduleSiteVisit = "ScheduleSiteVisit";
+    public static final String GetLayoutDetails = "GetLayoutDetails";
 }

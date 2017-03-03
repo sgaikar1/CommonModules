@@ -4,17 +4,19 @@ package com.example.smartrealitymodules.mvp.model;
 import com.example.smartrealitymodules.api.NetworkError;
 import com.example.smartrealitymodules.api.NetworkService;
 import com.example.smartrealitymodules.models.request.CommonReq;
+import com.example.smartrealitymodules.models.request.GetLayoutDetailsReq;
 import com.example.smartrealitymodules.models.request.ProjectDetailsReq;
 import com.example.smartrealitymodules.models.request.ProjectInterestedInReq;
 import com.example.smartrealitymodules.models.request.SaveReferForRewardsPostReq;
+import com.example.smartrealitymodules.models.request.ScheduleSiteVisitReq;
 import com.example.smartrealitymodules.models.response.CommonRes;
 import com.example.smartrealitymodules.models.response.GetAllJumbleNotificationsRes;
+import com.example.smartrealitymodules.models.response.GetLayoutDetailsRes;
 import com.example.smartrealitymodules.models.response.GetOffersRes;
 import com.example.smartrealitymodules.models.response.ProjectDetailsRes;
 import com.example.smartrealitymodules.models.response.ProjectListingRes;
 import com.example.smartrealitymodules.models.share.CheckForShareReq;
 import com.example.smartrealitymodules.models.share.CheckForShareRes;
-import com.example.smartrealitymodules.utils.Constants;
 import com.example.smartrealitymodules.utils.Utils;
 import com.google.gson.Gson;
 
@@ -229,31 +231,6 @@ public class MainModel {
     }
 
 
-    public void getReferFriendValidation(String name, String mobileno, String altMobileno, String email, String project, String dob, String address, String pincode, GetReferFriendValidationCallback callback) {
-        int status = Constants.DEFAULT_STATUS;
-        boolean flag = false;
-        if (name.length() == 0) {
-            status = Constants.NAME_EMPTY_STATUS;
-        } else if (mobileno.length() == 0 || mobileno.length() < 10) {
-            status = Constants.MOBILENO_EMPTY_STATUS;
-        } else if (altMobileno.length() > 0 && altMobileno.length() < 10) {
-            status = Constants.MOBILENO_ALTERNATE_EMPTY_STATUS;
-        } else if (email.length() > 0 && !mUtils.isEmail(email)) {
-            status = Constants.EMAIL_EMPTY_STATUS;
-        } else if (pincode.length() > 0 && pincode.length() < 6) {
-            status = Constants.PINCODE_EMPTY_STATUS;
-        } else {
-            //validation successful
-            flag = true;
-        }
-
-        if (flag) {
-            callback.onSuccess(flag);
-        } else {
-            callback.onError(status);
-        }
-    }
-
     public Subscription apiSaveReferForRewardsPost(SaveReferForRewardsPostReq obj, final String apiname, final SaveReferForRewardsPostCallback callback) {
         mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
         return networkService.apiSaveReferForRewardsPost(obj)
@@ -336,6 +313,97 @@ public class MainModel {
                 });
     }
 
+    public Subscription getScheduleSiteVisit(ScheduleSiteVisitReq obj, final String apiname, final GetScheduleSiteVisitCallback callback) {
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.apiGetScheduleSiteVisit(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CommonRes>>() {
+                    @Override
+                    public Observable<? extends CommonRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<CommonRes>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+
+                    }
+
+                    @Override
+                    public void onNext(CommonRes commonRes) {
+                        mUtils.getWebserviceLog(apiname + "_response", commonRes);
+                        if (commonRes.getStatus().equalsIgnoreCase("true")) {
+                            if (commonRes.getMessage() != null) {
+                                callback.onSuccess(commonRes);
+                            }
+                        } else {
+                            if (commonRes.getMessage() != null) {
+                                callback.onFailure(commonRes, true);
+                            } else {
+                                callback.onFailure(commonRes, false);
+                            }
+                        }
+                    }
+                });
+    }
+
+
+    public Subscription getLayoutDetails(GetLayoutDetailsReq obj, final String apiname, final GetLayoutDetailsCallback callback) {
+
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.getLayoutDetails(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends GetLayoutDetailsRes>>() {
+                    @Override
+                    public Observable<? extends GetLayoutDetailsRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<GetLayoutDetailsRes>() {
+                               @Override
+                               public void onCompleted() {
+
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+                                   callback.onError(new NetworkError(e));
+
+                               }
+
+                               @Override
+                               public void onNext(GetLayoutDetailsRes getLayoutDetailsRes) {
+                                   mUtils.getWebserviceLog(apiname + "_response", getLayoutDetailsRes);
+                                   if (getLayoutDetailsRes.getStatus().equalsIgnoreCase("true")) {
+                                       if (getLayoutDetailsRes.getResult() != null) {
+                                           if (getLayoutDetailsRes.getResult().getMasterLayout() != null && !getLayoutDetailsRes.getResult().getMasterLayout().isEmpty()) {
+                                               callback.onSuccess(getLayoutDetailsRes);
+                                           }else{
+                                               callback.onFailure(getLayoutDetailsRes);
+                                           }
+                                       }
+                                   } else {
+                                       if (getLayoutDetailsRes.getMessage() != null) {
+                                           callback.onFailure(getLayoutDetailsRes, true);
+                                       } else {
+                                           callback.onFailure(getLayoutDetailsRes, false);
+                                       }
+                                   }
+
+                               }
+
+                           }
+                );
+    }
+
 
     public interface GetOffersListCallback {
         void onSuccess(GetOffersRes getOffersRes);
@@ -367,11 +435,6 @@ public class MainModel {
         void onFailure(GetAllJumbleNotificationsRes getAllJumbleNotificationsRes);
     }
 
-    public interface GetReferFriendValidationCallback {
-        void onSuccess(boolean flag);
-
-        void onError(int status);
-    }
 
     public interface SaveReferForRewardsPostCallback {
         void onSuccess(CommonRes commonRes);
@@ -396,5 +459,23 @@ public class MainModel {
         void onError(NetworkError networkError);
 
         void onFailure(CommonRes commonRes, boolean flag);
+    }
+
+    public interface GetScheduleSiteVisitCallback {
+        void onSuccess(CommonRes commonRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(CommonRes commonRes, boolean flag);
+    }
+
+    public interface GetLayoutDetailsCallback {
+        void onSuccess(GetLayoutDetailsRes getLayoutDetailsRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(GetLayoutDetailsRes getLayoutDetailsRes, boolean flag);
+
+        void onFailure(GetLayoutDetailsRes getLayoutDetailsRes);
     }
 }
