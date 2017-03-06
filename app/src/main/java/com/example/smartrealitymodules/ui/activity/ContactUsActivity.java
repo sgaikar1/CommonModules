@@ -105,6 +105,8 @@ public class ContactUsActivity extends BaseActivity {
 
     private void showDialog() {
 
+        // TODO: 6/3/17 same layout used hence data binding not implemented here.. and also not needed.
+
         LayoutInflater inflater = ContactUsActivity.this
                 .getLayoutInflater();
         alert = new Dialog(ContactUsActivity.this,
@@ -143,7 +145,6 @@ public class ContactUsActivity extends BaseActivity {
                 } else {
                     mUtils.toastMe(mContext, getResources().getString(R.string.no_internet));
                 }
-
 
             }
         });

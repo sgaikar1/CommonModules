@@ -2,11 +2,13 @@ package com.example.smartrealitymodules.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.databinding.ActivityAboutUsBinding;
 import com.example.smartrealitymodules.ui.base.BaseActivity;
 
 /**
@@ -16,6 +18,7 @@ import com.example.smartrealitymodules.ui.base.BaseActivity;
 public class AboutUsActivity extends BaseActivity implements View.OnClickListener {
     private Context mContext;
     private LinearLayout linearaboutprivacy, linearaboutterms, linearaboutleadership, linearaboutfuture;
+    private ActivityAboutUsBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,19 +31,15 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
 
 
     public void renderView() {
-        setContentView(R.layout.activity_about_us);
-        linearaboutprivacy = (LinearLayout) findViewById(R.id.linear_about_privacy);
-        linearaboutterms = (LinearLayout) findViewById(R.id.linear_about_terms);
-        linearaboutleadership = (LinearLayout) findViewById(R.id.linear_about_leadership);
-        linearaboutfuture = (LinearLayout) findViewById(R.id.linear_about_future);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_about_us);
 
     }
 
     private void initClicks() {
-        linearaboutprivacy.setOnClickListener(this);
-        linearaboutterms.setOnClickListener(this);
-        linearaboutleadership.setOnClickListener(this);
-        linearaboutfuture.setOnClickListener(this);
+        binding.linearAboutPrivacy.setOnClickListener(this);
+        binding.linearAboutTerms.setOnClickListener(this);
+        binding.linearAboutLeadership.setOnClickListener(this);
+        binding.linearAboutFuture.setOnClickListener(this);
     }
 
     @Override

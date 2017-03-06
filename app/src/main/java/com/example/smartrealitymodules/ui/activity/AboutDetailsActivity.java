@@ -2,12 +2,14 @@ package com.example.smartrealitymodules.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.util.Linkify;
 import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.databinding.ActivityAboutDetailsBinding;
 import com.example.smartrealitymodules.ui.base.BaseActivity;
 
 /**
@@ -17,6 +19,7 @@ public class AboutDetailsActivity extends BaseActivity {
     private Context mContext;
     private TextView txtaboutustitle, txtaboutusdesc;
     private int pos;
+    private ActivityAboutDetailsBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,36 +34,34 @@ public class AboutDetailsActivity extends BaseActivity {
 
 
     private void renderView() {
-        setContentView(R.layout.activity_about_details);
-        txtaboutusdesc = (TextView) findViewById(R.id.txt_aboutus_desc);
-        txtaboutustitle = (TextView) findViewById(R.id.txt_aboutus_title);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_about_details);
     }
 
     private void init() {
         switch (pos) {
             case 0:
-                txtaboutustitle.setText(getString(R.string.about_us_better_future));
+                binding.txtAboutusTitle.setText(getString(R.string.about_us_better_future));
 //                txtaboutusdesc.loadData(getString(R.string.about_us_future), "text/html", "utf-8");
-                txtaboutusdesc.setText(Html.fromHtml(getString(R.string.about_us_future)));
-                Linkify.addLinks(txtaboutusdesc, Linkify.PHONE_NUMBERS | Linkify.EMAIL_ADDRESSES | Linkify.WEB_URLS);
+                binding.txtAboutusDesc.setText(Html.fromHtml(getString(R.string.about_us_future)));
+                Linkify.addLinks(binding.txtAboutusDesc, Linkify.PHONE_NUMBERS | Linkify.EMAIL_ADDRESSES | Linkify.WEB_URLS);
                 break;
 
             case 1:
-                txtaboutustitle.setText(getString(R.string.about_us_leadership));
-                txtaboutusdesc.setText(Html.fromHtml(getString(R.string.about_us_leaderships)));
-                Linkify.addLinks(txtaboutusdesc, Linkify.PHONE_NUMBERS | Linkify.EMAIL_ADDRESSES | Linkify.WEB_URLS);
+                binding.txtAboutusTitle.setText(getString(R.string.about_us_leadership));
+                binding.txtAboutusDesc.setText(Html.fromHtml(getString(R.string.about_us_leaderships)));
+                Linkify.addLinks(binding.txtAboutusDesc, Linkify.PHONE_NUMBERS | Linkify.EMAIL_ADDRESSES | Linkify.WEB_URLS);
                 break;
 
             case 2:
-                txtaboutustitle.setText(getString(R.string.about_us_tc));
-                txtaboutusdesc.setText(Html.fromHtml(getString(R.string.about_us_terms)));
-                Linkify.addLinks(txtaboutusdesc, Linkify.PHONE_NUMBERS | Linkify.EMAIL_ADDRESSES | Linkify.WEB_URLS);
+                binding.txtAboutusTitle.setText(getString(R.string.about_us_tc));
+                binding.txtAboutusDesc.setText(Html.fromHtml(getString(R.string.about_us_terms)));
+                Linkify.addLinks(binding.txtAboutusDesc, Linkify.PHONE_NUMBERS | Linkify.EMAIL_ADDRESSES | Linkify.WEB_URLS);
                 break;
 
             case 3:
-                txtaboutustitle.setText(getString(R.string.about_us_pp));
-                txtaboutusdesc.setText(Html.fromHtml(getString(R.string.about_us_privacy)));
-                Linkify.addLinks(txtaboutusdesc, Linkify.PHONE_NUMBERS | Linkify.EMAIL_ADDRESSES | Linkify.WEB_URLS);
+                binding.txtAboutusTitle.setText(getString(R.string.about_us_pp));
+                binding.txtAboutusDesc.setText(Html.fromHtml(getString(R.string.about_us_privacy)));
+                Linkify.addLinks(binding.txtAboutusDesc, Linkify.PHONE_NUMBERS | Linkify.EMAIL_ADDRESSES | Linkify.WEB_URLS);
                 break;
         }
     }
