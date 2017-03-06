@@ -108,4 +108,17 @@ public class ReferFriendPresenter {
 
         subscriptions.add(subscription);
     }
+
+    public void setDate(int year, int monthOfYear, int dayOfMonth) {
+        String year1 = String.valueOf(year);
+        String month = String.valueOf(monthOfYear + 1);
+        if (month.length() == 1) {
+            month = "0" + month;
+        }
+        String day = String.valueOf(dayOfMonth);
+        if (day.length() == 1) {
+            day = "0" + day;
+        }
+        view.setDate(year1,month,day);
+    }
 }

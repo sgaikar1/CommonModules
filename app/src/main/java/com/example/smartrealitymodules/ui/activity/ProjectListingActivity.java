@@ -24,7 +24,7 @@ import com.example.smartrealitymodules.models.response.ProjectListingRes;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.ProjectListingPresenter;
 import com.example.smartrealitymodules.mvp.view.ProjectListingView;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.ui.adapter.ProjectListingAdapter;
 import com.example.smartrealitymodules.utils.Constants;
 
@@ -54,7 +54,7 @@ public class ProjectListingActivity extends BaseActivity implements ProjectListi
             // TODO: 27/2/17 change filter icon when swipe refresh starts
 //            filteritem.setIcon(R.drawable.ic_action_filter);
 
-            if (cd.isConnectingToInternet()) {
+            if (isConnected) {
                 apiProjectListing();
             } else {
                 mUtils.toastAlert(ProjectListingActivity.this, getString(R.string.no_internet));
@@ -102,7 +102,7 @@ public class ProjectListingActivity extends BaseActivity implements ProjectListi
     }
 
     private void apiProjectListing() {
-        if (cd.isConnectingToInternet()) {
+        if (isConnected) {
 
             swipetorefresh.setRefreshing(true);
 
@@ -135,7 +135,7 @@ public class ProjectListingActivity extends BaseActivity implements ProjectListi
                         switch (view.getId()) {
                             case R.id.image_item_recycler_project_interested:
                                 interestedimageview = (ImageView) view;
-                                if (cd.isConnectingToInternet()) {
+                                if (isConnected) {
                                     if (listAll.get(position).getInterestedIn().equalsIgnoreCase("false")) {
 
                                         interestedimageview.startAnimation(pulse);

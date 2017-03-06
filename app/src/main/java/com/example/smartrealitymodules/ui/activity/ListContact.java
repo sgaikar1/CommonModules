@@ -40,7 +40,7 @@ import com.example.smartrealitymodules.models.share.SmsSentReceiver;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.SharePresenter;
 import com.example.smartrealitymodules.mvp.view.ShareView;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.ui.adapter.ContactListRowAdapter;
 import com.example.smartrealitymodules.utils.Constants;
 import com.example.smartrealitymodules.utils.Utils;
@@ -429,7 +429,7 @@ public class ListContact extends BaseActivity implements ShareView {
             public void onClick(View v) {
                 // list_summary = new ArrayList<M_Share>();
 
-                // isInternetPresent = cd.isConnectingToInternet();
+                // isInternetPresent = isConnected;
                 // METHOD_NAME = "getBrochureUrl";
 
                 StringBuffer strnew = null;
@@ -478,7 +478,7 @@ public class ListContact extends BaseActivity implements ShareView {
                 struserType = mpref.getString("UserType", "");
 
                 String MethodName = "CheckForShare";
-                if (cd.isConnectingToInternet()) {
+                if (isConnected) {
                     ShareWithMultipleNumbers(strjson);
 
                 } else {

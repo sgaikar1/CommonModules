@@ -1,11 +1,13 @@
 package com.example.smartrealitymodules.ui.activity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -13,14 +15,16 @@ import android.widget.Spinner;
 
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.api.ApiNames;
+import com.example.smartrealitymodules.databinding.ActivityReferFriendBinding;
 import com.example.smartrealitymodules.models.request.SaveReferForRewardsPostReq;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.ReferFriendPresenter;
 import com.example.smartrealitymodules.mvp.view.ReferFriendView;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.inject.Inject;
 
@@ -36,6 +40,7 @@ public class ReferFriendActivity extends BaseActivity implements ReferFriendView
     private Button btnsave;
     private ArrayList<String> projectlist;
     private ReferFriendPresenter presenter;
+    private ActivityReferFriendBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,39 +51,15 @@ public class ReferFriendActivity extends BaseActivity implements ReferFriendView
         renderView();
         setSpinner();
 
+       presenter = new ReferFriendPresenter(mainModel, ReferFriendActivity.this);
 
-        imagereferfriendcontact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), REQUEST_CODE_PICK_CONTACTS);
-
-            }
-        });
-
-        btnsave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ReferFriendPresenter presenter = new ReferFriendPresenter(mainModel, ReferFriendActivity.this);
-                presenter.validateForm(ReferFriendActivity.this, edittextrefername.getText().toString(), edittextrefermobilenumber.getText().toString(), edittextreferaltmobilenumber.getText().toString(), edittextreferemail.getText().toString(), projectlist.get(spinreferprojects.getSelectedItemPosition()), edittextreferdob.getText().toString(), edittextreferaddress.getText().toString(), edittextreferpincode.getText().toString());
-
-            }
-        });
     }
 
+
     public  void renderView(){
-        setContentView(R.layout.activity_refer_friend);
-        activityreferfriend = (RelativeLayout) findViewById(R.id.activity_refer_friend);
-        edittextreferpincode = (EditText) findViewById(R.id.edittext_refer_pincode);
-        edittextreferaddress = (EditText) findViewById(R.id.edittext_refer_address);
-        edittextreferdob = (EditText) findViewById(R.id.edittext_refer_dob);
-        spinreferprojects = (Spinner) findViewById(R.id.spin_refer_projects);
-        edittextreferemail = (EditText) findViewById(R.id.edittext_refer_email);
-        edittextreferaltmobilenumber = (EditText) findViewById(R.id.edittext_refer_alt_mobile_number);
-        imagereferfriendcontact = (ImageView) findViewById(R.id.image_refer_friend_contact);
-        edittextrefermobilenumber = (EditText) findViewById(R.id.edittext_refer_mobile_number);
-        edittextrefername = (EditText) findViewById(R.id.edittext_refer_name);
-        btnsave = (Button) findViewById(R.id.btn_save);
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_refer_friend);
+        binding.setReferActivity(this);
         setProgressBar();
     }
 
@@ -106,6 +87,7 @@ public class ReferFriendActivity extends BaseActivity implements ReferFriendView
             }
         }*/
 
+        // TODO: 6/3/17 spinner needs data from database, database not used yet, hence not implemented using databinding..
         projectlist = new ArrayList<>();
         projectlist.add("7");
         projectlist.add("Project 2");
@@ -113,24 +95,50 @@ public class ReferFriendActivity extends BaseActivity implements ReferFriendView
         projectlist.add("Project 4");
         ArrayAdapter typeAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, projectlist);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinreferprojects.setAdapter(typeAdapter);
+        binding.spinReferProjects.setAdapter(typeAdapter);
     }
+
+    public void openDatePicker(){
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(ReferFriendActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        presenter.setDate(year, monthOfYear, dayOfMonth);
+
+                    }
+                }, calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
+        datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+        datePickerDialog.show();
+    }
+
+    public void startContactPicker(){
+        startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), REQUEST_CODE_PICK_CONTACTS);
+    }
+
+    public void validate(){
+        presenter.validateForm(ReferFriendActivity.this, binding.edittextReferName.getText().toString(), binding.edittextReferMobileNumber.getText().toString(), binding.edittextReferAltMobileNumber.getText().toString(), binding.edittextReferEmail.getText().toString(), projectlist.get(binding.spinReferProjects.getSelectedItemPosition()), binding.edittextReferDob.getText().toString(), binding.edittextReferAddress.getText().toString(), binding.edittextReferPincode.getText().toString());
+    }
+
 
     @Override
     public void apiSaveReferForRewardsPost() {
-        if (cd.isConnectingToInternet()) {
+        if (isConnected) {
 
             ArrayList<SaveReferForRewardsPostReq.ReferForReward> ReferForRewards = new ArrayList<>();
 
             ReferForRewards.add(new SaveReferForRewardsPostReq.ReferForReward(
-                    edittextrefername.getText().toString().trim(),
-                    edittextrefermobilenumber.getText().toString(),
-                    edittextreferaltmobilenumber.getText().toString(),
-                    edittextreferemail.getText().toString(),
-                    projectlist.get(spinreferprojects.getSelectedItemPosition()),
-                    edittextreferdob.getText().toString(),
-                    edittextreferaddress.getText().toString(),
-                    edittextreferpincode.getText().toString()));
+                    binding.edittextReferName.getText().toString().trim(),
+                    binding.edittextReferMobileNumber.getText().toString(),
+                    binding.edittextReferAltMobileNumber.getText().toString(),
+                    binding.edittextReferEmail.getText().toString(),
+                    projectlist.get(binding.spinReferProjects.getSelectedItemPosition()),
+                    binding.edittextReferDob.getText().toString(),
+                    binding.edittextReferAddress.getText().toString(),
+                    binding.edittextReferPincode.getText().toString()));
             SaveReferForRewardsPostReq obj = new SaveReferForRewardsPostReq(Constants.PROJECTCODE, Constants.USERTYPE, Constants.USERID, ReferForRewards);
 
             presenter = new ReferFriendPresenter(mainModel, this);
@@ -138,5 +146,11 @@ public class ReferFriendActivity extends BaseActivity implements ReferFriendView
         } else {
             mUtils.toastAlert(this, getString(R.string.no_internet));
         }
+    }
+
+    @Override
+    public void setDate(String year, String month, String day) {
+        binding.edittextReferDob.setText(day + "-" + month + "-"
+                + year);
     }
 }

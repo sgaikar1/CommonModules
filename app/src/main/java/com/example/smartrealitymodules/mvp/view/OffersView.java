@@ -9,4 +9,5 @@ public interface OffersView extends BaseView {
 
     void getOffersListSuccess(GetOffersRes getOffersRes);
 
+    void dissmissDialog();
 }

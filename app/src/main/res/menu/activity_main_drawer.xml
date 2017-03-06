@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_dra"
+            android:title="@string/user_home" />
+        <item
+            android:id="@+id/nav_projects"
+            android:icon="@drawable/ic_nav_projects"
+            android:title="@string/user_nav_projects" />
+        <item
+            android:id="@+id/nav_offers"
+            android:icon="@drawable/ic_nav_offer"
+            android:title="@string/user_nav_offers" />
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/ic_feedback_drawer"
+            android:title="@string/user_nav_feedback" />
+       <item
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/ic_nav_notification"
+            android:title="@string/user_nav_notifications" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_nav_share"
+            android:title="@string/user_nav_share" />
+       <item
+            android:id="@+id/nav_refer_friend"
+            android:icon="@drawable/ic_nav_refer_a_frnd"
+            android:title="@string/user_nav_refer_friend" />
+
+       <item
+            android:id="@+id/nav_about_us"
+            android:icon="@drawable/ic_nav_about_us"
+            android:title="@string/user_nav_about_us" />
+        <item
+            android:id="@+id/nav_rate_us"
+            android:icon="@drawable/ic_star_drawer"
+            android:title="@string/user_nav_rate_us" />
+
+    </group>
+
+</menu>

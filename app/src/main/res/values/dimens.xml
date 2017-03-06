@@ -20,4 +20,7 @@
     <dimen name="textsize10">10sp</dimen>
     <dimen name="margin2">2dp</dimen>
     <dimen name="margin3">3dp</dimen>
+    <dimen name="nav_width">300dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="margin70">70dp</dimen>
 </resources>

@@ -1,520 +1,534 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="com.example.smartrealitymodules.ui.activity.ProjectDetailsActivity">
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:background="@color/white"
+                                                 tools:context="com.example.smartrealitymodules.ui.activity.ProjectDetailsActivity">
 
     <RelativeLayout
-        android:id="@+id/view_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+        <include
+            android:id="@+id/layout_toolbar"
+            layout="@layout/layout_toolbar"/>
 
-    </RelativeLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nsv_project_detail"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layout_toolbar">
 
-            <FrameLayout
+            <RelativeLayout
+                android:id="@+id/view_loading"
                 android:layout_width="match_parent"
-                android:layout_height="180dp">
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/image_project_detail_project"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY" />
-
-                <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:background="@drawable/black_to_white_transparent_patch" />-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/margin10">
+                    android:layout_centerInParent="true"/>
 
-                    <ImageView
-                        android:id="@+id/image_project_detail_interested"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_heart_white" />
+            </RelativeLayout>
 
-                    <ImageView
-                        android:id="@+id/image_project_detail_location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin10"
-                        android:src="@drawable/ic_location" />
-
-                    <ImageView
-                        android:id="@+id/image_project_detail_call"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin10"
-                        android:src="@drawable/ic_call" />
-
-                    <ImageView
-                        android:id="@+id/image_project_detail_walkthrough"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin10"
-                        android:src="@drawable/ic_walkthrough" />
-
-                    <ImageView
-                        android:id="@+id/image_project_detail_360_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin10"
-                        android:src="@drawable/ic_360" />
-
-
-                </LinearLayout>
-
-            </FrameLayout>
-
-            <LinearLayout
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/nsv_project_detail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/margin10">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.65"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/text_project_detail_project_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Osian Heights"
-                            android:textColor="@color/textHeading"
-                            android:textSize="@dimen/textsize18" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin5">
-
-                            <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:src="@drawable/ic_location_red" />
-
-                            <TextView
-                                android:id="@+id/text_project_detail_project_location"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin5"
-                                android:text="Mint, Chennai"
-                                android:textColor="@color/textDescription"
-                                android:textSize="@dimen/textsize12" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/text_project_detail_project_type"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin5"
-                            android:layout_marginTop="@dimen/margin5"
-                            android:text="3.5, 4, 5 BHK"
-                            android:textColor="@color/textDescription"
-                            android:textSize="@dimen/textsize12" />
-
-                    </LinearLayout>
-
-
-                    <RelativeLayout
-                        android:id="@+id/relative_start_from"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.35">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_above="@+id/linear_price"
-                            android:layout_alignLeft="@+id/linear_price"
-                            android:text="@string/start_from"
-                            android:textSize="@dimen/textsize10" />
-
-                        <LinearLayout
-                            android:id="@+id/linear_price"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginBottom="@dimen/margin15"
-                            android:layout_marginTop="@dimen/margin2"
-                            android:gravity="right"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="₹"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="@dimen/textsize14"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/text_project_detail_project_price"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="@dimen/margin5"
-                                android:layout_marginRight="@dimen/margin5"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="@dimen/textsize18" />
-
-                        </LinearLayout>
-
-                    </RelativeLayout>
-
-                    <!--<LinearLayout-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.3"-->
-                    <!--android:gravity="center"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="right"-->
-                    <!--android:text="@string/start_from"-->
-                    <!--android:textSize="@dimen/textsize12" />-->
-
-                    <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="right"-->
-                    <!--android:layout_marginTop="@dimen/margin5"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:text="₹"-->
-                    <!--android:textColor="@color/colorAccent"-->
-                    <!--android:textSize="@dimen/textsize14"-->
-                    <!--android:textStyle="bold" />-->
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/text_project_detail_project_price"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_marginLeft="@dimen/margin5"-->
-                    <!--android:layout_marginRight="@dimen/margin5"-->
-                    <!--android:text="50 Lacs"-->
-                    <!--android:textColor="@color/colorAccent"-->
-                    <!--android:textSize="@dimen/textsize18" />-->
-
-                    <!--</LinearLayout>-->
-
-                    <!--</LinearLayout>-->
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin10"
-                    android:background="@drawable/round_corner_border"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <LinearLayout
-                            android:id="@+id/linear_project_detail_about_project"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin15"
-                            android:layout_weight="0.5"
-                            android:gravity="center_vertical"
-                            android:paddingBottom="@dimen/margin15"
-                            android:paddingLeft="@dimen/margin10">
-
-                            <ImageView
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:src="@drawable/ic_about_project" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin10"
-                                android:text="@string/about_project"
-                                android:textColor="@color/textHeading"
-                                android:textSize="@dimen/textsize15" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/textDescription" />
-
-                        <LinearLayout
-                            android:id="@+id/linear_project_detail_amenities"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin15"
-                            android:layout_weight="0.5"
-                            android:gravity="center_vertical"
-                            android:paddingBottom="@dimen/margin15"
-                            android:paddingLeft="@dimen/margin10">
-
-                            <ImageView
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:src="@drawable/ic_amenities" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin10"
-                                android:text="@string/amenities"
-                                android:textColor="@color/textHeading"
-                                android:textSize="@dimen/textsize15" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/textDescription" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <LinearLayout
-                            android:id="@+id/linear_project_detail_schedule_site_visit"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin15"
-                            android:layout_weight="0.5"
-                            android:gravity="center_vertical"
-                            android:paddingBottom="@dimen/margin15"
-                            android:paddingLeft="@dimen/margin10">
-
-                            <ImageView
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:src="@drawable/ic_calendar"
-                                android:tint="@color/textHeading" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin10"
-                                android:text="@string/schedule_site_visit"
-                                android:textColor="@color/textHeading"
-                                android:textSize="@dimen/textsize15" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/textDescription" />
-
-                        <LinearLayout
-                            android:id="@+id/linear_project_online_blocking"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin15"
-                            android:layout_weight="0.5"
-                            android:gravity="center_vertical"
-                            android:paddingBottom="@dimen/margin15"
-                            android:paddingLeft="@dimen/margin10">
-
-                            <ImageView
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:src="@drawable/ic_tick" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/margin10"
-                                android:text="@string/online_blocking"
-                                android:textColor="@color/textHeading"
-                                android:textSize="@dimen/textsize15" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin10"
-                    android:text="@string/project_images"
-                    android:textAllCaps="true"
-                    android:textColor="@color/textHeading"
-                    android:textSize="@dimen/textsize15" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_marginTop="@dimen/margin5"
-                    android:weightSum="1">
-
                     <FrameLayout
-                        android:id="@+id/frame_project_detail_gallery"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/margin5"
-                        android:layout_weight="0.5"
-                        android:background="@drawable/proj_gallery_image">
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp">
 
                         <ImageView
-                            android:id="@+id/image_project_details_gallery"
+                            android:id="@+id/image_project_detail_project"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop" />
+                            android:scaleType="fitXY"/>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/black_to_white_transparent_patch" />
+                        <!--<View-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:background="@drawable/black_to_white_transparent_patch" />-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:layout_gravity="bottom"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin10">
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginLeft="@dimen/margin15"
-                                android:layout_marginRight="@dimen/margin15"
-                                android:background="@color/white" />
-
-                            <TextView
+                            <ImageView
+                                android:id="@+id/image_project_detail_interested"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/margin10"
-                                android:layout_marginTop="@dimen/margin10"
-                                android:text="@string/gallery"
-                                android:textAllCaps="true"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/textsize16" />
+                                android:src="@drawable/ic_heart_white"/>
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginLeft="@dimen/margin15"
-                                android:layout_marginRight="@dimen/margin15"
-                                android:background="@color/white" />
+                            <ImageView
+                                android:id="@+id/image_project_detail_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin10"
+                                android:src="@drawable/ic_location"/>
+
+                            <ImageView
+                                android:id="@+id/image_project_detail_call"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin10"
+                                android:src="@drawable/ic_call"/>
+
+                            <ImageView
+                                android:id="@+id/image_project_detail_walkthrough"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin10"
+                                android:src="@drawable/ic_walkthrough"/>
+
+                            <ImageView
+                                android:id="@+id/image_project_detail_360_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin10"
+                                android:src="@drawable/ic_360"/>
+
+
                         </LinearLayout>
 
                     </FrameLayout>
 
-                    <FrameLayout
-                        android:id="@+id/frame_project_detail_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/margin5"
-                        android:layout_weight="0.5"
-                        android:background="@drawable/proj_layout_image">
-
-                        <ImageView
-                            android:id="@+id/image_project_details_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/black_to_white_transparent_patch" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin10">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:orientation="horizontal"
+                            android:weightSum="1">
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginLeft="@dimen/margin15"
-                                android:layout_marginRight="@dimen/margin15"
-                                android:background="@color/white" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/margin10"
-                                android:layout_marginTop="@dimen/margin10"
-                                android:text="@string/layout"
-                                android:textAllCaps="true"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/textsize16" />
+                                android:layout_weight="0.65"
+                                android:orientation="vertical">
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginLeft="@dimen/margin15"
-                                android:layout_marginRight="@dimen/margin15"
-                                android:background="@color/white" />
+                                <TextView
+                                    android:id="@+id/text_project_detail_project_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Osian Heights"
+                                    android:textColor="@color/textHeading"
+                                    android:textSize="@dimen/textsize18"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin5">
+
+                                    <ImageView
+                                        android:layout_width="14dp"
+                                        android:layout_height="14dp"
+                                        android:src="@drawable/ic_location_red"/>
+
+                                    <TextView
+                                        android:id="@+id/text_project_detail_project_location"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/margin5"
+                                        android:text="Mint, Chennai"
+                                        android:textColor="@color/textDescription"
+                                        android:textSize="@dimen/textsize12"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/text_project_detail_project_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/margin5"
+                                    android:layout_marginTop="@dimen/margin5"
+                                    android:text="3.5, 4, 5 BHK"
+                                    android:textColor="@color/textDescription"
+                                    android:textSize="@dimen/textsize12"/>
+
+                            </LinearLayout>
+
+
+                            <RelativeLayout
+                                android:id="@+id/relative_start_from"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.35">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_above="@+id/linear_price"
+                                    android:layout_alignLeft="@+id/linear_price"
+                                    android:text="@string/start_from"
+                                    android:textSize="@dimen/textsize10"/>
+
+                                <LinearLayout
+                                    android:id="@+id/linear_price"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginBottom="@dimen/margin15"
+                                    android:layout_marginTop="@dimen/margin2"
+                                    android:gravity="right"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:text="₹"
+                                        android:textColor="@color/colorAccent"
+                                        android:textSize="@dimen/textsize14"
+                                        android:textStyle="bold"/>
+
+                                    <TextView
+                                        android:id="@+id/text_project_detail_project_price"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="@dimen/margin5"
+                                        android:layout_marginRight="@dimen/margin5"
+                                        android:textColor="@color/colorAccent"
+                                        android:textSize="@dimen/textsize18"/>
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                            <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="0.3"-->
+                            <!--android:gravity="center"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="right"-->
+                            <!--android:text="@string/start_from"-->
+                            <!--android:textSize="@dimen/textsize12" />-->
+
+                            <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="right"-->
+                            <!--android:layout_marginTop="@dimen/margin5"-->
+                            <!--android:orientation="horizontal">-->
+
+                            <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:text="₹"-->
+                            <!--android:textColor="@color/colorAccent"-->
+                            <!--android:textSize="@dimen/textsize14"-->
+                            <!--android:textStyle="bold" />-->
+
+                            <!--<TextView-->
+                            <!--android:id="@+id/text_project_detail_project_price"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_marginLeft="@dimen/margin5"-->
+                            <!--android:layout_marginRight="@dimen/margin5"-->
+                            <!--android:text="50 Lacs"-->
+                            <!--android:textColor="@color/colorAccent"-->
+                            <!--android:textSize="@dimen/textsize18" />-->
+
+                            <!--</LinearLayout>-->
+
+                            <!--</LinearLayout>-->
+
                         </LinearLayout>
 
-                    </FrameLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin10"
+                            android:background="@drawable/round_corner_border"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <LinearLayout
+                                    android:id="@+id/linear_project_detail_about_project"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin15"
+                                    android:layout_weight="0.5"
+                                    android:gravity="center_vertical"
+                                    android:paddingBottom="@dimen/margin15"
+                                    android:paddingLeft="@dimen/margin10">
+
+                                    <ImageView
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:src="@drawable/ic_about_project"/>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/margin10"
+                                        android:text="@string/about_project"
+                                        android:textColor="@color/textHeading"
+                                        android:textSize="@dimen/textsize15"/>
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/textDescription"/>
+
+                                <LinearLayout
+                                    android:id="@+id/linear_project_detail_amenities"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin15"
+                                    android:layout_weight="0.5"
+                                    android:gravity="center_vertical"
+                                    android:paddingBottom="@dimen/margin15"
+                                    android:paddingLeft="@dimen/margin10">
+
+                                    <ImageView
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:src="@drawable/ic_amenities"/>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/margin10"
+                                        android:text="@string/amenities"
+                                        android:textColor="@color/textHeading"
+                                        android:textSize="@dimen/textsize15"/>
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/textDescription"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <LinearLayout
+                                    android:id="@+id/linear_project_detail_schedule_site_visit"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin15"
+                                    android:layout_weight="0.5"
+                                    android:gravity="center_vertical"
+                                    android:paddingBottom="@dimen/margin15"
+                                    android:paddingLeft="@dimen/margin10">
+
+                                    <ImageView
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:src="@drawable/ic_calendar"
+                                        android:tint="@color/textHeading"/>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/margin10"
+                                        android:text="@string/schedule_site_visit"
+                                        android:textColor="@color/textHeading"
+                                        android:textSize="@dimen/textsize15"/>
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/textDescription"/>
+
+                                <LinearLayout
+                                    android:id="@+id/linear_project_online_blocking"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin15"
+                                    android:layout_weight="0.5"
+                                    android:gravity="center_vertical"
+                                    android:paddingBottom="@dimen/margin15"
+                                    android:paddingLeft="@dimen/margin10">
+
+                                    <ImageView
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:src="@drawable/ic_tick"/>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/margin10"
+                                        android:text="@string/online_blocking"
+                                        android:textColor="@color/textHeading"
+                                        android:textSize="@dimen/textsize15"/>
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin10"
+                            android:text="@string/project_images"
+                            android:textAllCaps="true"
+                            android:textColor="@color/textHeading"
+                            android:textSize="@dimen/textsize15"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:weightSum="1">
+
+                            <FrameLayout
+                                android:id="@+id/frame_project_detail_gallery"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="@dimen/margin5"
+                                android:layout_weight="0.5"
+                                android:background="@drawable/proj_gallery_image">
+
+                                <ImageView
+                                    android:id="@+id/image_project_details_gallery"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"/>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/black_to_white_transparent_patch"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_marginLeft="@dimen/margin15"
+                                        android:layout_marginRight="@dimen/margin15"
+                                        android:background="@color/white"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="@dimen/margin10"
+                                        android:layout_marginTop="@dimen/margin10"
+                                        android:text="@string/gallery"
+                                        android:textAllCaps="true"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/textsize16"/>
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_marginLeft="@dimen/margin15"
+                                        android:layout_marginRight="@dimen/margin15"
+                                        android:background="@color/white"/>
+                                </LinearLayout>
+
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:id="@+id/frame_project_detail_layout"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/margin5"
+                                android:layout_weight="0.5"
+                                android:background="@drawable/proj_layout_image">
+
+                                <ImageView
+                                    android:id="@+id/image_project_details_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"/>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/black_to_white_transparent_patch"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_marginLeft="@dimen/margin15"
+                                        android:layout_marginRight="@dimen/margin15"
+                                        android:background="@color/white"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="@dimen/margin10"
+                                        android:layout_marginTop="@dimen/margin10"
+                                        android:text="@string/layout"
+                                        android:textAllCaps="true"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/textsize16"/>
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_marginLeft="@dimen/margin15"
+                                        android:layout_marginRight="@dimen/margin15"
+                                        android:background="@color/white"/>
+                                </LinearLayout>
+
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
 
-        </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
-    <TextView
-        android:id="@+id/txt_projects_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/no_project_found"
-        android:textColor="@color/textHeading"
-        android:textSize="@dimen/textsize18"
-        android:visibility="gone" />
-
+            <TextView
+                android:id="@+id/txt_projects_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/no_project_found"
+                android:textColor="@color/textHeading"
+                android:textSize="@dimen/textsize18"
+                android:visibility="gone"/>
+        </RelativeLayout>
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

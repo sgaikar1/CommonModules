@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.models.response.ProjectDetailsRes;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.ui.fragments.GalleryImagesFragment;
 import com.example.smartrealitymodules.ui.fragments.WalkThroughFragment;
 import com.example.smartrealitymodules.utils.Constants;

@@ -1,45 +1,36 @@
 package com.example.smartrealitymodules.ui.adapter;
 
 import android.app.Activity;
-import android.app.Dialog;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.databinding.NotificationsRowBinding;
 import com.example.smartrealitymodules.models.response.GetAllJumbleNotificationsRes;
 import com.example.smartrealitymodules.utils.DateUtils;
-import com.example.smartrealitymodules.utils.Utils;
 
 import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> {
     private final OnItemClickListener listener;
-    private final Utils mUtils;
     private final DateUtils mDateUtils;
     private final Activity activity;
     private List<GetAllJumbleNotificationsRes.Result> data;
-    private Dialog alert;
-    private OnItemClickListener itemClickListener;
 
     public NotificationAdapter(Activity activity, List<GetAllJumbleNotificationsRes.Result> data, OnItemClickListener listener) {
         this.data = data;
         this.listener = listener;
         this.activity = activity;
-        mUtils = new Utils();
         mDateUtils = new DateUtils();
     }
 
 
     @Override
     public NotificationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.offers_row, null);
-        view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
-        return new NotificationViewHolder(view);
+        NotificationsRowBinding binding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.notifications_row, parent, false);
+        return new NotificationViewHolder(binding.getRoot());
     }
 
 
@@ -48,9 +39,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClick(data.get(position),v);
+                listener.onClick(data.get(position), v);
             }
         });
+        holder.binding.setNotification(data.get(position));
+        holder.binding.setDateUtils(mDateUtils);
     }
 
 
@@ -64,23 +57,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     public class NotificationViewHolder extends RecyclerView.ViewHolder {
-        private final FrameLayout floffer;
-        private final TextView textitemrecyclerofferdescription;
-        private final TextView textitemrecyclerofferdate;
-        private final TextView textitemrecycleroffertitle;
-        private final ImageView imageitemrecycleroffershare;
-        private final ImageView imageitemrecyclerofferimage;
+
+        NotificationsRowBinding binding;
 
         public NotificationViewHolder(View itemView) {
             super(itemView);
-            floffer = (FrameLayout) itemView.findViewById(R.id.fl_offer);
-            textitemrecyclerofferdescription = (TextView) itemView.findViewById(R.id.text_item_recycler_offer_description);
-            textitemrecyclerofferdate = (TextView) itemView.findViewById(R.id.text_item_recycler_offer_date);
-            textitemrecycleroffertitle = (TextView) itemView.findViewById(R.id.text_item_recycler_offer_title);
-            imageitemrecycleroffershare = (ImageView) itemView.findViewById(R.id.image_item_recycler_offer_share);
-            imageitemrecyclerofferimage = (ImageView) itemView.findViewById(R.id.image_item_recycler_offer_image);
-
-
+            binding = DataBindingUtil.bind(itemView);
         }
 
 

@@ -12,7 +12,7 @@ import android.view.WindowManager;
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.models.response.ProjectDetailsRes;
 import com.example.smartrealitymodules.mvp.model.MainModel;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.ui.adapter.AmenitiesAdapter;
 import com.example.smartrealitymodules.ui.adapter.CustomImagesPagerAdapter;
 import com.example.smartrealitymodules.utils.AutoScrollViewPager;

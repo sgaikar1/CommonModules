@@ -48,4 +48,8 @@ public class OffersPresenter {
         subscriptions.unsubscribe();
     }
 
+    public void dissmissDialog(){
+        view.dissmissDialog();
+    }
+
 }

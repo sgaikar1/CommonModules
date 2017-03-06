@@ -3,6 +3,7 @@ package com.example.smartrealitymodules.ui.activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.databinding.ActivityContactUsBinding;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 
 /**
  * Created by user on 22/2/17.
@@ -26,6 +28,7 @@ public class ContactUsActivity extends BaseActivity {
     private LinearLayout rlMail, rlCall;
     private Dialog alert;
     private Context mContext;
+    private ActivityContactUsBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,20 +40,21 @@ public class ContactUsActivity extends BaseActivity {
     }
 
     public void renderView() {
-        setContentView(R.layout.activity_contact_us);
-        rlGetSms = (RelativeLayout) findViewById(R.id.rlGetSms);
-        rlGetDir = (RelativeLayout) findViewById(R.id.rlGetDir);
-        rlMail = (LinearLayout) findViewById(R.id.rlMail);
-        rlCall = (LinearLayout) findViewById(R.id.relative_call);
-        txtaddress2 = (TextView) findViewById(R.id.txt_address2);
-        txtaddress = (TextView) findViewById(R.id.txt_address);
-        txtheadoffice = (TextView) findViewById(R.id.txt_headoffice);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_contact_us);
+//        setContentView(R.layout.activity_contact_us);
+//        rlGetSms = (RelativeLayout) findViewById(R.id.rlGetSms);
+//        rlGetDir = (RelativeLayout) findViewById(R.id.rlGetDir);
+//        rlMail = (LinearLayout) findViewById(R.id.rlMail);
+//        rlCall = (LinearLayout) findViewById(R.id.relative_call);
+//        txtaddress2 = (TextView) findViewById(R.id.txt_address2);
+//        txtaddress = (TextView) findViewById(R.id.txt_address);
+//        txtheadoffice = (TextView) findViewById(R.id.txt_headoffice);
 
     }
 
     private void initClicks() {
 
-        rlGetDir.setOnClickListener(new View.OnClickListener() {
+        binding.rlGetDir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Uri gmmIntentUri = null;
@@ -68,14 +72,14 @@ public class ContactUsActivity extends BaseActivity {
             }
         });
 
-        rlGetSms.setOnClickListener(new View.OnClickListener() {
+        binding.rlGetSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
         });
 
-        rlCall.setOnClickListener(new View.OnClickListener() {
+        binding.relativeCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
@@ -84,7 +88,7 @@ public class ContactUsActivity extends BaseActivity {
             }
         });
 
-        rlMail.setOnClickListener(new View.OnClickListener() {
+        binding.rlMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent email = new Intent(Intent.ACTION_SEND);
@@ -133,7 +137,7 @@ public class ContactUsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                if (cd.isConnectingToInternet()) {
+                if (isConnected) {
                     SendSMSofLocation();
                     alert.dismiss();
                 } else {

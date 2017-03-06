@@ -16,7 +16,7 @@ import com.example.smartrealitymodules.models.response.GetLayoutDetailsRes;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.LayoutPresenter;
 import com.example.smartrealitymodules.mvp.view.LayoutView;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.ui.adapter.LayoutImagesAdapter;
 import com.example.smartrealitymodules.utils.Constants;
 
@@ -66,7 +66,7 @@ public class LayoutActivity extends BaseActivity implements LayoutView {
 
 
     private void apiGetLayoutDetails() {
-        if (cd.isConnectingToInternet()) {
+        if (isConnected) {
 
             GetLayoutDetailsReq obj = new GetLayoutDetailsReq(Constants.PROJECTCODE, Constants.USERTYPE, Constants.USERID, projectId);
             LayoutPresenter presenter = new LayoutPresenter(mainModel, this);

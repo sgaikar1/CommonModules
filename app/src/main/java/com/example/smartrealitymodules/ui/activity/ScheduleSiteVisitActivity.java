@@ -19,7 +19,7 @@ import com.example.smartrealitymodules.models.request.ScheduleSiteVisitReq;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.ScheduleSiteVisitPresenter;
 import com.example.smartrealitymodules.mvp.view.ScheduleSiteVisitView;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.utils.Constants;
 
 import java.util.Calendar;
@@ -153,7 +153,7 @@ public class ScheduleSiteVisitActivity extends BaseActivity implements View.OnCl
                 break;
 
             case R.id.btn_apply:
-                if (cd.isConnectingToInternet()) {
+                if (isConnected) {
                     boolean callApi = true;
 
                     presenter.validateForm(ScheduleSiteVisitActivity.this,edittextscheduledate.getText().toString(),edittextscheduletime.getText().toString(),checkboxpickUp.isChecked(),

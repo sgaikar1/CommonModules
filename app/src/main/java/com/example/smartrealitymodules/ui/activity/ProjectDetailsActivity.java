@@ -25,7 +25,7 @@ import com.example.smartrealitymodules.models.response.ProjectDetailsRes;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.ProjectDetailsPresenter;
 import com.example.smartrealitymodules.mvp.view.ProjectDetailsView;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.utils.Constants;
 
 import org.greenrobot.eventbus.EventBus;
@@ -114,7 +114,7 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
     }
 
     private void apiProjectDetails() {
-        if (cd.isConnectingToInternet()) {
+        if (isConnected) {
 
             ProjectDetailsReq obj = new ProjectDetailsReq(Constants.PROJECTCODE, Constants.USERTYPE, Constants.USERID, projectId);
             ProjectDetailsPresenter presenter = new ProjectDetailsPresenter(mainModel, this);
@@ -194,7 +194,7 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.image_project_detail_360_view:
 
-                if (cd.isConnectingToInternet()) {
+                if (isConnected) {
                     if (data.getResult().getView360() != null &&
                             data.getResult().getView360().length() > 0 &&
                             data.getResult().getView360().contains("http")) {
@@ -212,7 +212,7 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.image_project_detail_interested:
 
-                if (cd.isConnectingToInternet()) {
+                if (isConnected) {
                     if (data.getResult().getInterestedIn().equalsIgnoreCase("false")) {
 
                         imageprojectdetailinterested.startAnimation(pulse);

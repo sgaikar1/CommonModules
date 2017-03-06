@@ -32,7 +32,7 @@ import com.example.smartrealitymodules.models.share.SmsDeliveredReceiver_Login;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.SharePresenter;
 import com.example.smartrealitymodules.mvp.view.ShareView;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.utils.Constants;
 import com.example.smartrealitymodules.utils.Utils;
 
@@ -152,7 +152,7 @@ public class ShareActivity extends BaseActivity implements ShareView {
 
             @Override
             public void onClick(View v) {
-                if (cd.isConnectingToInternet()) {
+                if (isConnected) {
 
                     Intent waIntent = new Intent(Intent.ACTION_SEND);
                     waIntent.setType("text/plain");
@@ -301,7 +301,7 @@ public class ShareActivity extends BaseActivity implements ShareView {
     }
 
     private void ShareNumber(String number, String strjson) {
-        if (cd.isConnectingToInternet()) {
+        if (isConnected) {
             ArrayList<CheckForShareReq> mySoapArr = new ArrayList<CheckForShareReq>();
             CheckForShareReq mySoapObj;
 

@@ -11,4 +11,5 @@
     <color name="dividerLine">#e5e5e5</color>
     <color name="black_tint">#99000000</color>
     <color name="dark_blue">#030729</color>
+    <color name="light_gray">#9f9f9f</color>
 </resources>

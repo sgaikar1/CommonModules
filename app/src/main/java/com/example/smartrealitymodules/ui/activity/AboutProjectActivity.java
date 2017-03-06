@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.models.response.ProjectDetailsRes;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.ui.adapter.CustomImagesPagerAdapter;
 import com.example.smartrealitymodules.utils.AutoScrollViewPager;
 import com.example.smartrealitymodules.utils.Constants;

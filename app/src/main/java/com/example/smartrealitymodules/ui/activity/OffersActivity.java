@@ -2,27 +2,24 @@ package com.example.smartrealitymodules.ui.activity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.api.ApiNames;
+import com.example.smartrealitymodules.databinding.ActivityOffersBinding;
+import com.example.smartrealitymodules.databinding.DialogMessageBinding;
 import com.example.smartrealitymodules.models.request.CommonReq;
 import com.example.smartrealitymodules.models.response.GetOffersRes;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.OffersPresenter;
 import com.example.smartrealitymodules.mvp.view.OffersView;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
 import com.example.smartrealitymodules.ui.adapter.OffersAdapter;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.utils.Constants;
 
 import javax.inject.Inject;
@@ -36,9 +33,9 @@ public class OffersActivity extends BaseActivity implements OffersView{
 
     @Inject
     public MainModel mainModel;
-    ProgressBar progressBar;
-    private RecyclerView list;
     private Dialog alert;
+    ActivityOffersBinding binding;
+    private OffersPresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,13 +44,13 @@ public class OffersActivity extends BaseActivity implements OffersView{
 
         renderView();
         init();
+        presenter = new OffersPresenter(mainModel, this);
 
-        // TODO: 27/2/17 check internet connection.. do needed check in other activities too
-        if (cd.isConnectingToInternet()) {
+        if (isConnected) {
             CommonReq obj = new CommonReq(Constants.PROJECTCODE, Constants.USERTYPE, Constants.USERID);
-            OffersPresenter presenter = new OffersPresenter(mainModel, this);
             presenter.getOffersList(obj, ApiNames.GetOffers);
         }else{
+            removeWait();
             mUtils.toastAlert(this, getString(R.string.no_internet));
             // TODO: 20/2/17 If internet not available display data from local database
 //            setOfflineData(dBhelper.getValuesFromModule(dBhelper.OFFERS));
@@ -61,13 +58,12 @@ public class OffersActivity extends BaseActivity implements OffersView{
     }
 
     public  void renderView(){
-        setContentView(R.layout.activity_offers);
-        list = (RecyclerView) findViewById(R.id.list);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_offers);
         setProgressBar();
     }
 
     public void init(){
-        list.setLayoutManager(new LinearLayoutManager(this));
+        binding.list.setLayoutManager(new LinearLayoutManager(this));
     }
 
 
@@ -76,52 +72,34 @@ public class OffersActivity extends BaseActivity implements OffersView{
         OffersAdapter adapter = new OffersAdapter(OffersActivity.this, getOffersRes.getResult(),
                 new OffersAdapter.OnItemClickListener() {
                     @Override
-                    public void onClick(GetOffersRes.Result Item, View v) {
-                        showDialog(Item.getTitle(), Item.getDescription());
+                    public void onClick(GetOffersRes.Result item, View v) {
+                        showDialog(item);
                     }
                 });
 
-        list.setAdapter(adapter);
+        binding.list.setAdapter(adapter);
+    }
+
+    @Override
+    public void dissmissDialog() {
+        alert.dismiss();
     }
 
 
-    private void showDialog(String Title, String Description) {
+    private void showDialog(GetOffersRes.Result item) {
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         alert = new Dialog(this, R.style.FullHeightDialog);
-        View view = inflater.inflate(R.layout.dialog_message, null);
-        alert.setContentView(view);
+        DialogMessageBinding binding = DataBindingUtil.inflate(inflater,R.layout.dialog_message,null,false);
+        alert.setContentView(binding.getRoot());
         alert.setCancelable(true);
         alert.show();
 
-        TextView txtHeading, txtMsg;
-        ImageView ivClose;
-        Button btnOk;
+        binding.setOffers(item);
+        binding.setOffersPresenter(presenter);
 
-        txtHeading = (TextView) view.findViewById(R.id.txt_dialog_Heading);
-        txtMsg = (TextView) view.findViewById(R.id.txt_dialog_msg);
-        ivClose = (ImageView) view.findViewById(R.id.ivClose);
-        btnOk = (Button) view.findViewById(R.id.btnOk);
+        Linkify.addLinks(binding.txtDialogMsg, Linkify.PHONE_NUMBERS);
 
-        txtHeading.setText(Title.toUpperCase());
-        txtMsg.setText(Html.fromHtml(Description));
-
-        Linkify.addLinks(txtMsg, Linkify.PHONE_NUMBERS);
-
-        ivClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alert.dismiss();
-            }
-        });
-
-        btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                alert.dismiss();
-            }
-        });
 
     }
 

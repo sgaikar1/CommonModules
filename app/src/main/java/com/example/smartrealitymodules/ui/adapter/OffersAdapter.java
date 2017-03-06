@@ -1,17 +1,13 @@
 package com.example.smartrealitymodules.ui.adapter;
 
 import android.app.Activity;
-import android.app.Dialog;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.databinding.OffersRowBinding;
 import com.example.smartrealitymodules.models.response.GetOffersRes;
 import com.example.smartrealitymodules.utils.DateUtils;
 import com.example.smartrealitymodules.utils.Utils;
@@ -25,7 +21,6 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
     private final Activity activity;
     public GetOffersRes.Result result;
     private List<GetOffersRes.Result> data;
-    private Dialog alert;
 
     public OffersAdapter(Activity activity, List<GetOffersRes.Result> data, OnItemClickListener listener) {
         this.data = data;
@@ -38,26 +33,33 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
 
     @Override
     public OffersViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.offers_row, null);
-        view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
-        return new OffersViewHolder(view);
+//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.offers_row, null);
+//        view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
+        OffersRowBinding binding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.offers_row, parent, false);
+        return new OffersViewHolder(binding.getRoot());
     }
-
 
     @Override
     public void onBindViewHolder(final OffersViewHolder holder, final int position) {
-        holder.textitemrecyclerofferdate.setText(mDateUtils.changeDateFormat(
-                data.get(position).getEndDate(), mDateUtils.dd_MM_yyyy, mDateUtils.dd_MMM_yy));
-        holder.textitemrecycleroffertitle.setText(data.get(position).getTitle());
-        holder.textitemrecyclerofferdescription.setText((Html.fromHtml(data.get(position).getDescription())));
-        mUtils.loadImageInImageview(activity, data.get(position).getOfferImage(), holder.imageitemrecyclerofferimage);
+//        holder.textitemrecyclerofferdate.setText(mDateUtils.changeDateFormat(
+//                data.get(position).getEndDate(), mDateUtils.dd_MM_yyyy, mDateUtils.dd_MMM_yy));
+//        holder.textitemrecycleroffertitle.setText(data.get(position).getTitle());
+//        holder.textitemrecyclerofferdescription.setText((Html.fromHtml(data.get(position).getDescription())));
+//        mUtils.loadImageInImageview(activity, data.get(position).getOfferImage(), holder.imageitemrecyclerofferimage);
+
+//        GetOffersRes.Result movie = GetOffersRes.Result.;
+//        holder.binding.setMovie(movie);
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClick(data.get(position),v);
+                listener.onClick(data.get(position), v);
             }
         });
+
+        holder.binding.setOffers(data.get(position));
+        holder.binding.setDateUtils(mDateUtils);
     }
 
 
@@ -71,28 +73,33 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
         void onClick(GetOffersRes.Result Item, View v);
     }
 
+//    public class OffersViewHolder extends RecyclerView.ViewHolder {
+//        private final FrameLayout floffer;
+//        private final TextView textitemrecyclerofferdescription;
+//        private final TextView textitemrecyclerofferdate;
+//        private final TextView textitemrecycleroffertitle;
+//        private final ImageView imageitemrecycleroffershare;
+//        private final ImageView imageitemrecyclerofferimage;
+//
+//        public OffersViewHolder(View itemView) {
+//            super(itemView);
+//            floffer = (FrameLayout) itemView.findViewById(R.id.fl_offer);
+//            textitemrecyclerofferdescription = (TextView) itemView.findViewById(R.id.text_item_recycler_offer_description);
+//            textitemrecyclerofferdate = (TextView) itemView.findViewById(R.id.text_item_recycler_offer_date);
+//            textitemrecycleroffertitle = (TextView) itemView.findViewById(R.id.text_item_recycler_offer_title);
+//            imageitemrecycleroffershare = (ImageView) itemView.findViewById(R.id.image_item_recycler_offer_share);
+//            imageitemrecyclerofferimage = (ImageView) itemView.findViewById(R.id.image_item_recycler_offer_image);
+//        }
+//    }
+
     public class OffersViewHolder extends RecyclerView.ViewHolder {
-        private final FrameLayout floffer;
-        private final TextView textitemrecyclerofferdescription;
-        private final TextView textitemrecyclerofferdate;
-        private final TextView textitemrecycleroffertitle;
-        private final ImageView imageitemrecycleroffershare;
-        private final ImageView imageitemrecyclerofferimage;
 
-        public OffersViewHolder(View itemView) {
-            super(itemView);
-            floffer = (FrameLayout) itemView.findViewById(R.id.fl_offer);
-            textitemrecyclerofferdescription = (TextView) itemView.findViewById(R.id.text_item_recycler_offer_description);
-            textitemrecyclerofferdate = (TextView) itemView.findViewById(R.id.text_item_recycler_offer_date);
-            textitemrecycleroffertitle = (TextView) itemView.findViewById(R.id.text_item_recycler_offer_title);
-            imageitemrecycleroffershare = (ImageView) itemView.findViewById(R.id.image_item_recycler_offer_share);
-            imageitemrecyclerofferimage = (ImageView) itemView.findViewById(R.id.image_item_recycler_offer_image);
+        OffersRowBinding binding;
 
-
+        public OffersViewHolder(View v) {
+            super(v);
+            binding = DataBindingUtil.bind(v);
         }
-
-
     }
-
 
 }

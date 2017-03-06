@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -41,6 +42,7 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 /**
  * Created by user on 13/2/17.
  */
@@ -178,6 +180,16 @@ public class Utils {
 
     }
 
+    @BindingAdapter({"bind:imageUrl"})
+    public static void loadImage(ImageView imageView, String url) {
+        logMe("testing", "image load");
+        if (!url.equals("")) {
+//            Picasso.with(imageView.getContext()).load(url).resize(200, 200).into(imageView);
+
+            Picasso.with(imageView.getContext()).load(url).into(imageView);
+        }
+    }
+
     /**
      * Method to check whether internet is connection or connected
      *
@@ -202,7 +214,7 @@ public class Utils {
      * @param tag     - tag for log
      * @param message - message for log
      **/
-    public void logMe(String tag, String message) {
+    public static void logMe(String tag, String message) {
         Log.e(tag, message);
     }
 
@@ -238,7 +250,7 @@ public class Utils {
 
                         @Override
                         public void onSuccess() {
-                           view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                            view.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         }
 
                         @Override

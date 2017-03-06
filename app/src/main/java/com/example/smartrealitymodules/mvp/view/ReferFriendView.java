@@ -8,4 +8,5 @@ public interface ReferFriendView extends BaseView {
 
     void apiSaveReferForRewardsPost();
 
+    void setDate(String year, String month, String day);
 }

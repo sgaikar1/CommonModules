@@ -171,5 +171,18 @@
     <string name="select_site_visit_set_time">Select Pick up Time</string>
     <string name="enter_address">Enter Address</string>
     <string name="no_layout_image_available">Layout images not available.</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="redeem_points">redeem points</string>
+    <string name="user_home">Home\'</string>
+    <string name="user_nav_projects">Projects</string>
+    <string name="user_nav_offers">Offers</string>
+    <string name="user_nav_feedback">Feedback</string>
+    <string name="user_nav_notifications">Notifications</string>
+    <string name="user_nav_share">Share App</string>
+    <string name="user_nav_refer_friend">Refer a friend</string>
+    <string name="user_nav_about_us">About us</string>
+    <string name="user_nav_rate_us">Rate us</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 </resources>

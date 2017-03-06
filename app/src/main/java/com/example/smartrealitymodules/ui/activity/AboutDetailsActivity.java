@@ -8,7 +8,7 @@ import android.text.util.Linkify;
 import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 
 /**
  * Created by user on 22/2/17.

@@ -13,7 +13,7 @@ import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.CalenderPresenter;
 import com.example.smartrealitymodules.mvp.view.CalenderView;
-import com.example.smartrealitymodules.ui.BaseActivity.BaseActivity;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.utils.Constants;
 
 import javax.inject.Inject;

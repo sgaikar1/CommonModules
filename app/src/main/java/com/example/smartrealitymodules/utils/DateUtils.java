@@ -35,6 +35,7 @@ public class DateUtils {
         simpleDateFormat = convertDateToUTC(simpleDateFormat);
         SimpleDateFormat sdfTarget = new SimpleDateFormat(newFormat, Locale.US);
         String StrDateNew = "";
+        Utils.logMe("Testing", "inside");
 
         try {
             Date datenw = simpleDateFormat.parse(selectedDate);

@@ -8,7 +8,9 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.example.smartrealitymodules.ui.activity.GalleryActivity">
-
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/layout_toolbar"/>
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
