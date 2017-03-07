@@ -3,6 +3,7 @@ package com.example.smartrealitymodules.ui.activity;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.TimePicker;
 
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.api.ApiNames;
+import com.example.smartrealitymodules.databinding.ActivityScheduleSiteVisitBinding;
 import com.example.smartrealitymodules.models.request.ScheduleSiteVisitReq;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.ScheduleSiteVisitPresenter;
@@ -47,6 +49,7 @@ public class ScheduleSiteVisitActivity extends BaseActivity implements View.OnCl
     private String date="";
     private int noOfTimesCalled=0;
     private ScheduleSiteVisitPresenter presenter;
+    private ActivityScheduleSiteVisitBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,18 +72,19 @@ public class ScheduleSiteVisitActivity extends BaseActivity implements View.OnCl
     }
 
     private void renderView() {
-        setContentView(R.layout.activity_schedule_site_visit);
-        btnapply = (Button) findViewById(R.id.btn_apply);
-        activityschedulesitevisit = (RelativeLayout) findViewById(R.id.activity_schedule_site_visit);
-        llpickuphome = (LinearLayout) findViewById(R.id.ll_pickup_home);
-        edittextcity = (EditText) findViewById(R.id.edittext_city);
-        edittextaddress = (EditText) findViewById(R.id.edittext_address);
-        edittextsettime = (EditText) findViewById(R.id.edittext_set_time);
-        rlpickUp = (RelativeLayout) findViewById(R.id.rl_pickUp);
-        checkboxpickUp = (CheckBox) findViewById(R.id.checkbox_pickUp);
-        edittextscheduletime = (EditText) findViewById(R.id.edittext_schedule_time);
-        edittextscheduledate = (EditText) findViewById(R.id.edittext_schedule_date);
-        edittextselectprojectname = (EditText) findViewById(R.id.edittext_select_project_name);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_schedule_site_visit);
+//        setContentView(R.layout.activity_schedule_site_visit);
+//        btnapply = (Button) findViewById(R.id.btn_apply);
+//        activityschedulesitevisit = (RelativeLayout) findViewById(R.id.activity_schedule_site_visit);
+//        llpickuphome = (LinearLayout) findViewById(R.id.ll_pickup_home);
+//        edittextcity = (EditText) findViewById(R.id.edittext_city);
+//        edittextaddress = (EditText) findViewById(R.id.edittext_address);
+//        edittextsettime = (EditText) findViewById(R.id.edittext_set_time);
+//        rlpickUp = (RelativeLayout) findViewById(R.id.rl_pickUp);
+//        checkboxpickUp = (CheckBox) findViewById(R.id.checkbox_pickUp);
+//        edittextscheduletime = (EditText) findViewById(R.id.edittext_schedule_time);
+//        edittextscheduledate = (EditText) findViewById(R.id.edittext_schedule_date);
+//        edittextselectprojectname = (EditText) findViewById(R.id.edittext_select_project_name);
         setProgressBar();
         removeWait();
     }
@@ -89,27 +93,27 @@ public class ScheduleSiteVisitActivity extends BaseActivity implements View.OnCl
 
         presenter = new ScheduleSiteVisitPresenter(mainModel, ScheduleSiteVisitActivity.this);
 
-        edittextscheduledate.setOnClickListener(this);
-        edittextscheduletime.setOnClickListener(this);
-        edittextsettime.setOnClickListener(this);
-        btnapply.setOnClickListener(this);
+        binding.edittextScheduleDate.setOnClickListener(this);
+        binding.edittextScheduleTime.setOnClickListener(this);
+        binding.edittextSetTime.setOnClickListener(this);
+        binding.btnApply.setOnClickListener(this);
 
-        edittextselectprojectname.setText(projectName);
-        edittextcity.setText(projectCity);
+        binding.edittextSelectProjectName.setText(projectName);
+        binding.edittextCity.setText(projectCity);
 
-        rlpickUp.setOnClickListener(this);
+        binding.rlPickUp.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_pickUp:
-                if (checkboxpickUp.isChecked()) {
-                    llpickuphome.setVisibility(View.INVISIBLE);
-                    checkboxpickUp.setChecked(false);
+                if (binding.checkboxPickUp.isChecked()) {
+                    binding.llPickupHome.setVisibility(View.INVISIBLE);
+                    binding.checkboxPickUp.setChecked(false);
                 } else {
-                    llpickuphome.setVisibility(View.VISIBLE);
-                    checkboxpickUp.setChecked(true);
+                    binding.llPickupHome.setVisibility(View.VISIBLE);
+                    binding.checkboxPickUp.setChecked(true);
                 }
                 break;
             case R.id.edittext_schedule_date:
@@ -118,7 +122,7 @@ public class ScheduleSiteVisitActivity extends BaseActivity implements View.OnCl
                 overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left);
                 break;
             case R.id.edittext_schedule_time:
-                edittextscheduletime.setText("");
+                binding.edittextScheduleTime.setText("");
                 noOfTimesCalled = 0;
                 Calendar scheduleTime = Calendar.getInstance();
                 int schedulehour = scheduleTime.get(Calendar.HOUR_OF_DAY);
@@ -127,7 +131,7 @@ public class ScheduleSiteVisitActivity extends BaseActivity implements View.OnCl
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                        presenter.pickTime(ScheduleSiteVisitActivity.this,noOfTimesCalled,selectedHour,selectedMinute,
-                               edittextscheduledate.getText().toString());
+                               binding.edittextScheduleDate.getText().toString());
                         noOfTimesCalled++;
                     }
                 }, schedulehour, scheduleminute, true);//Yes 24 hour time
@@ -135,7 +139,7 @@ public class ScheduleSiteVisitActivity extends BaseActivity implements View.OnCl
                 scheduleTimePicker.show();
                 break;
             case R.id.edittext_set_time:
-                edittextsettime.setText("");
+                binding.edittextSetTime.setText("");
                 noOfTimesCalled = 0;
                 Calendar setTime = Calendar.getInstance();
                 int sethour = setTime.get(Calendar.HOUR_OF_DAY);
@@ -144,7 +148,7 @@ public class ScheduleSiteVisitActivity extends BaseActivity implements View.OnCl
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         presenter.setPickUpTime(ScheduleSiteVisitActivity.this,noOfTimesCalled,selectedHour,selectedMinute,
-                                edittextscheduletime.getText().toString(), edittextscheduledate.getText().toString());
+                                binding.edittextScheduleTime.getText().toString(), binding.edittextScheduleDate.getText().toString());
                     }
                 }, sethour, setminute, true);//Yes 24 hour time
                 setTimePicker.setTitle("Select Time");
@@ -156,8 +160,8 @@ public class ScheduleSiteVisitActivity extends BaseActivity implements View.OnCl
                 if (isConnected) {
                     boolean callApi = true;
 
-                    presenter.validateForm(ScheduleSiteVisitActivity.this,edittextscheduledate.getText().toString(),edittextscheduletime.getText().toString(),checkboxpickUp.isChecked(),
-                            edittextsettime.getText().toString(),edittextaddress.getText().toString() );
+                    presenter.validateForm(ScheduleSiteVisitActivity.this,binding.edittextScheduleDate.getText().toString(),binding.edittextScheduleTime.getText().toString(),binding.checkboxPickUp.isChecked(),
+                            binding.edittextSetTime.getText().toString(),binding.edittextAddress.getText().toString() );
 
 
 
@@ -175,21 +179,21 @@ public class ScheduleSiteVisitActivity extends BaseActivity implements View.OnCl
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 date = data.getStringExtra(Constants.DATE_KEY);
-                edittextscheduledate.setText(date);
-                edittextscheduletime.setText("");
-                edittextsettime.setText("");
+                binding.edittextScheduleDate.setText(date);
+                binding.edittextScheduleTime.setText("");
+                binding.edittextSetTime.setText("");
             }
         }
     }
 
     @Override
     public void setScheduleTime(String time) {
-        edittextscheduletime.setText(time);
+        binding.edittextScheduleTime.setText(time);
     }
 
     @Override
     public void setPickUpTime(String time) {
-        edittextsettime.setText(time);
+        binding.edittextSetTime.setText(time);
 
     }
 
@@ -197,16 +201,21 @@ public class ScheduleSiteVisitActivity extends BaseActivity implements View.OnCl
     public void showSuccess(boolean checked) {
         if (checked) {
             ScheduleSiteVisitReq obj = new ScheduleSiteVisitReq(Constants.PROJECTCODE, Constants.USERTYPE, Constants.USERID,
-                    projectId, "sitevisit", edittextscheduledate.getText().toString()+" "+edittextscheduletime.getText().toString(), "true", edittextsettime.getText().toString(),
-                    edittextaddress.getText().toString(), "");
+                    projectId, "sitevisit", binding.edittextScheduleDate.getText().toString()+" "+binding.edittextScheduleTime.getText().toString(), "true", binding.edittextSetTime.getText().toString(),
+                    binding.edittextAddress.getText().toString(), "");
             presenter.getScheduleSiteVisit(mContext,obj, ApiNames.ScheduleSiteVisit);
         } else {
             ScheduleSiteVisitReq obj = new ScheduleSiteVisitReq(Constants.PROJECTCODE, Constants.USERTYPE, Constants.USERID,
-                    projectId, "sitevisit", edittextscheduledate.getText().toString()+" "+edittextscheduletime.getText().toString(), "false", edittextsettime.getText().toString(),
-                    edittextaddress.getText().toString(), "");
+                    projectId, "sitevisit", binding.edittextScheduleDate.getText().toString()+" "+binding.edittextScheduleTime.getText().toString(), "false", binding.edittextSetTime.getText().toString(),
+                    binding.edittextAddress.getText().toString(), "");
 
             presenter.getScheduleSiteVisit(mContext,obj, ApiNames.ScheduleSiteVisit);
         }
 
+    }
+
+    @Override
+    public void finishActivity() {
+        onBackPressed();
     }
 }

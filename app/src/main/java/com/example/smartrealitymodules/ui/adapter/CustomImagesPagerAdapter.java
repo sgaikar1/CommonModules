@@ -1,13 +1,14 @@
 package com.example.smartrealitymodules.ui.adapter;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.databinding.CustomImagesBinding;
 import com.example.smartrealitymodules.utils.Utils;
 
 import java.util.ArrayList;
@@ -48,21 +49,20 @@ public class CustomImagesPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View itemView = mLayoutInflater.inflate(R.layout.custom_images,
-                container, false);
-        ImageView itemScrollImage = (ImageView) itemView.findViewById(R.id.item_scroll_image);
+        CustomImagesBinding binding = DataBindingUtil.inflate(mLayoutInflater, R.layout.custom_images, container, false);
+
         try {
             if (mImages != null && mImagesBanner == null) {
-                itemScrollImage.setImageResource(mImages.get(position));
+                binding.itemScrollImage.setImageResource(mImages.get(position));
             } else {
-                mUtils.loadImageInImageview(mContext, mImagesBanner.get(position), itemScrollImage);
+                mUtils.loadImageInImageview(mContext, mImagesBanner.get(position), binding.itemScrollImage);
             }
-            container.addView(itemView, 0);
+            container.addView(binding.getRoot(), 0);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return itemView;
+        return binding.getRoot();
     }
 
     @Override

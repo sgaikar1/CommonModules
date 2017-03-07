@@ -1,28 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_marginBottom="@dimen/margin5"
-              android:background="@color/white"
-              android:gravity="center"
-              android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/image_item_recycler_amenities_images"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:padding="@dimen/margin5"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher" />
+    <data>
 
-    <TextView
-        android:id="@+id/text_item_recycler_amenities_name"
+        <import type="com.example.smartrealitymodules.models.response.ProjectDetailsRes.Amenity" />
+
+        <import type="android.view.View" />
+
+        <import type="com.example.smartrealitymodules.utils.DateUtils" />
+
+        <import type="com.example.smartrealitymodules.utils.Utils" />
+
+        <variable
+            name="amenity"
+            type="Amenity" />
+
+        <variable
+            name="dateUtils"
+            type="DateUtils" />
+
+        <variable
+            name="utils"
+            type="Utils" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin5"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/margin5"
+        android:background="@color/white"
         android:gravity="center"
-        android:textColor="@color/textHeading"
-        android:textSize="@dimen/textsize12" />
+        android:orientation="vertical">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/image_item_recycler_amenities_images"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:padding="@dimen/margin5"
+            android:scaleType="fitXY"
+            app:imageUrl="@{amenity.IconPath}"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/text_item_recycler_amenities_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin5"
+            android:gravity="center"
+            android:text="@{amenity.title}"
+            android:textColor="@color/textHeading"
+            android:textSize="@dimen/textsize12"/>
+
+    </LinearLayout>
+</layout>

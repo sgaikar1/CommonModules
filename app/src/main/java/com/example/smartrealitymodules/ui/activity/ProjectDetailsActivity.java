@@ -2,21 +2,16 @@ package com.example.smartrealitymodules.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.widget.NestedScrollView;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.api.ApiNames;
+import com.example.smartrealitymodules.databinding.ActivityProjectDetailsBinding;
 import com.example.smartrealitymodules.models.eventbus.Interest;
 import com.example.smartrealitymodules.models.request.ProjectDetailsReq;
 import com.example.smartrealitymodules.models.request.ProjectInterestedInReq;
@@ -39,17 +34,12 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
     @Inject
     public MainModel mainModel;
     private Context mContext;
-    private TextView txtprojectsdetail, textprojectdetailprojectprice, textprojectdetailprojecttype, textprojectdetailprojectlocation, textprojectdetailprojectname;
-    private NestedScrollView nsvprojectdetail;
-    private FrameLayout frameprojectdetaillayout, frameprojectdetailgallery;
-    private ImageView imageprojectdetailslayout, imageprojectdetailsgallery, imageprojectdetail360view, imageprojectdetailwalkthrough, imageprojectdetailcall, imageprojectdetaillocation, imageprojectdetailinterested, imageprojectdetailproject;
-    private LinearLayout linearprojectonlineblocking, linearprojectdetailschedulesitevisit, linearprojectdetailamenities, linearprojectdetailaboutproject, linearprice;
-    private RelativeLayout relativestartfrom, viewloading;
     private String projectId;
     private String projectName;
-    private String projectImage;
+    public String projectImage;
     private ProjectDetailsRes data;
     private Animation pulse;
+    private ActivityProjectDetailsBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,46 +61,27 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
     }
 
     private void renderView() {
-        setContentView(R.layout.activity_project_details);
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_project_details);
+
+        binding.setUtils(mUtils);
+        binding.setProjectActivity(this);
 
         pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
 
-        txtprojectsdetail = (TextView) findViewById(R.id.txt_projects_detail);
-        nsvprojectdetail = (NestedScrollView) findViewById(R.id.nsv_project_detail);
-        frameprojectdetaillayout = (FrameLayout) findViewById(R.id.frame_project_detail_layout);
-        imageprojectdetailslayout = (ImageView) findViewById(R.id.image_project_details_layout);
-        frameprojectdetailgallery = (FrameLayout) findViewById(R.id.frame_project_detail_gallery);
-        imageprojectdetailsgallery = (ImageView) findViewById(R.id.image_project_details_gallery);
-        linearprojectonlineblocking = (LinearLayout) findViewById(R.id.linear_project_online_blocking);
-        linearprojectdetailschedulesitevisit = (LinearLayout) findViewById(R.id.linear_project_detail_schedule_site_visit);
-        linearprojectdetailamenities = (LinearLayout) findViewById(R.id.linear_project_detail_amenities);
-        linearprojectdetailaboutproject = (LinearLayout) findViewById(R.id.linear_project_detail_about_project);
-        relativestartfrom = (RelativeLayout) findViewById(R.id.relative_start_from);
-        linearprice = (LinearLayout) findViewById(R.id.linear_price);
-        textprojectdetailprojectprice = (TextView) findViewById(R.id.text_project_detail_project_price);
-        textprojectdetailprojecttype = (TextView) findViewById(R.id.text_project_detail_project_type);
-        textprojectdetailprojectlocation = (TextView) findViewById(R.id.text_project_detail_project_location);
-        textprojectdetailprojectname = (TextView) findViewById(R.id.text_project_detail_project_name);
-        imageprojectdetail360view = (ImageView) findViewById(R.id.image_project_detail_360_view);
-        imageprojectdetailwalkthrough = (ImageView) findViewById(R.id.image_project_detail_walkthrough);
-        imageprojectdetailcall = (ImageView) findViewById(R.id.image_project_detail_call);
-        imageprojectdetaillocation = (ImageView) findViewById(R.id.image_project_detail_location);
-        imageprojectdetailinterested = (ImageView) findViewById(R.id.image_project_detail_interested);
-        imageprojectdetailproject = (ImageView) findViewById(R.id.image_project_detail_project);
-        viewloading = (RelativeLayout) findViewById(R.id.view_loading);
         setProgressBar();
 
-        frameprojectdetailgallery.setOnClickListener(this);
-        frameprojectdetaillayout.setOnClickListener(this);
-        linearprojectdetailamenities.setOnClickListener(this);
-        linearprojectdetailschedulesitevisit.setOnClickListener(this);
-        linearprojectdetailaboutproject.setOnClickListener(this);
-        imageprojectdetailwalkthrough.setOnClickListener(this);
-        imageprojectdetailcall.setOnClickListener(this);
-        imageprojectdetaillocation.setOnClickListener(this);
-        imageprojectdetailinterested.setOnClickListener(this);
-        imageprojectdetail360view.setOnClickListener(this);
-        linearprojectonlineblocking.setOnClickListener(this);
+        binding.frameProjectDetailGallery.setOnClickListener(this);
+        binding.frameProjectDetailLayout.setOnClickListener(this);
+        binding.linearProjectDetailAmenities.setOnClickListener(this);
+        binding.linearProjectDetailScheduleSiteVisit.setOnClickListener(this);
+        binding.linearProjectDetailAboutProject.setOnClickListener(this);
+        binding.imageProjectDetailWalkthrough.setOnClickListener(this);
+        binding.imageProjectDetailCall.setOnClickListener(this);
+        binding.imageProjectDetailLocation.setOnClickListener(this);
+        binding.imageProjectDetailInterested.setOnClickListener(this);
+        binding.imageProjectDetail360View.setOnClickListener(this);
+        binding.linearProjectOnlineBlocking.setOnClickListener(this);
     }
 
     private void apiProjectDetails() {
@@ -215,8 +186,8 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
                 if (isConnected) {
                     if (data.getResult().getInterestedIn().equalsIgnoreCase("false")) {
 
-                        imageprojectdetailinterested.startAnimation(pulse);
-                        imageprojectdetailinterested
+                        binding.imageProjectDetailInterested.startAnimation(pulse);
+                        binding.imageProjectDetailInterested
                                 .setImageResource(R.drawable.ic_heart_red);
                         data.getResult().setInterestedIn("True");
                         EventBus.getDefault().post(new Interest("True", data.getResult().getProjectID(), "Detail", 0));
@@ -226,8 +197,8 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
 
                     } else if (data.getResult().getInterestedIn().equalsIgnoreCase("true")) {
 
-                        imageprojectdetailinterested.startAnimation(pulse);
-                        imageprojectdetailinterested
+                        binding.imageProjectDetailInterested.startAnimation(pulse);
+                        binding.imageProjectDetailInterested
                                 .setImageResource(R.drawable.ic_heart_white);
                         data.getResult().setInterestedIn("False");
                         EventBus.getDefault().post(new Interest("False", data.getResult().getProjectID(), "Detail", 0));
@@ -256,52 +227,17 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void getProjectDetailsSuccess(ProjectDetailsRes projectDetailsRes) {
-        nsvprojectdetail.setVisibility(View.VISIBLE);
-        txtprojectsdetail.setVisibility(View.GONE);
+        binding.nsvProjectDetail.setVisibility(View.VISIBLE);
+        binding.txtProjectsDetail.setVisibility(View.GONE);
         data = projectDetailsRes;
-        setDataOnViews();
-
-
+        binding.setProjects(data.getResult());
     }
 
-    private void setDataOnViews() {
-        mUtils.loadImageInImageview(this, projectImage, imageprojectdetailproject);
-
-        if (data.getResult().getInterestedIn().equalsIgnoreCase("true")) {
-            imageprojectdetailinterested.setImageResource(R.drawable.ic_heart_red);
-        } else {
-            imageprojectdetailinterested.setImageResource(R.drawable.ic_heart_white);
-        }
-
-        if (TextUtils.isEmpty(data.getResult().getView360())) {
-            imageprojectdetail360view.setVisibility(View.GONE);
-        } else {
-            imageprojectdetail360view.setVisibility(View.VISIBLE);
-        }
-
-        if (TextUtils.isEmpty(data.getResult().getWalkThroughURL())) {
-            imageprojectdetailwalkthrough.setVisibility(View.GONE);
-        } else {
-            imageprojectdetailwalkthrough.setVisibility(View.VISIBLE);
-        }
-
-        textprojectdetailprojectname.setText(data.getResult().getProjectName());
-        textprojectdetailprojectlocation.setText(data.getResult().getLocalArea());
-
-//                textProjectDetailProjectLocation.setText(data.getResult().getLocalArea()+", "+data.getResult().getCityName());
-        textprojectdetailprojecttype.setText(data.getResult().getApartmentType());
-        if (data.getResult().getMinBudget().equals("0")) {
-            relativestartfrom.setVisibility(View.GONE);
-        } else {
-            relativestartfrom.setVisibility(View.VISIBLE);
-            textprojectdetailprojectprice.setText(data.getResult().getMinBudget());
-        }
-    }
 
     @Override
     public void showEmptyView() {
-        nsvprojectdetail.setVisibility(View.GONE);
-        txtprojectsdetail.setVisibility(View.VISIBLE);
+        binding.nsvProjectDetail.setVisibility(View.GONE);
+        binding.txtProjectsDetail.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -312,11 +248,11 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
     @Override
     public void resetInterestedImage() {
         if (data.getResult().getInterestedIn().equalsIgnoreCase("false")) {
-            imageprojectdetailinterested
+            binding.imageProjectDetailInterested
                     .setImageResource(R.drawable.ic_heart_red);
             data.getResult().setInterestedIn("True");
         } else {
-            imageprojectdetailinterested
+            binding.imageProjectDetailInterested
                     .setImageResource(R.drawable.ic_heart_white);
             data.getResult().setInterestedIn("False");
         }

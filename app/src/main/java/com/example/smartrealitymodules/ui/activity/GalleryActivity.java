@@ -1,17 +1,16 @@
 package com.example.smartrealitymodules.ui.activity;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.widget.LinearLayout;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.databinding.ActivityGalleryBinding;
 import com.example.smartrealitymodules.models.response.ProjectDetailsRes;
 import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.ui.fragments.GalleryImagesFragment;
@@ -29,11 +28,8 @@ public class GalleryActivity extends BaseActivity {
     private String WalkThroughURL;
     private ArrayList<ProjectDetailsRes.Architectures> architectures;
     private ArrayList<ProjectDetailsRes.Constructions> constructions;
-    private LinearLayout maincontent;
-    private ViewPager container;
-    private AppBarLayout appbar;
-    private TabLayout tabs;
     private GalleryPagerAdapter mGalleryPagerAdapter;
+    private ActivityGalleryBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,11 +43,11 @@ public class GalleryActivity extends BaseActivity {
 
     private void init() {
         mGalleryPagerAdapter = new GalleryPagerAdapter(getSupportFragmentManager());
-        container.setAdapter(mGalleryPagerAdapter);
-        container.setCurrentItem(position);
-        tabs.setupWithViewPager(container);
+        binding.container.setAdapter(mGalleryPagerAdapter);
+        binding.container.setCurrentItem(position);
+        binding.tabs.setupWithViewPager(binding.container);
 
-        container.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        binding.container.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -70,11 +66,7 @@ public class GalleryActivity extends BaseActivity {
     }
 
     private void renderView() {
-        setContentView(R.layout.activity_gallery);
-        maincontent = (LinearLayout) findViewById(R.id.main_content);
-        container = (ViewPager) findViewById(R.id.container);
-        appbar = (AppBarLayout) findViewById(R.id.appbar);
-        tabs = (TabLayout) findViewById(R.id.tabs);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_gallery);
     }
 
     private void getIntentValues() {

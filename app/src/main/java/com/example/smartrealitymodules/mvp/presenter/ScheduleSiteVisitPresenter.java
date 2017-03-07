@@ -138,6 +138,7 @@ public class ScheduleSiteVisitPresenter {
             public void onSuccess(CommonRes commonRes) {
                 view.removeWait();
                 view.showToast(commonRes.getMessage());
+                view.finishActivity();
             }
 
             @Override

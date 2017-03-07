@@ -9,4 +9,6 @@ public interface ScheduleSiteVisitView extends BaseView {
     void setPickUpTime(String time);
 
     void showSuccess(boolean checked);
+
+    void finishActivity();
 }

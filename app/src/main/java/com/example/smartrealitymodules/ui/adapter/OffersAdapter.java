@@ -33,23 +33,12 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
 
     @Override
     public OffersViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.offers_row, null);
-//        view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
         OffersRowBinding binding = DataBindingUtil.inflate(activity.getLayoutInflater(), R.layout.offers_row, parent, false);
         return new OffersViewHolder(binding.getRoot());
     }
 
     @Override
     public void onBindViewHolder(final OffersViewHolder holder, final int position) {
-//        holder.textitemrecyclerofferdate.setText(mDateUtils.changeDateFormat(
-//                data.get(position).getEndDate(), mDateUtils.dd_MM_yyyy, mDateUtils.dd_MMM_yy));
-//        holder.textitemrecycleroffertitle.setText(data.get(position).getTitle());
-//        holder.textitemrecyclerofferdescription.setText((Html.fromHtml(data.get(position).getDescription())));
-//        mUtils.loadImageInImageview(activity, data.get(position).getOfferImage(), holder.imageitemrecyclerofferimage);
-
-//        GetOffersRes.Result movie = GetOffersRes.Result.;
-//        holder.binding.setMovie(movie);
-
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

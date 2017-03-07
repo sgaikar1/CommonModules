@@ -1,170 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_schedule_site_visit"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.smartrealitymodules.ui.activity.ScheduleSiteVisitActivity">
-    <include
-        android:id="@+id/layout_toolbar"
-        layout="@layout/layout_toolbar"/>
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
+    <RelativeLayout
+        android:id="@+id/activity_schedule_site_visit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/layout_toolbar">
+        android:layout_height="match_parent"
+        tools:context="com.example.smartrealitymodules.ui.activity.ScheduleSiteVisitActivity">
 
-        <FrameLayout
+        <include
+            android:id="@+id/layout_toolbar"
+            layout="@layout/layout_toolbar"/>
+
+        <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_toolbar"
+            android:orientation="vertical">
 
-
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-
-                <RelativeLayout
-                    android:layout_marginTop="@dimen/margin10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin5"
-                        android:textColorHint="@color/colorAccent"
-                        app:hintAnimationEnabled="true"
-                        app:hintTextAppearance="@style/TextInputLayoutStyle">
-
-                        <EditText
-                            android:id="@+id/edittext_select_project_name"
-                            style="@style/EditTextStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="@string/site_visit_select_project"
-                            android:editable="false"
-                            android:clickable="false"
-                            android:text="" />
-
-                    </android.support.design.widget.TextInputLayout>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin5"
-                        android:textColorHint="@color/colorAccent"
-                        app:hintAnimationEnabled="true"
-                        app:hintTextAppearance="@style/TextInputLayoutStyle">
-
-                        <EditText
-                            android:id="@+id/edittext_schedule_date"
-                            style="@style/EditTextStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="@string/site_visit_schedule_date"
-                            android:editable="false"
-                            android:focusable="false"
-                            android:text="" />
-
-                    </android.support.design.widget.TextInputLayout>
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/margin10"
-                        android:layout_marginRight="@dimen/margin10"
-                        android:src="@drawable/ic_calendar" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin5"
-                        android:textColorHint="@color/colorAccent"
-                        app:hintAnimationEnabled="true"
-                        app:hintTextAppearance="@style/TextInputLayoutStyle">
-
-                        <EditText
-                            android:id="@+id/edittext_schedule_time"
-                            style="@style/EditTextStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="@string/site_visit_schedule_time"
-                            android:editable="false"
-                            android:focusable="false"
-                            android:text="" />
-
-                    </android.support.design.widget.TextInputLayout>
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/margin10"
-                        android:layout_marginRight="@dimen/margin10"
-                        android:src="@drawable/ic_schedule_site_visit" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/rl_pickUp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/dividerLine">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:paddingLeft="@dimen/margin10"
-                        android:paddingStart="@dimen/margin10"
-                        android:text="@string/site_visit_pickup_home"
-                        android:textColor="@color/textHeading"
-                        android:textSize="@dimen/textsize16" />
-
-                    <CheckBox
-                        android:id="@+id/checkbox_pickUp"
-                        style="@style/MyCheckBox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:clickable="false"
-                        android:layout_alignParentRight="true" />
-
-                </RelativeLayout>
 
                 <LinearLayout
-                    android:id="@+id/ll_pickup_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:orientation="vertical">
+
 
                     <RelativeLayout
-                        android:layout_marginTop="@dimen/margin10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin10">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:textColorHint="@color/colorAccent"
+                            app:hintAnimationEnabled="true"
+                            app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                            <EditText
+                                android:id="@+id/edittext_select_project_name"
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:clickable="false"
+                                android:editable="false"
+                                android:hint="@string/site_visit_select_project"
+                                android:text=""/>
+
+                        </android.support.design.widget.TextInputLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -177,15 +72,15 @@
                             app:hintTextAppearance="@style/TextInputLayoutStyle">
 
                             <EditText
-                                android:id="@+id/edittext_set_time"
+                                android:id="@+id/edittext_schedule_date"
                                 style="@style/EditTextStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:hint="@string/site_visit_set_time"
                                 android:editable="false"
                                 android:focusable="false"
-                                android:text="" />
+                                android:hint="@string/site_visit_schedule_date"
+                                android:text=""/>
 
                         </android.support.design.widget.TextInputLayout>
 
@@ -197,67 +92,179 @@
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="@dimen/margin10"
                             android:layout_marginRight="@dimen/margin10"
-                            android:src="@drawable/ic_schedule_site_visit" />
+                            android:src="@drawable/ic_calendar"/>
 
                     </RelativeLayout>
 
-                    <android.support.design.widget.TextInputLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin5"
-                        android:textColorHint="@color/colorAccent"
-                        app:hintAnimationEnabled="true"
-                        app:hintTextAppearance="@style/TextInputLayoutStyle">
+                        android:layout_height="wrap_content">
 
-                        <EditText
-                            android:id="@+id/edittext_address"
-                            style="@style/EditTextStyle"
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:hint="@string/site_visit_enter_address"
-                            android:text="" />
+                            android:layout_marginTop="@dimen/margin5"
+                            android:textColorHint="@color/colorAccent"
+                            app:hintAnimationEnabled="true"
+                            app:hintTextAppearance="@style/TextInputLayoutStyle">
 
-                    </android.support.design.widget.TextInputLayout>
+                            <EditText
+                                android:id="@+id/edittext_schedule_time"
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:hint="@string/site_visit_schedule_time"
+                                android:text=""/>
 
-                    <android.support.design.widget.TextInputLayout
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/margin10"
+                            android:layout_marginRight="@dimen/margin10"
+                            android:src="@drawable/ic_schedule_site_visit"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_pickUp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin5"
-                        android:textColorHint="@color/colorAccent"
-                        app:hintAnimationEnabled="true"
-                        app:hintTextAppearance="@style/TextInputLayoutStyle"
+                        android:background="@color/dividerLine">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:paddingLeft="@dimen/margin10"
+                            android:paddingStart="@dimen/margin10"
+                            android:text="@string/site_visit_pickup_home"
+                            android:textColor="@color/textHeading"
+                            android:textSize="@dimen/textsize16"/>
+
+                        <CheckBox
+                            android:id="@+id/checkbox_pickUp"
+                            style="@style/MyCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:checked="false"
+                            android:clickable="false"/>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_pickup_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
                         android:visibility="gone">
 
-                        <EditText
-                            android:id="@+id/edittext_city"
-                            style="@style/EditTextStyle"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:editable="false"
-                            android:clickable="false"
-                            android:hint="@string/site_visit_city"
-                            android:text="" />
+                            android:layout_marginTop="@dimen/margin10">
 
-                    </android.support.design.widget.TextInputLayout>
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:textColorHint="@color/colorAccent"
+                                app:hintAnimationEnabled="true"
+                                app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                                <EditText
+                                    android:id="@+id/edittext_set_time"
+                                    style="@style/EditTextStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:editable="false"
+                                    android:focusable="false"
+                                    android:hint="@string/site_visit_set_time"
+                                    android:text=""/>
+
+                            </android.support.design.widget.TextInputLayout>
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/margin10"
+                                android:layout_marginRight="@dimen/margin10"
+                                android:src="@drawable/ic_schedule_site_visit"/>
+
+                        </RelativeLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:textColorHint="@color/colorAccent"
+                            app:hintAnimationEnabled="true"
+                            app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                            <EditText
+                                android:id="@+id/edittext_address"
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:hint="@string/site_visit_enter_address"
+                                android:text=""/>
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:textColorHint="@color/colorAccent"
+                            android:visibility="gone"
+                            app:hintAnimationEnabled="true"
+                            app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                            <EditText
+                                android:id="@+id/edittext_city"
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:clickable="false"
+                                android:editable="false"
+                                android:hint="@string/site_visit_city"
+                                android:text=""/>
+
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
 
-        </FrameLayout>
+            </FrameLayout>
 
-    </LinearLayout>
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
-    <Button
-        android:id="@+id/btn_apply"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Apply"
-        android:layout_alignParentBottom="true"
-        />
-</RelativeLayout>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+        <Button
+            android:id="@+id/btn_apply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Apply"
+            />
+    </RelativeLayout>
+</layout>

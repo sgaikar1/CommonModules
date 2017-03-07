@@ -45,6 +45,7 @@ public class GetLayoutDetailsRes {
     }
 
     public class Result {
+
         public ArrayList<MasterLayouts> MasterLayout = new ArrayList<MasterLayouts>();
         public ArrayList<BlockLayouts> BlockLayout = new ArrayList<BlockLayouts>();
 
@@ -68,44 +69,47 @@ public class GetLayoutDetailsRes {
         public void setBlockLayout(ArrayList<BlockLayouts> blockLayout) {
             BlockLayout = blockLayout;
         }
+
+        public class MasterLayouts {
+
+            public String FilePath;
+            public String CateGoryName;
+            public String TagName;
+
+            public MasterLayouts(String filePath, String cateGoryName, String tagName) {
+                FilePath = filePath;
+                CateGoryName = cateGoryName;
+                TagName = tagName;
+            }
+
+            public String getFilePath() {
+                return FilePath;
+            }
+
+            public void setFilePath(String filePath) {
+                FilePath = filePath;
+            }
+
+            public String getCateGoryName() {
+                return CateGoryName;
+            }
+
+            public void setCateGoryName(String cateGoryName) {
+                CateGoryName = cateGoryName;
+            }
+
+            public String getTagName() {
+                return TagName;
+            }
+
+            public void setTagName(String tagName) {
+                TagName = tagName;
+            }
+        }
+
     }
 
-    public class MasterLayouts {
 
-        public String FilePath;
-        public String CateGoryName;
-        public String TagName;
-
-        public MasterLayouts(String filePath, String cateGoryName, String tagName) {
-            FilePath = filePath;
-            CateGoryName = cateGoryName;
-            TagName = tagName;
-        }
-
-        public String getFilePath() {
-            return FilePath;
-        }
-
-        public void setFilePath(String filePath) {
-            FilePath = filePath;
-        }
-
-        public String getCateGoryName() {
-            return CateGoryName;
-        }
-
-        public void setCateGoryName(String cateGoryName) {
-            CateGoryName = cateGoryName;
-        }
-
-        public String getTagName() {
-            return TagName;
-        }
-
-        public void setTagName(String tagName) {
-            TagName = tagName;
-        }
-    }
 
     public static class BlockLayouts implements Parcelable {
 

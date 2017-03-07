@@ -25,6 +25,7 @@ public class Constants {
     public static final String PROJECT_DESC_KEY = "projectDesc";
     public static final String PROJECT_CITY_KEY = "projectCity";
     public static final String DATE_KEY = "Date";
+    public static final String IMAGELIST_KEY = "image_list";
 
     /**
      * This is Webservice's Base URL's USERNAME to access webservice

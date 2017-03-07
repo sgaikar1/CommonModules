@@ -3,17 +3,19 @@ package com.example.smartrealitymodules.ui.adapter;
 /**
  * Created by user on 28/2/17.
  */
+
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.databinding.ItemRecyclerGalleryImagesBinding;
 import com.example.smartrealitymodules.ui.activity.ImagePagerActivity;
+import com.example.smartrealitymodules.utils.Constants;
 import com.example.smartrealitymodules.utils.Utils;
 
 import java.util.ArrayList;
@@ -23,34 +25,38 @@ import java.util.ArrayList;
  */
 public class GalleryImagesAdapter extends RecyclerView.Adapter<GalleryImagesAdapter.GalleryImagesViewHolder> {
 
+    private final LayoutInflater mLayoutInflater;
     ArrayList<String> data;
     Context mContext;
     Utils mUtils;
+    private ItemRecyclerGalleryImagesBinding binding;
 
     public GalleryImagesAdapter(ArrayList<String> data, Context mContext) {
         this.data = data;
         this.mContext = mContext;
         mUtils = new Utils();
+        mLayoutInflater = (LayoutInflater) mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public GalleryImagesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View mView =
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_gallery_images, parent, false);
-        GalleryImagesViewHolder mHolder = new GalleryImagesViewHolder(mView);
+        binding = DataBindingUtil.inflate(mLayoutInflater, R.layout.item_recycler_gallery_images, parent, false);
+
+        GalleryImagesViewHolder mHolder = new GalleryImagesViewHolder(binding.getRoot());
         return mHolder;
     }
 
     @Override
     public void onBindViewHolder(final GalleryImagesViewHolder holder, final int position) {
-        mUtils.loadImageInImageview(mContext, data.get(position), holder.imageItemRecyclerGalleryImages);
+        mUtils.loadImageInImageview(mContext, data.get(position), holder.binding.imageItemRecyclerGalleryImages);
 
-        holder.ll_gallery.setOnClickListener(new View.OnClickListener() {
+        holder.binding.llGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent album = new Intent(mContext, ImagePagerActivity.class);
-                album.putStringArrayListExtra("ImagesList", data);
-                album.putExtra("position", position);
+                album.putStringArrayListExtra(Constants.IMAGELIST_KEY, data);
+                album.putExtra(Constants.POSITION_KEY, position);
                 mContext.startActivity(album);
             }
         });
@@ -65,13 +71,10 @@ public class GalleryImagesAdapter extends RecyclerView.Adapter<GalleryImagesAdap
 
     public class GalleryImagesViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imageItemRecyclerGalleryImages;
-        private LinearLayout ll_gallery;
-
+        ItemRecyclerGalleryImagesBinding binding;
         public GalleryImagesViewHolder(View itemView) {
             super(itemView);
-            ll_gallery = (LinearLayout) itemView.findViewById(R.id.ll_gallery);
-            imageItemRecyclerGalleryImages = (ImageView) itemView.findViewById(R.id.image_item_recycler_gallery_images);
+            binding = DataBindingUtil.bind(itemView);
         }
     }
 }

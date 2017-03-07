@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.api.ApiNames;
+import com.example.smartrealitymodules.databinding.ActivityShareBinding;
 import com.example.smartrealitymodules.models.share.CheckForShareReq;
 import com.example.smartrealitymodules.models.share.CheckForShareRes;
 import com.example.smartrealitymodules.models.share.SmsDeliveredReceiver_Login;
@@ -59,18 +61,8 @@ public class ShareActivity extends BaseActivity implements ShareView {
     private Dialog alert;
     private EditText edtNumber;
     private EditText edtName;
+    private ActivityShareBinding binding;
 
-    public static boolean filterByPackageName(Context context, Intent intent, String prefix) {
-        List<ResolveInfo> matches = context.getPackageManager().queryIntentActivities(intent, 0);
-        for (ResolveInfo info : matches) {
-            if (info.activityInfo.packageName.toLowerCase().startsWith(prefix)) {
-                intent.setPackage(info.activityInfo.packageName);
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,18 +74,19 @@ public class ShareActivity extends BaseActivity implements ShareView {
     }
 
     private void renderView() {
-        setContentView(R.layout.activity_share);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_share);
+        /*setContentView(R.layout.activity_share);
         imgwhatsapp = (ImageView) findViewById(R.id.imgwhatsapp);
         imggoogleplus = (ImageView) findViewById(R.id.imggoogleplus);
         imgtwitter = (ImageView) findViewById(R.id.imgtwitter);
         imgfb = (ImageView) findViewById(R.id.imgfb);
         rlShareNewNumber = (RelativeLayout) findViewById(R.id.rlShareNewNumber);
         rlShareContacts = (RelativeLayout) findViewById(R.id.rlShareContacts);
-
+*/
     }
 
     private void initClicks() {
-        rlShareNewNumber.setOnClickListener(new View.OnClickListener() {
+        binding.rlShareNewNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -101,7 +94,7 @@ public class ShareActivity extends BaseActivity implements ShareView {
             }
         });
 
-        rlShareContacts.setOnClickListener(new View.OnClickListener() {
+        binding.rlShareContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -111,7 +104,7 @@ public class ShareActivity extends BaseActivity implements ShareView {
             }
         });
 
-        imgfb.setOnClickListener(new View.OnClickListener() {
+        binding.imgfb.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -122,7 +115,7 @@ public class ShareActivity extends BaseActivity implements ShareView {
             }
         });
 
-        imggoogleplus.setOnClickListener(new View.OnClickListener() {
+        binding.imggoogleplus.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -148,7 +141,7 @@ public class ShareActivity extends BaseActivity implements ShareView {
             }
         });
 
-        imgwhatsapp.setOnClickListener(new View.OnClickListener() {
+        binding.imgwhatsapp.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -176,7 +169,7 @@ public class ShareActivity extends BaseActivity implements ShareView {
             }
         });
 
-        imgtwitter.setOnClickListener(new View.OnClickListener() {
+        binding.imgtwitter.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -186,6 +179,18 @@ public class ShareActivity extends BaseActivity implements ShareView {
                 startActivity(tw);
             }
         });
+    }
+
+    public static boolean filterByPackageName(Context context, Intent intent, String prefix) {
+        List<ResolveInfo> matches = context.getPackageManager().queryIntentActivities(intent, 0);
+        for (ResolveInfo info : matches) {
+            if (info.activityInfo.packageName.toLowerCase().startsWith(prefix)) {
+                intent.setPackage(info.activityInfo.packageName);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void showDialog() {

@@ -2,22 +2,21 @@ package com.example.smartrealitymodules.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.api.ApiNames;
+import com.example.smartrealitymodules.databinding.ActivityLayoutBinding;
 import com.example.smartrealitymodules.models.request.GetLayoutDetailsReq;
 import com.example.smartrealitymodules.models.response.GetLayoutDetailsRes;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.LayoutPresenter;
 import com.example.smartrealitymodules.mvp.view.LayoutView;
-import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.ui.adapter.LayoutImagesAdapter;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.utils.Constants;
 
 import javax.inject.Inject;
@@ -30,11 +29,9 @@ public class LayoutActivity extends BaseActivity implements LayoutView {
     @Inject
     public MainModel mainModel;
     private String projectId;
-    private TextView txtlayoutlisting;
-    private RecyclerView recyclerlayoutlisting;
-    private ProgressBar progress;
     private LinearLayoutManager mLayoutManager;
     private LayoutImagesAdapter mLayoutImagesAdapter;
+    private ActivityLayoutBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,15 +50,14 @@ public class LayoutActivity extends BaseActivity implements LayoutView {
     }
 
     private void renderView() {
-        setContentView(R.layout.activity_layout);
-        recyclerlayoutlisting = (RecyclerView) findViewById(R.id.recycler_layout_listing);
-        progress = (ProgressBar) findViewById(R.id.progress);
-        txtlayoutlisting = (TextView) findViewById(R.id.txt_layout_listing);
+
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_layout);
+
         setProgressBar();
 
-        recyclerlayoutlisting.setHasFixedSize(true);
+        binding.recyclerLayoutListing.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        recyclerlayoutlisting.setLayoutManager(mLayoutManager);
+        binding.recyclerLayoutListing.setLayoutManager(mLayoutManager);
     }
 
 
@@ -80,8 +76,8 @@ public class LayoutActivity extends BaseActivity implements LayoutView {
 
     @Override
     public void getLayoutDetailsSuccess(GetLayoutDetailsRes getLayoutDetailsRes) {
-        txtlayoutlisting.setVisibility(View.GONE);
-        recyclerlayoutlisting.setVisibility(View.VISIBLE);
+        binding.txtLayoutListing.setVisibility(View.GONE);
+        binding.recyclerLayoutListing.setVisibility(View.VISIBLE);
         mLayoutImagesAdapter = new LayoutImagesAdapter(this, getLayoutDetailsRes.getResult(), new LayoutImagesAdapter.OnItemClickListener() {
             @Override
             public void onClick(GetLayoutDetailsRes.Result data, View view, int position) {
@@ -111,12 +107,12 @@ public class LayoutActivity extends BaseActivity implements LayoutView {
                 }
             }
         });
-        recyclerlayoutlisting.setAdapter(mLayoutImagesAdapter);
+        binding.recyclerLayoutListing.setAdapter(mLayoutImagesAdapter);
     }
 
     @Override
     public void showEmptyView() {
-        txtlayoutlisting.setVisibility(View.VISIBLE);
-        recyclerlayoutlisting.setVisibility(View.GONE);
+        binding.txtLayoutListing.setVisibility(View.VISIBLE);
+        binding.recyclerLayoutListing.setVisibility(View.GONE);
     }
 }

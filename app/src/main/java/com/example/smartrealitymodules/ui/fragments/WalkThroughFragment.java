@@ -3,6 +3,7 @@ package com.example.smartrealitymodules.ui.fragments;
 /**
  * Created by user on 28/2/17.
  */
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.databinding.FragmentWalkthroughBinding;
 
 /**
  * Created by vijay on 23/11/16.
@@ -17,6 +19,7 @@ import com.example.smartrealitymodules.R;
 public class WalkThroughFragment extends Fragment {
 
     String mUrl = "";
+    private FragmentWalkthroughBinding binding;
 //    VideoFragment frag;
 
     public WalkThroughFragment() {
@@ -35,8 +38,8 @@ public class WalkThroughFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_walkthrough, container, false);
 
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_walkthrough,container,false);
 
         mUrl = this.getArguments().getString("url");
         VideoFragment f = VideoFragment.newInstance(mUrl);
@@ -45,6 +48,6 @@ public class WalkThroughFragment extends Fragment {
 
 
 
-        return rootView;
+        return binding.getRoot();
     }
 }

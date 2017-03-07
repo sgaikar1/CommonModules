@@ -1,34 +1,37 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.smartrealitymodules.ui.activity.LayoutActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <include
-        android:id="@+id/layout_toolbar"
-        layout="@layout/layout_toolbar"/>
-
-    <TextView
-        android:id="@+id/txt_layout_listing"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/no_layout_image_available"
-        android:textColor="@color/textHeading"
-        android:textSize="@dimen/textsize18"
-        android:visibility="gone"/>
+        tools:context="com.example.smartrealitymodules.ui.activity.LayoutActivity">
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        <include
+            android:id="@+id/layout_toolbar"
+            layout="@layout/layout_toolbar"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/layout_toolbar"
-        android:id="@+id/recycler_layout_listing"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/txt_layout_listing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_layout_image_available"
+            android:textColor="@color/textHeading"
+            android:textSize="@dimen/textsize18"
+            android:visibility="gone"/>
 
-</RelativeLayout>
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_layout_listing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layout_toolbar"/>
+
+    </RelativeLayout>
+</layout>

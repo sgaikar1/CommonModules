@@ -3,25 +3,23 @@ package com.example.smartrealitymodules.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import com.example.smartrealitymodules.R;
+import com.example.smartrealitymodules.databinding.ActivityProjectAmenitiesBinding;
 import com.example.smartrealitymodules.models.response.ProjectDetailsRes;
 import com.example.smartrealitymodules.mvp.model.MainModel;
-import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.ui.adapter.AmenitiesAdapter;
 import com.example.smartrealitymodules.ui.adapter.CustomImagesPagerAdapter;
-import com.example.smartrealitymodules.utils.AutoScrollViewPager;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
-
-import me.relex.circleindicator.CircleIndicator;
 
 
 /**
@@ -33,12 +31,10 @@ public class ProjectAmenitiesActivity extends BaseActivity {
     private Context mContext;
     private ArrayList<ProjectDetailsRes.AmenityImage> amenitiesImages;
     private ArrayList<ProjectDetailsRes.Amenity> amenities;
-    private RecyclerView recycleramenitiesdetails;
-    private CircleIndicator circleindicatorprojectamenities;
-    private AutoScrollViewPager autoscrollamenitiesimages;
     private ArrayList<String> amenitiesBannerImages;
     private CustomImagesPagerAdapter mAmenitiesImagesAdapter;
     private AmenitiesAdapter mAmenitiesAdapter;
+    private ActivityProjectAmenitiesBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,12 +56,8 @@ public class ProjectAmenitiesActivity extends BaseActivity {
     }
 
     private void renderView() {
-        setContentView(R.layout.activity_project_amenities);
-        recycleramenitiesdetails = (RecyclerView) findViewById(R.id.recycler_amenities_details);
-         circleindicatorprojectamenities = (CircleIndicator) findViewById(R.id.circleindicator_project_amenities);
-         autoscrollamenitiesimages = (AutoScrollViewPager) findViewById(R.id.autoscroll_amenities_images);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_project_amenities);
     }
-
 
 
     private void initializeAmenitiesBanners() {
@@ -75,10 +67,10 @@ public class ProjectAmenitiesActivity extends BaseActivity {
             amenitiesBannerImages.add(amenitiesImages.get(i).getFilePath());
         }
 
-        mAmenitiesImagesAdapter = new CustomImagesPagerAdapter(this, amenitiesBannerImages,"");
-        autoscrollamenitiesimages.setAdapter(mAmenitiesImagesAdapter);
-        autoscrollamenitiesimages.startAutoScroll(3000);
-        circleindicatorprojectamenities.setViewPager(autoscrollamenitiesimages);
+        mAmenitiesImagesAdapter = new CustomImagesPagerAdapter(this, amenitiesBannerImages, "");
+        binding.autoscrollAmenitiesImages.setAdapter(mAmenitiesImagesAdapter);
+        binding.autoscrollAmenitiesImages.startAutoScroll(3000);
+        binding.circleindicatorProjectAmenities.setViewPager(binding.autoscrollAmenitiesImages);
     }
 
     private void initializeAmenities() {
@@ -99,13 +91,13 @@ public class ProjectAmenitiesActivity extends BaseActivity {
         int columns = orientation == Configuration.ORIENTATION_PORTRAIT ? 3 : 5;
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, columns);
-        recycleramenitiesdetails.setLayoutManager(layoutManager);
+        binding.recyclerAmenitiesDetails.setLayoutManager(layoutManager);
 
         if (mAmenitiesAdapter != null) {
             int size = metrics.widthPixels / columns;
             mAmenitiesAdapter.setImageSize(size);
         }
 
-        recycleramenitiesdetails.setAdapter(mAmenitiesAdapter);
+        binding.recyclerAmenitiesDetails.setAdapter(mAmenitiesAdapter);
     }
 }

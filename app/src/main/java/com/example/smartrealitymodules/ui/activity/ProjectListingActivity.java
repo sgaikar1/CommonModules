@@ -2,6 +2,7 @@ package com.example.smartrealitymodules.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.api.ApiNames;
+import com.example.smartrealitymodules.databinding.ActivityProjectListingBinding;
 import com.example.smartrealitymodules.models.eventbus.Interest;
 import com.example.smartrealitymodules.models.request.CommonReq;
 import com.example.smartrealitymodules.models.request.ProjectInterestedInReq;
@@ -24,8 +26,8 @@ import com.example.smartrealitymodules.models.response.ProjectListingRes;
 import com.example.smartrealitymodules.mvp.model.MainModel;
 import com.example.smartrealitymodules.mvp.presenter.ProjectListingPresenter;
 import com.example.smartrealitymodules.mvp.view.ProjectListingView;
-import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.ui.adapter.ProjectListingAdapter;
+import com.example.smartrealitymodules.ui.base.BaseActivity;
 import com.example.smartrealitymodules.utils.Constants;
 
 import org.greenrobot.eventbus.EventBus;
@@ -47,20 +49,6 @@ public class ProjectListingActivity extends BaseActivity implements ProjectListi
     private RecyclerView recyclerprojectslisting;
     private ProgressBar progress;
     private SwipeRefreshLayout swipetorefresh;
-    protected SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-
-            // TODO: 27/2/17 change filter icon when swipe refresh starts
-//            filteritem.setIcon(R.drawable.ic_action_filter);
-
-            if (isConnected) {
-                apiProjectListing();
-            } else {
-                mUtils.toastAlert(ProjectListingActivity.this, getString(R.string.no_internet));
-            }
-        }
-    };
     private LinearLayoutManager mLayoutManager;
     private Context mContext;
     private ArrayList<ProjectListingRes.Result> listAll;
@@ -68,6 +56,7 @@ public class ProjectListingActivity extends BaseActivity implements ProjectListi
     private ImageView interestedimageview;
     private ProjectListingAdapter adapter;
     private Animation pulse;
+    private ActivityProjectListingBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,10 +70,8 @@ public class ProjectListingActivity extends BaseActivity implements ProjectListi
     }
 
     private void renderView() {
-        setContentView(R.layout.activity_project_listing);
-        swipetorefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_to_refresh);
-        recyclerprojectslisting = (RecyclerView) findViewById(R.id.recycler_projects_listing);
-        txtprojectslisting = (TextView) findViewById(R.id.txt_projects_listing);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_project_listing);
+
         pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
@@ -93,18 +80,18 @@ public class ProjectListingActivity extends BaseActivity implements ProjectListi
     }
 
     private void init() {
-        swipetorefresh.setColorSchemeResources(R.color.colorAccent);
-        swipetorefresh.setOnRefreshListener(mOnRefreshListener);
+        binding.swipeToRefresh.setColorSchemeResources(R.color.colorAccent);
+        binding.swipeToRefresh.setOnRefreshListener(mOnRefreshListener);
 
-        recyclerprojectslisting.setHasFixedSize(true);
+        binding.recyclerProjectsListing.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        recyclerprojectslisting.setLayoutManager(mLayoutManager);
+        binding.recyclerProjectsListing.setLayoutManager(mLayoutManager);
     }
 
     private void apiProjectListing() {
         if (isConnected) {
 
-            swipetorefresh.setRefreshing(true);
+            binding.swipeToRefresh.setRefreshing(true);
 
             CommonReq obj = new CommonReq(Constants.PROJECTCODE, Constants.USERTYPE, Constants.USERID);
             ProjectListingPresenter presenter = new ProjectListingPresenter(mainModel, this);
@@ -122,10 +109,25 @@ public class ProjectListingActivity extends BaseActivity implements ProjectListi
         presenter.getProjectInterestedIn(mContext, obj, ApiNames.ProjectInterestedIn);
     }
 
+    protected SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+
+            // TODO: 27/2/17 change filter icon when swipe refresh starts
+//            filteritem.setIcon(R.drawable.ic_action_filter);
+
+            if (isConnected) {
+                apiProjectListing();
+            } else {
+                mUtils.toastAlert(ProjectListingActivity.this, getString(R.string.no_internet));
+            }
+        }
+    };
+
     @Override
     public void getProjectListSuccess(final ProjectListingRes projectListingRes) {
-        txtprojectslisting.setVisibility(View.GONE);
-        recyclerprojectslisting.setVisibility(View.VISIBLE);
+        binding.txtProjectsListing.setVisibility(View.GONE);
+        binding.recyclerProjectsListing.setVisibility(View.VISIBLE);
         listAll = projectListingRes.getResult();
         projectlist = projectListingRes;
         adapter = new ProjectListingAdapter(ProjectListingActivity.this, projectListingRes.getResult(),
@@ -176,19 +178,19 @@ public class ProjectListingActivity extends BaseActivity implements ProjectListi
                     }
                 });
 
-        recyclerprojectslisting.setAdapter(adapter);
+        binding.recyclerProjectsListing.setAdapter(adapter);
     }
 
     @Override
     public void showEmptyView() {
-        txtprojectslisting.setVisibility(View.VISIBLE);
-        recyclerprojectslisting.setVisibility(View.GONE);
+        binding.txtProjectsListing.setVisibility(View.VISIBLE);
+        binding.recyclerProjectsListing.setVisibility(View.GONE);
 
     }
 
     @Override
     public void removeRefresh() {
-        swipetorefresh.setRefreshing(false);
+        binding.swipeToRefresh.setRefreshing(false);
 
     }
 
