@@ -54,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
         mainList.add("About Us");
         mainList.add("Share");
         mainList.add("Projects");
+        mainList.add("User Profile");
+        mainList.add("Login");
+        mainList.add("Feedback History");
+        mainList.add("Complaint History");
+        mainList.add("Splash Fade In");
+        mainList.add("Splash Video");
+        mainList.add("Resources");
 
         rvmain.setHasFixedSize(true);
         rvmain.setAdapter(new MainActivityAdapter(mContext,mainList, R.layout.item));

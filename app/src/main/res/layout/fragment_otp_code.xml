@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:id="@+id/activity_otp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:id="@+id/rl_otp_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin15"
+                android:layout_marginRight="@dimen/margin15"
+                android:layout_marginTop="@dimen/margin45"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    android:id="@+id/tv_verify_static"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OTP"
+                    android:textSize="@dimen/textsize18"/>
+
+                <TextView
+                    android:id="@+id/tv_code_sms_static"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_verify_static"
+                    android:layout_marginTop="@dimen/margin15"
+                    android:text="Your one time password is"
+                    android:textSize="@dimen/textsize16"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_otp_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_code_sms_static"
+                    android:layout_marginTop="@dimen/margin10">
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="@dimen/margin15"
+                        android:layout_height="@dimen/margin15"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_horizontal|center_vertical"/>
+
+                    <EditText
+                        android:id="@+id/edt_otp_mobile_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_toLeftOf="@+id/progressBar"
+                        android:layout_toStartOf="@+id/progressBar"
+                        android:hint="@string/edit_text_otp_code"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingBottom="@dimen/margin15"
+                        android:singleLine="true"
+                        android:textSize="@dimen/textsize16"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_static_otp_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_otp_edit"
+                    android:layout_marginTop="@dimen/margin15"
+                    android:text="@string/otp_message"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_static_otp_message"
+                    android:layout_marginTop="@dimen/margin15">
+
+                    <TextView
+                        android:id="@+id/tv_otp_timer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="60"
+                        android:textSize="@dimen/textsize16"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/tv_regenerate_otp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:text="Regenerate OTP"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/textsize16"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin45"
+                android:layout_alignParentBottom="true"
+                android:background="@color/black">
+
+                <TextView
+                    android:id="@+id/tv_otp_done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin30"
+                    android:paddingRight="@dimen/margin30"
+                    android:text="DONE"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textsize14"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</layout>

@@ -189,4 +189,61 @@
     <string name="False">false</string>
     <string name="zero">0</string>
 
+    <!-- Profile -->
+    <string name="lead_history">Lead History</string>
+    <string name="order_history">Order History</string>
+    <string name="point_statement">Point Statement</string>
+    <string name="mobile_no">Mobile No.</string>
+    <string name="alt_mobile_no">Alternate Mobile No.</string>
+    <string name="email_id">Email Id</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="marital_status">Marital Status</string>
+    <string name="anniversary">Anniversary</string>
+    <string name="address">Address</string>
+    <string name="pincode">Pincode</string>
+    <string name="product_to_redeem">Products To Redeem</string>
+
+    <!--Edit Profile-->
+    <string name="edit_profile_name_star">Name</string>
+    <string name="edit_profile_mobile_no_star">*Mobile No</string>
+    <string name="edit_profile_alternate_no">Alternate Mobile No</string>
+    <string name="edit_profile_email_star">Email Id</string>
+    <string name="edit_profile_dob">Date of Birth</string>
+    <string name="edit_profile_relationship">Select Relationship Status</string>
+    <string name="edit_profile_anniverasry">Anniversary date</string>
+    <string name="edit_profile_address">Address</string>
+    <string name="edit_profile_pincode">Pincode</string>
+    <string name="edit_text_otp">Enter number</string>
+    <string name="otp_message">We assure you that your number wont be shared anywhere and would be safe with us.</string>
+    <string name="edit_text_otp_code">Enter Code</string>
+
+    <string name="select_filter_type">Select feedback type</string>
+    <string name="enter_title">Enter Title</string>
+    <string name="enter_title_star">*Enter Title</string>
+    <string-array name="feedback_filters">
+        <item>Feedback type</item>
+        <item>Feedback type</item>
+        <item>Feedback type</item>
+    </string-array>
+
+    <string name="no_feedback_found">Currently you have not submitted any feedback.</string>
+    <string name="read_more">Read More</string>
+    <string name="enter_desc">Enter Description</string>
+    <string name="feedback_details">Feedback Details</string>
+
+    <string name="write_desc_star">*Please enter description here</string>
+    <string name="view_more">VIEW MORE</string>
+
+    <string name="no_complaint_found">No Complaints Found</string>
+    <string name="post_complaint">Post A Complaint</string>
+    <string name="write_complaint_desc_star">*Please write about the complaint here</string>
+    <string name="send">Send</string>
+    <string name="no_mobile_number">Number not available</string>
+
+
+    <string-array name="marital_status">
+        <item>Single</item>
+        <item>Married</item>
+    </string-array>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.example.smartrealitymodules.ui.base;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.example.smartrealitymodules.api.NetworkModule;
 import com.example.smartrealitymodules.dependancy.DaggerDependancyInjection;
 import com.example.smartrealitymodules.dependancy.DependancyInjection;
 import com.example.smartrealitymodules.mvp.view.BaseView;
+import com.example.smartrealitymodules.utils.Constants;
 import com.example.smartrealitymodules.utils.Utils;
 import com.zplesac.connectionbuddy.ConnectionBuddy;
 import com.zplesac.connectionbuddy.cache.ConnectionBuddyCache;
@@ -28,6 +30,9 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Connect
     public Utils mUtils;
     DependancyInjection deps;
     public boolean isConnected;
+    public String userId;
+    public String userType;
+    private ProgressDialog pDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +44,10 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Connect
             ConnectionBuddyCache.clearLastNetworkState(this);
         }
         isConnected = ConnectionBuddy.getInstance().hasNetworkConnection();
+        userId = Constants.USERID;
+        userType = Constants.USERTYPE;
 
+        pDialog = new ProgressDialog(this);
     }
 
     public DependancyInjection getDeps() {
@@ -71,6 +79,17 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Connect
     }
 
     @Override
+    public void showProgressDialog() {
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+
+    @Override
+    public void showCancelableProgressDialog() {
+        pDialog.show();
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
@@ -86,6 +105,13 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Connect
     protected void onStop() {
         super.onStop();
         ConnectionBuddy.getInstance().unregisterFromConnectivityEvents(this);
+    }
+
+
+
+    @Override
+    public void hideProgressDialog() {
+        pDialog.dismiss();
     }
 
     @Override

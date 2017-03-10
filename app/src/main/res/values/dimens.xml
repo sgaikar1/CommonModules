@@ -23,4 +23,15 @@
     <dimen name="nav_width">300dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="margin70">70dp</dimen>
+    <dimen name="margin100">100dp</dimen>
+    <dimen name="margin45">45dp</dimen>
+    <dimen name="margin65">65dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin250">250dp</dimen>
+    <dimen name="margin200">200dp</dimen>
+    <dimen name="margin25">25dp</dimen>
+    <dimen name="margin7">7dp</dimen>
+    <dimen name="margin50">50dp</dimen>
+    <dimen name="margin120">120dp</dimen>
+    <dimen name="margin0">0dp</dimen>
 </resources>

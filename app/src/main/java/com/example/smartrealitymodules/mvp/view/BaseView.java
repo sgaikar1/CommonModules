@@ -11,4 +11,10 @@ public interface BaseView {
     void onFailure(String appErrorMessage);
 
     void showToast(String Message);
+
+    void showProgressDialog();
+
+    void showCancelableProgressDialog();
+
+    void hideProgressDialog();
 }

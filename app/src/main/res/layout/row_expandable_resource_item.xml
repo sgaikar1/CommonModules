@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/ll_emergency_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin1"
+            android:background="@color/light_gray"/>
+
+        <TextView
+            android:id="@+id/tv_num_emergency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin70"
+            android:layout_marginTop="@dimen/margin5"
+            android:text="000"
+            android:textSize="@dimen/textsize14"/>
+
+        <TextView
+            android:id="@+id/tv_number_emergency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_num_emergency"
+            android:layout_marginLeft="@dimen/margin70"
+            android:paddingBottom="@dimen/margin3"
+            android:text="000"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize12"/>
+
+        <ImageView
+            android:id="@+id/img_contacts_calls"
+            android:layout_width="@dimen/margin25"
+            android:layout_height="@dimen/margin25"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin25"
+            android:src="@drawable/ic_call_green"/>
+
+
+    </RelativeLayout>
+</layout>

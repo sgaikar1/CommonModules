@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="com.example.smartrealitymodules.models.response.GetComplaintsHistoryRes.Facilitys"/>
+
+        <import type="android.view.View"/>
+
+        <import type="com.example.smartrealitymodules.utils.DateUtils"/>
+
+        <variable
+            name="result"
+            type="Facilitys"/>
+
+        <variable
+            name="dateUtils"
+            type="DateUtils"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_item_recycler_complaint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/margin10"
+            android:paddingLeft="@dimen/margin10"
+            android:paddingRight="@dimen/margin10"
+            android:paddingStart="@dimen/margin10"
+            android:paddingTop="@dimen/margin5">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin5">
+
+                <TextView
+                    android:id="@+id/text_item_recycler_complaint_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/text_item_recycler_complaint_status"
+                    android:maxLines="2"
+                    android:text="@{result.title}"
+                    android:textColor="@color/textHeading"
+                    android:textSize="@dimen/textsize16"/>
+
+                <TextView
+                    android:id="@+id/text_item_recycler_complaint_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/margin5"
+                    android:background="@drawable/rounded_light_green"
+                    android:paddingBottom="@dimen/margin3"
+                    android:paddingLeft="@dimen/margin15"
+                    android:paddingRight="@dimen/margin15"
+                    android:paddingTop="@dimen/margin3"
+                    android:text="@{result.facilityStatus}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize12"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin5"
+                    android:layout_weight="0.9"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_item_recycler_complaint_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin2"
+                        android:maxLines="1"
+                        android:text="NA"
+                        android:textColor="@color/light_gray"
+                        android:textSize="@dimen/textsize12"/>
+
+                    <TextView
+                        android:id="@+id/text_item_recycler_complaint_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin5"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{result.description}"
+                        android:textColor="@color/textDescription"
+                        android:textSize="@dimen/textsize14"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/image_item_recycler_complaint_delete"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/margin20"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginBottom="@dimen/margin5"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/ic_delete"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/view_more"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/textsize12"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margin5"
+            android:alpha="0.4"
+            android:background="@color/textDescription"/>
+
+    </LinearLayout>
+</layout>

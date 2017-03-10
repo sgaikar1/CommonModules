@@ -82,6 +82,7 @@ public class ProjectDetailsActivity extends BaseActivity implements View.OnClick
         binding.imageProjectDetailInterested.setOnClickListener(this);
         binding.imageProjectDetail360View.setOnClickListener(this);
         binding.linearProjectOnlineBlocking.setOnClickListener(this);
+        // TODO: 10/3/17 change google-services.json file
     }
 
     private void apiProjectDetails() {

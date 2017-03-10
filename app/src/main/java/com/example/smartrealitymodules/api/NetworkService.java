@@ -2,17 +2,31 @@ package com.example.smartrealitymodules.api;
 
 
 import com.example.smartrealitymodules.models.request.CommonReq;
+import com.example.smartrealitymodules.models.request.DeleteComplaintReq;
+import com.example.smartrealitymodules.models.request.DeleteFeedbackReq;
+import com.example.smartrealitymodules.models.request.EditProfileReq;
 import com.example.smartrealitymodules.models.request.GetLayoutDetailsReq;
+import com.example.smartrealitymodules.models.request.GetResourceRequest;
+import com.example.smartrealitymodules.models.request.InsertUpdateComplaintRequestReq;
+import com.example.smartrealitymodules.models.request.InsertUpdateFeedbackReq;
+import com.example.smartrealitymodules.models.request.MyProfileReq;
 import com.example.smartrealitymodules.models.request.ProjectDetailsReq;
 import com.example.smartrealitymodules.models.request.ProjectInterestedInReq;
 import com.example.smartrealitymodules.models.request.SaveReferForRewardsPostReq;
 import com.example.smartrealitymodules.models.request.ScheduleSiteVisitReq;
+import com.example.smartrealitymodules.models.request.SendMISCountReq;
+import com.example.smartrealitymodules.models.request.VerifyMobileNumberRequest;
 import com.example.smartrealitymodules.models.response.CommonRes;
+import com.example.smartrealitymodules.models.response.DisplayFeedbackRes;
 import com.example.smartrealitymodules.models.response.GetAllJumbleNotificationsRes;
+import com.example.smartrealitymodules.models.response.GetComplaintsHistoryRes;
 import com.example.smartrealitymodules.models.response.GetLayoutDetailsRes;
 import com.example.smartrealitymodules.models.response.GetOffersRes;
+import com.example.smartrealitymodules.models.response.GetResourcesResponse;
+import com.example.smartrealitymodules.models.response.MyProfileRes;
 import com.example.smartrealitymodules.models.response.ProjectDetailsRes;
 import com.example.smartrealitymodules.models.response.ProjectListingRes;
+import com.example.smartrealitymodules.models.response.VerifyMobileNumberRes;
 import com.example.smartrealitymodules.models.share.CheckForShareRes;
 
 import retrofit2.http.Body;
@@ -63,4 +77,48 @@ public interface NetworkService {
     @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
     @POST(ApiNames.GetLayoutDetails)
     Observable<GetLayoutDetailsRes> getLayoutDetails(@Body GetLayoutDetailsReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.MyProfile)
+    Observable<MyProfileRes> getMyProfile(@Body MyProfileReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.EditProfile)
+    Observable<CommonRes> getEditMyProfile(@Body EditProfileReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.RequestOTP)
+    Observable<VerifyMobileNumberRes> getVerifyMobileNumber(@Body VerifyMobileNumberRequest obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.DisplayFeedback)
+    Observable<DisplayFeedbackRes> getDisplayFeedback(@Body CommonReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.DeleteFeedback)
+    Observable<CommonRes> apiGetDeleteFeedback(@Body DeleteFeedbackReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.InsertUpdateFeedback)
+    Observable<CommonRes>apiGetInsertUpdateFeedback(@Body InsertUpdateFeedbackReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.GetComplaintRequest)
+    Observable<GetComplaintsHistoryRes> getDisplayComplaint(@Body CommonReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.DeleteComplaintRequest)
+    Observable<CommonRes> apiGetDeleteComplaint(@Body DeleteComplaintReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.InsertUpdateComplaintRequest)
+    Observable<CommonRes> apiGetInsertUpdateComplaint(@Body InsertUpdateComplaintRequestReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.SendMISCount)
+    Observable<CommonRes>  apiGetSendMISCount(@Body SendMISCountReq obj);
+
+    @Headers("encryptKey:nfzGgyg18wr9pQF6iS+IhXjgcrp7OjA17Bo/33u7ntk=")
+    @POST(ApiNames.GET_RESOURCES)
+    Observable<GetResourcesResponse> apiGetResources(@Body GetResourceRequest obj);
 }

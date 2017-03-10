@@ -10,12 +10,19 @@ import android.widget.TextView;
 
 import com.example.smartrealitymodules.R;
 import com.example.smartrealitymodules.ui.activity.AboutUsActivity;
+import com.example.smartrealitymodules.ui.activity.ComplaintsHistoryActivity;
 import com.example.smartrealitymodules.ui.activity.ContactUsActivity;
+import com.example.smartrealitymodules.ui.activity.FeedbackHistoryActivity;
+import com.example.smartrealitymodules.ui.activity.LoginTypeActivity;
 import com.example.smartrealitymodules.ui.activity.NotificationActivity;
 import com.example.smartrealitymodules.ui.activity.OffersActivity;
 import com.example.smartrealitymodules.ui.activity.ProjectListingActivity;
 import com.example.smartrealitymodules.ui.activity.ReferFriendActivity;
+import com.example.smartrealitymodules.ui.activity.ResourcesActivity;
 import com.example.smartrealitymodules.ui.activity.ShareActivity;
+import com.example.smartrealitymodules.ui.activity.SplashFadeInActivity;
+import com.example.smartrealitymodules.ui.activity.SplashVideoActivity;
+import com.example.smartrealitymodules.ui.activity.UserProfileActivity;
 
 import java.util.List;
 
@@ -75,6 +82,34 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
                     case 6:
                         Intent intent7 = new Intent(mContext, ProjectListingActivity.class);
                         mContext.startActivity(intent7);
+                        break;
+                    case 7:
+                        Intent intent8 = new Intent(mContext, UserProfileActivity.class);
+                        mContext.startActivity(intent8);
+                        break;
+                    case 8:
+                        Intent intent9 = new Intent(mContext, LoginTypeActivity.class);
+                        mContext.startActivity(intent9);
+                        break;
+                    case 9:
+                        Intent intent10 = new Intent(mContext, FeedbackHistoryActivity.class);
+                        mContext.startActivity(intent10);
+                        break;
+                    case 10:
+                        Intent intent11 = new Intent(mContext, ComplaintsHistoryActivity.class);
+                        mContext.startActivity(intent11);
+                        break;
+                    case 11:
+                        Intent intent12 = new Intent(mContext, SplashFadeInActivity.class);
+                        mContext.startActivity(intent12);
+                        break;
+                    case 12:
+                        Intent intent13 = new Intent(mContext, SplashVideoActivity.class);
+                        mContext.startActivity(intent13);
+                        break;
+                    case 13:
+                        Intent intent14 = new Intent(mContext, ResourcesActivity.class);
+                        mContext.startActivity(intent14);
                         break;
                 }
 

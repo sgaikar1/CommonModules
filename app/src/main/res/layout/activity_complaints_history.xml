@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.smartrealitymodules.ui.activity.ComplaintsHistoryActivity">
+
+        <include
+            android:id="@+id/layout_toolbar"
+            layout="@layout/layout_toolbar"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layout_toolbar">
+
+            <TextView
+                android:id="@+id/txt_complaints_listing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/no_complaint_found"
+                android:textColor="@color/textHeading"
+                android:textSize="@dimen/textsize18"
+                android:visibility="gone"/>
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_complaint_history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <android.support.design.widget.CoordinatorLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/fab_margin">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/float_add_complaint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_add_complaint"/>
+
+            </android.support.design.widget.CoordinatorLayout>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

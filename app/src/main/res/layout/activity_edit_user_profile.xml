@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="result"
+            type="com.example.smartrealitymodules.models.response.MyProfileRes.Result"/>
+    </data>
+
+    <RelativeLayout android:id="@+id/activity_edit_user_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context="com.spr.ui.userprofile.EditUserProfile">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_save">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/margin5"
+                android:paddingRight="@dimen/margin5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/margin10"
+                    android:paddingTop="@dimen/margin10">
+
+                    <!--<ImageView-->
+                    <!--android:id="@+id/img_user_profile"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="0.25"-->
+                    <!--android:adjustViewBounds="true"-->
+                    <!--android:src="@drawable/dummy_profile_pic" />-->
+
+                    <com.example.smartrealitymodules.utils.CircularImageView
+                        android:id="@+id/img_user_profile"
+                        android:layout_width="@dimen/margin100"
+                        android:layout_height="@dimen/margin100"
+                        android:paddingTop="@dimen/margin5"
+                        android:src="@drawable/ic_nav_refer_a_frnd"
+                        app:border="true"
+                        app:imageUrl="@{result.ProfilePhoto}"
+                        app:border_color="@color/light_gray"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/margin10">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin15"
+                            android:textColorHint="@color/colorAccent"
+                            app:hintAnimationEnabled="true"
+                            app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                            <EditText
+                                android:id="@+id/edittext_user_profile_name"
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:hint="@string/edit_profile_name_star"
+                                android:inputType="textCapWords"
+                                android:maxLength="20"
+                                android:text="@{result.name}"/>
+
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:textColorHint="@color/colorAccent"
+                    app:hintAnimationEnabled="true"
+                    app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                    <EditText
+                        android:id="@+id/edittext_user_profile_mobile_number"
+                        style="@style/EditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:editable="false"
+                        android:hint="@string/edit_profile_mobile_no_star"
+                        android:maxLength="10"
+                        android:text="@{result.mobileNo}"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:textColorHint="@color/colorAccent"
+                    app:hintAnimationEnabled="true"
+                    app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                    <EditText
+                        android:id="@+id/edittext_user_profile_alt_mobile_number"
+                        style="@style/EditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/edit_profile_alternate_no"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:text="@{result.altMobileNo}"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:textColorHint="@color/colorAccent"
+                    app:hintAnimationEnabled="true"
+                    app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                    <EditText
+                        android:id="@+id/edittext_user_profile_email"
+                        style="@style/EditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/edit_profile_email_star"
+                        android:inputType="textEmailAddress"
+                        android:text="@{result.emailID}"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:textColorHint="@color/colorAccent"
+                    app:hintAnimationEnabled="true"
+                    app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                    <EditText
+                        android:id="@+id/edittext_user_profile_dob"
+                        style="@style/EditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="@string/edit_profile_dob"
+                        android:text="@{result.DOB}"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin10"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:text="@string/edit_profile_relationship"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/textsize12"/>
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spin_user_profile_marital_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:selectedValue="@={result.MaritalStatus}"
+                    android:entries="@array/marital_status"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin1"
+                    android:background="@color/textDescription"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textinput_user_profile_anniversary_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:textColorHint="@color/colorAccent"
+                    app:hintAnimationEnabled="true"
+                    app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                    <EditText
+                        android:id="@+id/edittext_user_profile_anniversary_dob"
+                        style="@style/EditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="@string/edit_profile_anniverasry"
+                        android:text="@{result.anniversary}"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:textColorHint="@color/colorAccent"
+                    app:hintAnimationEnabled="true"
+                    app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                    <EditText
+                        android:id="@+id/edittext_user_profile_address"
+                        style="@style/EditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/edit_profile_address"
+                        android:inputType="textCapWords"
+                        android:text="@{result.address}"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:textColorHint="@color/colorAccent"
+                    app:hintAnimationEnabled="true"
+                    app:hintTextAppearance="@style/TextInputLayoutStyle">
+
+                    <EditText
+                        android:id="@+id/edittext_user_profile_pincode"
+                        style="@style/EditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/edit_profile_pincode"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:text="@{result.pinCode}"/>
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+</layout>

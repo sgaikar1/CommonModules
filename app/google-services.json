@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "545010103583",
+    "firebase_url": "https://fir-shapoorji.firebaseio.com",
+    "project_id": "fir-shapoorji",
+    "storage_bucket": "fir-shapoorji.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545010103583:android:45937fdb47246fbd",
+        "android_client_info": {
+          "package_name": "com.example.smartrealitymodules"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545010103583-sn2s0k87preuk779729khdeouu4oql89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSP9-yisKKNQ-yOvYo8qYFG80oBygbFdE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545010103583-sn2s0k87preuk779729khdeouu4oql89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

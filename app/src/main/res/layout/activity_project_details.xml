@@ -68,7 +68,7 @@
                     android:id="@+id/nsv_project_detail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -290,6 +290,15 @@
                                 <!--</LinearLayout>-->
 
                             </LinearLayout>
+
+                            <fragment
+                                android:id="@+id/mapview_overview_fragment"
+                                class="com.google.android.gms.maps.SupportMapFragment"
+                                android:layout_width="@dimen/margin0"
+                                android:layout_height="@dimen/margin120"
+                                android:layout_weight="2"
+                                app:liteMode="true"
+                                app:mapType="none"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"

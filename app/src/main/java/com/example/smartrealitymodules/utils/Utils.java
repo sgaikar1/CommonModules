@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.BindingAdapter;
+import android.databinding.InverseBindingAdapter;
+import android.databinding.InverseBindingListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -14,12 +16,16 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.URLUtil;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -183,12 +189,39 @@ public class Utils {
     @BindingAdapter({"bind:imageUrl"})
     public static void loadImage(ImageView imageView, String url) {
         logMe("testing", "image load");
-        if (!url.equals("")) {
+        if(url!=null) {
+            if (!url.equals("")) {
 //            Picasso.with(imageView.getContext()).load(url).resize(200, 200).into(imageView);
 
-            Picasso.with(imageView.getContext()).load(url).into(imageView);
+                Picasso.with(imageView.getContext()).load(url).into(imageView);
+            }
+        }else {
+            logMe("Image","URL is null");
         }
     }
+
+    @BindingAdapter(value = {"bind:selectedValue", "bind:selectedValueAttrChanged"}, requireAll = false)
+    public static void bindSpinnerData(AppCompatSpinner pAppCompatSpinner, String newSelectedValue, final InverseBindingListener newTextAttrChanged) {
+        pAppCompatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                newTextAttrChanged.onChange();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        if (newSelectedValue != null) {
+            int pos = ((ArrayAdapter<String>) pAppCompatSpinner.getAdapter()).getPosition(newSelectedValue);
+            pAppCompatSpinner.setSelection(pos, true);
+        }
+    }
+    @InverseBindingAdapter(attribute = "bind:selectedValue", event = "bind:selectedValueAttrChanged")
+    public static String captureSelectedValue(AppCompatSpinner pAppCompatSpinner) {
+        return (String) pAppCompatSpinner.getSelectedItem();
+    }
+
+
 
     /**
      * Method to check whether internet is connection or connected

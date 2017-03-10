@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:name=".ui.base.MyApplication"
         android:allowBackup="true"
@@ -14,6 +17,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
+
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.activity.ReferFriendActivity"
                   android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.OffersActivity"
@@ -55,6 +60,48 @@
                   android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.ProjectAmenitiesActivity"
                   android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.UserProfileActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.EditUserProfileActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.OtpActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.LoginTypeActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.FeedBackActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.FeedbackHistoryActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.FeedbackDetailsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.ComplaintsHistoryActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.ComplaintActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.ComplaintDetailsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.SplashFadeInActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.SplashVideoActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.ResourcesActivity"
+                  android:screenOrientation="portrait"/>
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAgY6nj9JtM-RqsAtZMwQm_Z33fF9X2L-Y" />
+
+        // For Camera
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.smartrealitymodules.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/image_path" />
+        </provider>
     </application>
 
 

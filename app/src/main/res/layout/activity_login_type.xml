@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_prospect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Prospect"/>
+
+        <Button
+            android:id="@+id/btn_buyer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buyer"/>
+
+        <Button
+            android:id="@+id/btn_broker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Broker"/>
+
+        <Button
+            android:id="@+id/btn_employee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Employee"/>
+    </LinearLayout>
+</layout>

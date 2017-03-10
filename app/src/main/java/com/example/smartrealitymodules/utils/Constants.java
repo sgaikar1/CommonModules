@@ -7,13 +7,16 @@ package com.example.smartrealitymodules.utils;
 public class Constants {
     public static final String PROJECTCODE = "SPR";
     public static final String USERTYPE = "prospect";
-    public static final String USERID = "295";
+    public static final String USERID = "297";
     public static final int DEFAULT_STATUS = 876;
     public static final int NAME_EMPTY_STATUS = 1;
     public static final int MOBILENO_EMPTY_STATUS = 2;
     public static final int MOBILENO_ALTERNATE_EMPTY_STATUS = 3;
     public static final int EMAIL_EMPTY_STATUS = 4;
     public static final int PINCODE_EMPTY_STATUS = 5;
+    public static final int ANNIVERSARY_EMPTY_STATUS = 6;
+    public static final int TITLE_EMPTY_STATUS = 7;
+    public static final int DESCRIPTION_EMPTY_STATUS = 8;
     public static final String PROJECTNAME_KEY = "projectname";
     public static final String PROJECTID_KEY = "projectid";
     public static final String PROJECTIMAGE_KEY = "projectImage";
@@ -26,6 +29,7 @@ public class Constants {
     public static final String PROJECT_CITY_KEY = "projectCity";
     public static final String DATE_KEY = "Date";
     public static final String IMAGELIST_KEY = "image_list";
+    public static final String MOBILE_NO = "9099999999";// TODO: 10/3/17 remove this
 
     /**
      * This is Webservice's Base URL's USERNAME to access webservice

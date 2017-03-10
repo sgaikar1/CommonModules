@@ -4,17 +4,31 @@ package com.example.smartrealitymodules.mvp.model;
 import com.example.smartrealitymodules.api.NetworkError;
 import com.example.smartrealitymodules.api.NetworkService;
 import com.example.smartrealitymodules.models.request.CommonReq;
+import com.example.smartrealitymodules.models.request.DeleteComplaintReq;
+import com.example.smartrealitymodules.models.request.DeleteFeedbackReq;
+import com.example.smartrealitymodules.models.request.EditProfileReq;
 import com.example.smartrealitymodules.models.request.GetLayoutDetailsReq;
+import com.example.smartrealitymodules.models.request.GetResourceRequest;
+import com.example.smartrealitymodules.models.request.InsertUpdateComplaintRequestReq;
+import com.example.smartrealitymodules.models.request.InsertUpdateFeedbackReq;
+import com.example.smartrealitymodules.models.request.MyProfileReq;
 import com.example.smartrealitymodules.models.request.ProjectDetailsReq;
 import com.example.smartrealitymodules.models.request.ProjectInterestedInReq;
 import com.example.smartrealitymodules.models.request.SaveReferForRewardsPostReq;
 import com.example.smartrealitymodules.models.request.ScheduleSiteVisitReq;
+import com.example.smartrealitymodules.models.request.SendMISCountReq;
+import com.example.smartrealitymodules.models.request.VerifyMobileNumberRequest;
 import com.example.smartrealitymodules.models.response.CommonRes;
+import com.example.smartrealitymodules.models.response.DisplayFeedbackRes;
 import com.example.smartrealitymodules.models.response.GetAllJumbleNotificationsRes;
+import com.example.smartrealitymodules.models.response.GetComplaintsHistoryRes;
 import com.example.smartrealitymodules.models.response.GetLayoutDetailsRes;
 import com.example.smartrealitymodules.models.response.GetOffersRes;
+import com.example.smartrealitymodules.models.response.GetResourcesResponse;
+import com.example.smartrealitymodules.models.response.MyProfileRes;
 import com.example.smartrealitymodules.models.response.ProjectDetailsRes;
 import com.example.smartrealitymodules.models.response.ProjectListingRes;
+import com.example.smartrealitymodules.models.response.VerifyMobileNumberRes;
 import com.example.smartrealitymodules.models.share.CheckForShareReq;
 import com.example.smartrealitymodules.models.share.CheckForShareRes;
 import com.example.smartrealitymodules.utils.Utils;
@@ -386,7 +400,7 @@ public class MainModel {
                                        if (getLayoutDetailsRes.getResult() != null) {
                                            if (getLayoutDetailsRes.getResult().getMasterLayout() != null && !getLayoutDetailsRes.getResult().getMasterLayout().isEmpty()) {
                                                callback.onSuccess(getLayoutDetailsRes);
-                                           }else{
+                                           } else {
                                                callback.onFailure(getLayoutDetailsRes);
                                            }
                                        }
@@ -402,6 +416,481 @@ public class MainModel {
 
                            }
                 );
+    }
+
+
+    public Subscription getMyProfile(MyProfileReq obj, final String apiname, final GetMyProfileCallback callback) {
+
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.getMyProfile(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends MyProfileRes>>() {
+                    @Override
+                    public Observable<? extends MyProfileRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<MyProfileRes>() {
+                               @Override
+                               public void onCompleted() {
+
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+                                   callback.onError(new NetworkError(e));
+
+                               }
+
+                               @Override
+                               public void onNext(MyProfileRes myProfileRes) {
+                                   mUtils.getWebserviceLog(apiname + "_response", myProfileRes);
+                                   if (myProfileRes.getStatus().equalsIgnoreCase("true")) {
+                                       if (myProfileRes.getResult() != null) {
+                                           callback.onSuccess(myProfileRes);
+                                       }
+                                   } else {
+                                       if (myProfileRes.getMessage() != null) {
+                                           callback.onFailure(myProfileRes, true);
+                                       } else {
+                                           callback.onFailure(myProfileRes, false);
+                                       }
+                                   }
+
+                               }
+
+                           }
+                );
+    }
+
+    public Subscription getEditMyProfile(EditProfileReq obj, final String apiname, final GetEditMyProfileCallback callback) {
+
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.getEditMyProfile(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CommonRes>>() {
+                    @Override
+                    public Observable<? extends CommonRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<CommonRes>() {
+                               @Override
+                               public void onCompleted() {
+
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+                                   callback.onError(new NetworkError(e));
+
+                               }
+
+                               @Override
+                               public void onNext(CommonRes commonRes) {
+                                   mUtils.getWebserviceLog(apiname + "_response", commonRes);
+                                   if (commonRes.getStatus().equalsIgnoreCase("true")) {
+                                       if (commonRes.getMessage() != null) {
+                                           callback.onSuccess(commonRes);
+                                       }
+                                   } else {
+                                       if (commonRes.getMessage() != null) {
+                                           callback.onFailure(commonRes, true);
+                                       } else {
+                                           callback.onFailure(commonRes, false);
+                                       }
+                                   }
+
+                               }
+
+                           }
+                );
+    }
+
+    public Subscription getVerifyMobileNumber(VerifyMobileNumberRequest obj, final String apiname, final GetVerifyMobileNumberCallback callback) {
+
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.getVerifyMobileNumber(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends VerifyMobileNumberRes>>() {
+                    @Override
+                    public Observable<? extends VerifyMobileNumberRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<VerifyMobileNumberRes>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+
+                    }
+
+                    @Override
+                    public void onNext(VerifyMobileNumberRes verifyMobileNumberRes) {
+                        mUtils.getWebserviceLog(apiname + "_response", verifyMobileNumberRes);
+                        if (verifyMobileNumberRes != null) {
+                            if (verifyMobileNumberRes.getStatus().equalsIgnoreCase("true")) {
+                                if (verifyMobileNumberRes.getResult() != null) {
+                                    callback.onSuccess(verifyMobileNumberRes);
+                                }
+                            } else {
+                                if (verifyMobileNumberRes.getMessage() != null) {
+                                    callback.onFailure(verifyMobileNumberRes, true);
+                                } else {
+                                    callback.onFailure(verifyMobileNumberRes, false);
+                                }
+                            }
+                        }
+
+                    }
+                });
+    }
+
+    public Subscription getDisplayFeedback(CommonReq obj, final String apiname, final GetDisplayFeedbackCallback callback) {
+
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.getDisplayFeedback(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends DisplayFeedbackRes>>() {
+                    @Override
+                    public Observable<? extends DisplayFeedbackRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<DisplayFeedbackRes>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+
+                    }
+
+                    @Override
+                    public void onNext(DisplayFeedbackRes displayFeedbackRes) {
+                        mUtils.getWebserviceLog(apiname + "_response", displayFeedbackRes);
+                        callback.onSuccess(displayFeedbackRes);
+
+                        if (displayFeedbackRes.getStatus().equalsIgnoreCase("true")) {
+                            if (displayFeedbackRes.getResult() != null) {
+                                callback.onSuccess(displayFeedbackRes);
+                            }
+                        } else {
+                            if (displayFeedbackRes.getMessage() != null) {
+                                callback.onFailure(displayFeedbackRes, true);
+                            } else {
+                                callback.onFailure(displayFeedbackRes, false);
+                            }
+                        }
+
+                    }
+                });
+    }
+
+
+    public Subscription getDeleteFeedback(DeleteFeedbackReq obj, final String apiname, final GetDeleteFeedbackCallback callback) {
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.apiGetDeleteFeedback(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CommonRes>>() {
+                    @Override
+                    public Observable<? extends CommonRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<CommonRes>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+
+                    }
+
+                    @Override
+                    public void onNext(CommonRes commonRes) {
+                        mUtils.getWebserviceLog(apiname + "_response", commonRes);
+                        if (commonRes.getStatus().equalsIgnoreCase("true")) {
+                            if (commonRes.getMessage() != null) {
+                                callback.onSuccess(commonRes);
+                            }
+                        } else {
+                            if (commonRes.getMessage() != null) {
+                                callback.onFailure(commonRes, true);
+                            } else {
+                                callback.onFailure(commonRes, false);
+                            }
+                        }
+                    }
+                });
+    }
+
+    public Subscription getInsertUpdateFeedback(InsertUpdateFeedbackReq obj, final String apiname, final GetInsertUpdateFeedbackCallback callback) {
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.apiGetInsertUpdateFeedback(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CommonRes>>() {
+                    @Override
+                    public Observable<? extends CommonRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<CommonRes>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+
+                    }
+
+                    @Override
+                    public void onNext(CommonRes commonRes) {
+                        mUtils.getWebserviceLog(apiname + "_response", commonRes);
+                        if (commonRes.getStatus().equalsIgnoreCase("true")) {
+                            if (commonRes.getMessage() != null) {
+                                callback.onSuccess(commonRes);
+                            }
+                        } else {
+                            if (commonRes.getMessage() != null) {
+                                callback.onFailure(commonRes, true);
+                            } else {
+                                callback.onFailure(commonRes, false);
+                            }
+                        }
+                    }
+                });
+    }
+
+    public Subscription getDisplayComplaint(CommonReq obj, final String apiname, final GetDisplayComplaintCallback callback) {
+
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.getDisplayComplaint(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends GetComplaintsHistoryRes>>() {
+                    @Override
+                    public Observable<? extends GetComplaintsHistoryRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<GetComplaintsHistoryRes>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+
+                    }
+
+                    @Override
+                    public void onNext(GetComplaintsHistoryRes getComplaintsHistoryRes) {
+                        mUtils.getWebserviceLog(apiname + "_response", getComplaintsHistoryRes);
+                        callback.onSuccess(getComplaintsHistoryRes);
+
+                        if (getComplaintsHistoryRes.getStatus().equalsIgnoreCase("true")) {
+                            if (getComplaintsHistoryRes.getFacility() != null) {
+                                callback.onSuccess(getComplaintsHistoryRes);
+                            }
+                        } else {
+                            if (getComplaintsHistoryRes.getMessage() != null) {
+                                callback.onFailure(getComplaintsHistoryRes, true);
+                            } else {
+                                callback.onFailure(getComplaintsHistoryRes, false);
+                            }
+                        }
+
+                    }
+                });
+    }
+
+    public Subscription getDeleteComplaint(DeleteComplaintReq obj, final String apiname, final GetDeleteComplaintCallback callback) {
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.apiGetDeleteComplaint(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CommonRes>>() {
+                    @Override
+                    public Observable<? extends CommonRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<CommonRes>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+
+                    }
+
+                    @Override
+                    public void onNext(CommonRes commonRes) {
+                        mUtils.getWebserviceLog(apiname + "_response", commonRes);
+                        if (commonRes.getStatus().equalsIgnoreCase("true")) {
+                            if (commonRes.getMessage() != null) {
+                                callback.onSuccess(commonRes);
+                            }
+                        } else {
+                            if (commonRes.getMessage() != null) {
+                                callback.onFailure(commonRes, true);
+                            } else {
+                                callback.onFailure(commonRes, false);
+                            }
+                        }
+                    }
+                });
+    }
+
+    public Subscription getInsertUpdateComplaint(InsertUpdateComplaintRequestReq obj, final String apiname, final GetInsertUpdateComplaintCallback callback) {
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.apiGetInsertUpdateComplaint(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CommonRes>>() {
+                    @Override
+                    public Observable<? extends CommonRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<CommonRes>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+
+                    }
+
+                    @Override
+                    public void onNext(CommonRes commonRes) {
+                        mUtils.getWebserviceLog(apiname + "_response", commonRes);
+                        if (commonRes.getStatus().equalsIgnoreCase("true")) {
+                            if (commonRes.getMessage() != null) {
+                                callback.onSuccess(commonRes);
+                            }
+                        } else {
+                            if (commonRes.getMessage() != null) {
+                                callback.onFailure(commonRes, true);
+                            } else {
+                                callback.onFailure(commonRes, false);
+                            }
+                        }
+                    }
+                });
+    }
+
+    public Subscription getSendMISCount(SendMISCountReq obj, final String apiname, final GetSendMISCountCallback callback) {
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.apiGetSendMISCount(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CommonRes>>() {
+                    @Override
+                    public Observable<? extends CommonRes> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<CommonRes>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+
+                    }
+
+                    @Override
+                    public void onNext(CommonRes commonRes) {
+                        mUtils.getWebserviceLog(apiname + "_response", commonRes);
+                        if (commonRes.getStatus().equalsIgnoreCase("true")) {
+                            if (commonRes.getMessage() != null) {
+                                callback.onSuccess(commonRes);
+                            }
+                        }
+                    }
+                });
+    }
+
+    public Subscription getResources(GetResourceRequest obj, final String apiname, final GetResourcesCallback callback) {
+        mUtils.getWebserviceLog(apiname + "_request", gson.toJson(obj));
+        return networkService.apiGetResources(obj)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends GetResourcesResponse>>() {
+                    @Override
+                    public Observable<? extends GetResourcesResponse> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<GetResourcesResponse>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+
+                    }
+
+                    @Override
+                    public void onNext(GetResourcesResponse getResourcesResponse) {
+                        mUtils.getWebserviceLog(apiname + "_response", getResourcesResponse);
+                        if (getResourcesResponse.getData() != null) {
+                            if (getResourcesResponse.isStatus()) {
+                                if(!getResourcesResponse.getData().isEmpty()) {
+                                    callback.onSuccess(getResourcesResponse);
+                                }else{
+                                    callback.onFailure(getResourcesResponse, true);
+                                }
+                            } else {
+                                if (getResourcesResponse.getMessage() != null) {
+                                    callback.onFailure(getResourcesResponse, true);
+                                } else {
+                                    callback.onFailure(getResourcesResponse, false);
+                                }
+                            }
+                        } else {
+
+                            callback.onFailure(getResourcesResponse, false);
+
+                        }
+                    }
+                });
     }
 
 
@@ -477,5 +966,91 @@ public class MainModel {
         void onFailure(GetLayoutDetailsRes getLayoutDetailsRes, boolean flag);
 
         void onFailure(GetLayoutDetailsRes getLayoutDetailsRes);
+    }
+
+    public interface GetMyProfileCallback {
+        void onSuccess(MyProfileRes myProfileRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(MyProfileRes myProfileRes, boolean flag);
+    }
+
+    public interface GetEditMyProfileCallback {
+        void onSuccess(CommonRes commonRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(CommonRes commonRes, boolean flag);
+    }
+
+    public interface GetVerifyMobileNumberCallback {
+        void onSuccess(VerifyMobileNumberRes verifyMobileNumberRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(VerifyMobileNumberRes verifyMobileNumberRes, boolean flag);
+    }
+
+    public interface GetDisplayFeedbackCallback {
+        void onSuccess(DisplayFeedbackRes displayFeedbackRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(DisplayFeedbackRes displayFeedbackRes, boolean flag);
+    }
+
+    public interface GetDeleteFeedbackCallback {
+        void onSuccess(CommonRes commonRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(CommonRes commonRes, boolean flag);
+    }
+
+    public interface GetInsertUpdateFeedbackCallback {
+        void onSuccess(CommonRes commonRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(CommonRes commonRes, boolean flag);
+    }
+
+    public interface GetDisplayComplaintCallback {
+        void onSuccess(GetComplaintsHistoryRes getComplaintsHistoryRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(GetComplaintsHistoryRes getComplaintsHistoryRes, boolean flag);
+    }
+
+    public interface GetDeleteComplaintCallback {
+        void onSuccess(CommonRes commonRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(CommonRes commonRes, boolean flag);
+    }
+
+    public interface GetInsertUpdateComplaintCallback {
+        void onSuccess(CommonRes commonRes);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(CommonRes commonRes, boolean flag);
+    }
+
+    public interface GetSendMISCountCallback {
+        void onSuccess(CommonRes commonRes);
+
+        void onError(NetworkError networkError);
+    }
+
+    public interface GetResourcesCallback {
+        void onSuccess(GetResourcesResponse getResourcesResponse);
+
+        void onError(NetworkError networkError);
+
+        void onFailure(GetResourcesResponse getResourcesResponse, boolean flag);
     }
 }

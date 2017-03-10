@@ -12,4 +12,10 @@
     <color name="black_tint">#99000000</color>
     <color name="dark_blue">#030729</color>
     <color name="light_gray">#9f9f9f</color>
+    <color name="red">#FF0000</color>
+
+
+    <color name="light_blue">#00C0FF</color>
+    <color name="light_red">#FF4E4E</color>
+    <color name="light_green">#2ECC71</color>
 </resources>
